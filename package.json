@@ -1,0 +1,27 @@
+{
+  "name": "ludo-app-backend",
+  "version": "2.0.0",
+  "description": "Backend to use in project LudoApp, project to build social network for boardgames, register matches and challenge yourself in search of achievements",
+  "main": "index.js",
+  "dependencies": {
+    "express-graphql": "^0.12.0",
+    "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psico/ludo-app-backend.git"
+  },
+  "author": "João Gabriel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/psico/ludo-app-backend/issues"
+  },
+  "homepage": "https://github.com/psico/ludo-app-backend#readme"
+}
