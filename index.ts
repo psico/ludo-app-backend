@@ -1,5 +1,5 @@
 const app = require("express")();
-const expressGraphql = require("express-graphql");
+const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require("graphql");
 
 const schema = buildSchema(`
@@ -51,7 +51,7 @@ const resolvers = {
 
 app.use(
     "/graphql",
-    expressGraphql({
+    graphqlHTTP({
         schema,
         rootValue: resolvers,
         graphiql: true
