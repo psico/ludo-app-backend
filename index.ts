@@ -1,64 +1,54 @@
-const express = require('express');
+const express = require("express");
 const { graphqlHTTP } = require('express-graphql');
-
-const typeDefs = require('./schema.graphql');
-const resolvers = require('./resolvers');
-const { makeExecutableSchema } = require('graphql-tools');
-// const { buildSchema } = require("graphql");
+const { buildSchema } = require("graphql");
 
 
+const schema = buildSchema(`
+  type User {
+    id: ID
+    name: String
+    repo: String
+    age: Int
+  }
+  type Query {
+    user(id: ID!): User
+    users: [User]
+  }
+  type Mutation {
+    createUser(name: String!, repo: String!, age: Int!): User
+  }
+`);
 
-const schema = makeExecutableSchema({
-    typeDefs: typeDefs,
-    resolvers: resolvers,
-});
+const providers = {
+    users: []
+};
 
-// const schema.graphql = buildSchema(`
-//   type User {
-//     id: ID
-//     name: String
-//     repo: String
-//     age: Int
-//   }
-//   type Query {
-//     user(id: ID!): User
-//     users: [User]
-//   }
-//   type Mutation {
-//     createUser(name: String!, repo: String!, age: Int!): User
-//   }
-// `);
+let id = 0;
 
-// const providers = {
-//     users: []
-// };
+const resolvers = {
+    // @ts-ignore
+    user({ id }) {
+        // @ts-ignore
+        return providers.users.find(item => item.id === Number(id));
+    },
+    users() {
+        return providers.users;
+    },
+    // @ts-ignore
+    createUser({ name, repo, age }) {
+        const user = {
+            id: id++,
+            name,
+            repo,
+            age
+        };
 
-// let id = 0;
+        // @ts-ignore
+        providers.users.push(user);
 
-// const resolvers = {
-//     // @ts-ignore
-//     user({ id }) {
-//         // @ts-ignore
-//         return providers.users.find(item => item.id === Number(id));
-//     },
-//     users() {
-//         return providers.users;
-//     },
-//     // @ts-ignore
-//     createUser({ name, repo, age }) {
-//         const user = {
-//             id: id++,
-//             name,
-//             repo,
-//             age
-//         };
-//
-//         // @ts-ignore
-//         providers.users.push(user);
-//
-//         return user;
-//     }
-// };
+        return user;
+    }
+};
 
 var app = express();
 
