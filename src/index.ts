@@ -1,10 +1,9 @@
 const express = require("express");
 const { graphqlHTTP } = require('express-graphql');
+const { makeExecutableSchema } = require("graphql-tools");
 
 const fs = require("fs")
 const path = require("path");
-const { makeExecutableSchema } = require("graphql-tools");
-
 const schemaFile = path.join(__dirname, "schema.graphql");
 const typeDefs = fs.readFileSync(schemaFile, "utf8");
 
