@@ -1,23 +1,30 @@
 const express = require("express");
 const { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require("graphql");
+// const { buildSchema } = require("graphql");
 
+const fs = require("fs")
+const path = require("path");
+const { makeExecutableSchema } = require("graphql-tools");
 
-const schema = buildSchema(`
-  type User {
-    id: ID
-    name: String
-    repo: String
-    age: Int
-  }
-  type Query {
-    user(id: ID!): User
-    users: [User]
-  }
-  type Mutation {
-    createUser(name: String!, repo: String!, age: Int!): User
-  }
-`);
+const schemaFile = path.join(__dirname, "schema.graphql");
+const typeDefs = fs.readFileSync(schemaFile, "utf8");
+
+const schema = makeExecutableSchema({ typeDefs });
+// const schema = buildSchema(`
+//   type User {
+//     id: ID
+//     name: String
+//     repo: String
+//     age: Int
+//   }
+//   type Query {
+//     user(id: ID!): User
+//     users: [User]
+//   }
+//   type Mutation {
+//     createUser(name: String!, repo: String!, age: Int!): User
+//   }
+// `);
 
 const providers = {
     users: []
