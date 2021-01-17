@@ -12,16 +12,16 @@ const resolvers = {
         Users: () => {
             return providers.users;
         },
-        User: (_, { id }) => {
+        User: (_: any, {id}: any) => {
             // @ts-ignore
             return providers.users.find(item => item.id === Number(id));
         },
     },
     User: {
-        id: user => user.id,
-        name: user => user.name,
-        repo: user => user.repo,
-        age: user => user.age,
+        id: (user: { id: any; }) => user.id,
+        name: (user: { name: any; }) => user.name,
+        repo: (user: { repo: any; }) => user.repo,
+        age: (user: { age: any; }) => user.age,
     },
 };
 
@@ -31,7 +31,7 @@ const providers = {
     users: []
 };
 
-let id = 0;
+// let id = 0;
 
 // const resolvers = {
 //     // @ts-ignore
