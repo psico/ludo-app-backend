@@ -27,6 +27,22 @@ const resolvers = {
         repo: (user: { repo: string; }) => user.repo,
         age: (user: { age: number; }) => user.age,
     },
+    Mutation: {
+        // @ts-ignore
+        createUser(_, { name, repo, age }) {
+            const user = {
+                id: 1,
+                name,
+                repo,
+                age
+            };
+
+            // @ts-ignore
+            providers.users.push(user);
+
+            return user;
+        }
+    },
 };
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
@@ -42,20 +58,20 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 //     users() {
 //         return providers.users;
 //     },
-//     // @ts-ignore
-//     createUser({ name, repo, age }) {
-//         const user = {
-//             id: id++,
-//             name,
-//             repo,
-//             age
-//         };
-//
-//         // @ts-ignore
-//         providers.users.push(user);
-//
-//         return user;
-//     }
+    // @ts-ignore
+    // createUser({ name, repo, age }) {
+    //     const user = {
+    //         id: id++,
+    //         name,
+    //         repo,
+    //         age
+    //     };
+    //
+    //     // @ts-ignore
+    //     providers.users.push(user);
+    //
+    //     return user;
+    // }
 // };
 
 var app = express();
