@@ -19,9 +19,9 @@ const resolvers = {
     },
     User: {
         id: (user: { id: any; }) => user.id,
-        name: (user: { name: any; }) => user.name,
-        repo: (user: { repo: any; }) => user.repo,
-        age: (user: { age: any; }) => user.age,
+        name: (user: { name: string; }) => user.name,
+        repo: (user: { repo: string; }) => user.repo,
+        age: (user: { age: number; }) => user.age,
     },
 };
 
