@@ -7,12 +7,16 @@ const path = require("path");
 const schemaFile = path.join(__dirname, "schema.graphql");
 const typeDefs = fs.readFileSync(schemaFile, "utf8");
 
+const providers = {
+    users: []
+};
+
 const resolvers = {
     Query: {
-        Users: () => {
+        users: () => {
             return providers.users;
         },
-        User: (_: any, {id}: any) => {
+        user: (_: any, {id}: any) => {
             // @ts-ignore
             return providers.users.find(item => item.id === Number(id));
         },
@@ -26,10 +30,6 @@ const resolvers = {
 };
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
-
-const providers = {
-    users: []
-};
 
 // let id = 0;
 
