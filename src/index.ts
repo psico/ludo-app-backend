@@ -47,43 +47,7 @@ const resolvers = {
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-// let id = 0;
-
-// const resolvers = {
-//     // @ts-ignore
-//     user({ id }) {
-//         // @ts-ignore
-//         return providers.users.find(item => item.id === Number(id));
-//     },
-//     users() {
-//         return providers.users;
-//     },
-    // @ts-ignore
-    // createUser({ name, repo, age }) {
-    //     const user = {
-    //         id: id++,
-    //         name,
-    //         repo,
-    //         age
-    //     };
-    //
-    //     // @ts-ignore
-    //     providers.users.push(user);
-    //
-    //     return user;
-    // }
-// };
-
 var app = express();
-
-// app.use(
-//     "/graphql",
-//     graphqlHTTP({
-//         schema,
-//         rootValue: resolvers,
-//         graphiql: true
-//     })
-// );
 
 app.use(
     "/graphql",
