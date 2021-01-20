@@ -1,3 +1,7 @@
+const providers = {
+    users: []
+};
+
 export const Query = {
     users: () => {
         return providers.users;
