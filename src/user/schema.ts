@@ -1,4 +1,4 @@
-const Tweet = `
+const User = `
 extend type Query {
     user(id: ID!): User
     users: [User]
@@ -13,3 +13,5 @@ type User {
     age: Int
 }
 `;
+
+export default () => [User];
