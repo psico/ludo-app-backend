@@ -1,16 +1,15 @@
 const UserInfo = `
 extend type Query {
-    userInfo(id: ID!): UserInfo
+    userInfo(uid: ID!): UserInfo
     usersInfo: [UserInfo]
 }
 extend type Mutation {
-    createUser(name: String!, repo: String!, age: Int!): UserInfo
+    createUser(uid: ID!, name: String!, friends: friend): UserInfo
 }
 type UserInfo {
-    id: ID
+    uid: ID
     name: String
-    repo: String
-    age: Int
+    friends: [friend]
 }
 `;
 
