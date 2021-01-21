@@ -8,30 +8,27 @@ export const Query = {
     },
     userInfo: (_: any, {id}: any) => {
         // @ts-ignore
-        return providers.usersInfo.find(item => item.id === Number(id));
+        return providers.usersInfo.find(item => item.uid === Number(uid));
     },
 };
 
 export const Mutation = {
-    // @ts-ignore
-    createUser(_, { name, repo, age }) {
-        const user = {
-            id: 1,
+    createUser(_: any, { uid, name, friends }: any) {
+        const userInfo = {
+            uid,
             name,
-            repo,
-            age
+            friends
         };
 
         // @ts-ignore
-        providers.usersInfo.push(user);
+        providers.usersInfo.push(userInfo);
 
-        return user;
+        return userInfo;
     }
 };
 
-export const User = {
-    id: (user: { id: any; }) => user.id,
-    name: (user: { name: string; }) => user.name,
-    repo: (user: { repo: string; }) => user.repo,
-    age: (user: { age: number; }) => user.age,
+export const UserInfo = {
+    uid: (userInfo: { uid: any; }) => userInfo.uid,
+    name: (userInfo: { name: string; }) => userInfo.name,
+    friends: (userInfo: { friends: [friends]; }) => userInfo.friends
 };
