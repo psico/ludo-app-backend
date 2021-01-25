@@ -1,3 +1,6 @@
+import Friend from '../friend/schema';
+import Base from '../base';
+
 const UserInfo = `
 extend type Query {
     userInfo(uid: ID!): UserInfo
@@ -9,8 +12,8 @@ extend type Mutation {
 type UserInfo {
     uid: ID
     name: String
-    friends: [friend]
+    friends: [Friend]
 }
 `;
 
-export default () => [UserInfo];
+export default () => [UserInfo, Friend, Base];
