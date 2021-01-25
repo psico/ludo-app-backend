@@ -30,5 +30,5 @@ export const Mutation = {
 export const UserInfo = {
     uid: (userInfo: { uid: any; }) => userInfo.uid,
     name: (userInfo: { name: string; }) => userInfo.name,
-    friends: (userInfo: { friends: [friends]; }) => userInfo.friends
+    friends: (userInfo: { friends: Array<any>; }) => userInfo.friends
 };
