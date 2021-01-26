@@ -7,7 +7,7 @@ extend type Query {
     usersInfo: [UserInfo]
 }
 extend type Mutation {
-    createUser(uid: ID!, name: String!, friends: friend): UserInfo
+    createUserInfo(uid: ID!, name: String!, friends: Friend): UserInfo
 }
 type UserInfo {
     uid: ID
