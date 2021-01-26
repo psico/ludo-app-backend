@@ -13,7 +13,7 @@ export const Query = {
 };
 
 export const Mutation = {
-    createUser(_: any, { uid, name, friends }: any) {
+    createUserInfo(_: any, { uid, name, friends }: any) {
         const userInfo = {
             uid,
             name,
