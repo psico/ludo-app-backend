@@ -26,7 +26,9 @@
   "scripts": {
     "start": "tsc && yarn copy-files && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "copy-files": "copyfiles -u 1 resources/*.* dist/"
+    "copy-files": "copyfiles -u 1 resources/*.* dist/",
+    "dev": "nodemon --config nodemon.json src/index.ts",
+    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts"
   },
   "repository": {
     "type": "git",
