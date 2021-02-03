@@ -30,7 +30,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy-files": "copyfiles -u 1 resources/*.* dist/",
     "dev": "nodemon --config nodemon.json src/index.ts",
-    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts"
+    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
+    "test": "./node_modules/.bin/jest --watch"
   },
   "repository": {
     "type": "git",
