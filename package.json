@@ -4,20 +4,27 @@
   "description": "Backend to use in project LudoApp, project to build social network for boardgames, register matches and challenge yourself in search of achievements",
   "main": "dist/index.js",
   "jest": {
-    "verbose": true,
-    "roots": [
-      "<rootDir>"
+    "collectCoverage": true,
+    "coverageDirectory": "coverage/typescript/",
+    "coverageReporters": [
+      "json",
+      "html",
+      "lcov"
     ],
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$",
+    "verbose": true,
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
     "moduleFileExtensions": [
       "ts",
+      "tsx",
       "js",
+      "jsx",
       "json",
       "node"
-    ],
-    "collectCoverage": true,
-    "clearMocks": true,
-    "coverageDirectory": "coverage"
+    ]
   },
   "dependencies": {
     "@types/express-graphql": "^0.9.0",
@@ -27,6 +34,8 @@
     "express-graphql": "^0.12.0",
     "graphql": "^15.4.0",
     "graphql-tools": "^7.0.2",
+    "jest-junit": "^12.0.0",
+    "ts-jest": "^26.5.0",
     "tslint": "^6.1.3",
     "typescript": "^4.1.3"
   },
