@@ -6,6 +6,6 @@ describe("TEST Friend", () => {
     });
 
     it("Function friend()", () => {
-        expect(typeof Query.friend("",{id:1})).toBe("object");
+        expect(typeof Query.friend("",{id:0})).toBe("undefined");
     });
 });
