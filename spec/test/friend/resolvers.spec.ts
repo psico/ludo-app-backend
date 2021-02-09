@@ -12,7 +12,9 @@ describe("QUERY Friend", () => {
 
 describe("MUTATION Friend", () => {
     it("Function createFriend()", () => {
-        expect(typeof Mutation.createFriend("", { uid: 1, name: "name" }))
-            .toBe("object");
+        const friend = Mutation.createFriend("", { uid: 1, name: "name" })
+        expect(typeof friend).toBe("object");
+        expect(friend.uid).toBe(1);
+        expect(friend.name).toBe("name");
     });
 });
