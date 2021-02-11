@@ -26,4 +26,10 @@ describe("MODEL User", () => {
         expect(typeof id).toBe("number");
         expect(id).toBe(1);
     });
+
+    it("Property name", () => {
+        const name = User.name({name: "name"});
+        expect(typeof name).toBe("string");
+        expect(name).toBe("name");
+    });
 });
