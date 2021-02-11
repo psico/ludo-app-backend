@@ -38,4 +38,10 @@ describe("MODEL User", () => {
         expect(typeof repo).toBe("string");
         expect(repo).toBe("repo");
     });
+
+    it("Property age", () => {
+        const age = User.age({age: 1});
+        expect(typeof age).toBe("number");
+        expect(age).toBe(1);
+    });
 });
