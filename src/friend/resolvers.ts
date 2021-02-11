@@ -27,6 +27,6 @@ export const Mutation = {
 };
 
 export const Friend = {
-    uid: (friend: { uid: any; }) => friend.uid,
+    uid: (friend: { uid: string; }) => friend.uid,
     name: (friend: { name: string; }) => friend.name
 };
