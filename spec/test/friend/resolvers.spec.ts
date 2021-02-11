@@ -25,4 +25,10 @@ describe("MODEL Friend", () => {
         expect(typeof uid).toBe("string");
         expect(uid).toBe("1");
     });
+
+    it("Property name", () => {
+        const name = Friend.name({name: "name"});
+        expect(typeof name).toBe("string");
+        expect(name).toBe("name");
+    });
 });
