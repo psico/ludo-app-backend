@@ -32,4 +32,10 @@ describe("MODEL User", () => {
         expect(typeof name).toBe("string");
         expect(name).toBe("name");
     });
+
+    it("Property repo", () => {
+        const repo = User.repo({repo: "repo"});
+        expect(typeof repo).toBe("string");
+        expect(repo).toBe("repo");
+    });
 });
