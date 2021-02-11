@@ -21,6 +21,8 @@ describe("MUTATION Friend", () => {
 
 describe("MODEL Friend", () => {
     it("Property uid", () => {
-        Friend.uid({uid: 1});
+        const uid = Friend.uid({uid: "1"});
+        expect(typeof uid).toBe("string");
+        expect(uid).toBe("1");
     });
 });
