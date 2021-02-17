@@ -209,3 +209,4 @@ dist
 
 # Soource generate by TypeScript
 /dist/
+/ludoapp-b612-firebase-adminsdk.json
