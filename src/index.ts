@@ -1,25 +1,30 @@
 const express = require("express");
-const { graphqlHTTP } = require('express-graphql');
+const {graphqlHTTP} = require('express-graphql');
 
-import firebase from "firebase/app";
+import admin from "firebase-admin";
 import "firebase/auth";
 import "firebase/firestore";
 
 import schema from './schema';
 
-const firebaseConfig = {
-    apiKey: "API_KEY",
-    authDomain: "PROJECT_ID.firebaseapp.com",
-    databaseURL: "https://PROJECT_ID.firebaseio.com",
-    projectId: "PROJECT_ID",
-    storageBucket: "PROJECT_ID.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID",
-    measurementId: "G-MEASUREMENT_ID",
-};
+var serviceAccount = require("../ludoapp-b612-firebase-adminsdk.json");
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://ludoapp-b612.firebaseio.com"
+});;
+
+const db = admin.firestore();
+db.collection("usersInfo").get()
+    .then(snapshot => {
+    snapshot.forEach((doc: any) => {
+        console.log("aki ==> ", doc.id, '=>', doc.data());
+    });
+})
+    .catch((e: any) => {
+        console.log("ops =>", e);
+});
 
 const app = express();
 
