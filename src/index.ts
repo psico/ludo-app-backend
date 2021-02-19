@@ -15,16 +15,7 @@ admin.initializeApp({
     databaseURL: "https://ludoapp-b612.firebaseio.com"
 });
 
-const db = admin.firestore();
-db.collection("usersInfo").get()
-    .then(snapshot => {
-        snapshot.forEach((doc: any) => {
-            console.log("aki ==> ", doc.id, '=>', doc.data());
-        });
-    })
-    .catch((e: any) => {
-        console.log("ops =>", e);
-    });
+export const db = admin.firestore();
 
 const app = express();
 
