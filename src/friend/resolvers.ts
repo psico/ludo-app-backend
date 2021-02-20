@@ -5,18 +5,21 @@ const providers = {
 };
 
 export const Query = {
-    friends: () => {
-        db.collection("usersInfo").get()
-            .then(snapshot => {
-                snapshot.forEach((doc: any) => {
-                    console.log("aki ==> ", doc.id, '=>', doc.data());
-                });
-            })
-            .catch((e: any) => {
-                console.log("ops =>", e);
-            });
+    friends: async () => {
+        // db.collection("usersInfo").get()
+        //     .then(snapshot => {
+        //         snapshot.forEach((doc: any) => {
+        //             console.log("aki ==> ", doc.id, '=>', doc.data());
+        //         });
+        //     })
+        //     .catch((e: any) => {
+        //         console.log("ops =>", e);
+        //     });
 
-        return providers.friend;
+        const friends = await db.collection("usersInfo").get();
+        return friends;
+
+        // return providers.friend;
     },
     friend: (_: any, {id}: any) => {
         // @ts-ignore
