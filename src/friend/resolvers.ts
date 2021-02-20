@@ -6,17 +6,23 @@ const providers = {
 
 export const Query = {
     friends: async () => {
-        // db.collection("usersInfo").get()
-        //     .then(snapshot => {
-        //         snapshot.forEach((doc: any) => {
-        //             console.log("aki ==> ", doc.id, '=>', doc.data());
-        //         });
-        //     })
-        //     .catch((e: any) => {
-        //         console.log("ops =>", e);
-        //     });
+        let friends: Array<object> = [];
+        db.collection("usersInfo").get()
+            .then(snapshot => {
+                snapshot.forEach((doc: any) => {
+                    console.log("aki ==> ", doc.id, '=>', doc.data());
+                    friends.push(doc.data());
+                });
+            })
+            .catch((e: any) => {
+                console.log("ops =>", e);
+            });
 
-        const friends = await db.collection("usersInfo").get();
+        // const snapshot = await db.collection("usersInfo").get();
+        // snapshot.forEach((doc: any) => {
+        //     console.log("aki ==> ", doc.id, '=>', doc.data());
+        // });
+        console.log(friends);
         return friends;
 
         // return providers.friend;
