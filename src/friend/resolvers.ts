@@ -7,22 +7,25 @@ const providers = {
 export const Query = {
     friends: async () => {
         let friends: Array<object> = [];
-        db.collection("usersInfo").get()
-            .then(snapshot => {
-                snapshot.forEach((doc: any) => {
-                    console.log("aki ==> ", doc.id, '=>', doc.data());
-                    friends.push(doc.data());
-                });
-            })
-            .catch((e: any) => {
-                console.log("ops =>", e);
-            });
+        // db.collection("usersInfo").get()
+        //     .then(snapshot => {
+        //         snapshot.forEach((doc: any) => {
+        //             friends.push(doc.data());
+        //         });
+        //         return friends;
+        //     })
+        //     .catch((e: any) => {
+        //         console.log("ops =>", e);
+        //     });
 
-        // const snapshot = await db.collection("usersInfo").get();
-        // snapshot.forEach((doc: any) => {
-        //     console.log("aki ==> ", doc.id, '=>', doc.data());
-        // });
+        const snapshot = await db.collection("usersInfo").get();
+        snapshot.forEach((doc: any) => {
+            console.log("aki ==> ", doc.id, '=>', doc.data());
+            friends.push(doc.data())
+        });
         console.log(friends);
+        console.log(providers.friend);
+
         return friends;
 
         // return providers.friend;
