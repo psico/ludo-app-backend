@@ -15,9 +15,19 @@ export const Query = {
 
         return friends;
     },
-    friend: (_: any, {id}: any) => {
+    friend: async (_: any, {uid}: any) => {
+        const usersInfoRef = db.collection("usersInfo");
+        const snapshot = await usersInfoRef.where("uid","==", uid).get();
+        console.log(snapshot.docs[0].data());
+
+        snapshot.forEach(doc => {
+            console.log(doc.id, '=>', doc.data());
+        });
+
+        return snapshot.docs[0].data();
+
         // @ts-ignore
-        return providers.friend.find(item => item.uid === Number(uid));
+        // return providers.friend.find(item => item.uid === Number(uid));
     },
 };
 
