@@ -27,20 +27,10 @@ export const Mutation = {
     async createFriend(_: any, { uid, name }: any) {
         const docRef = db.collection('usersInfo').doc();
 
-        const friend = await docRef.set({
+        return await docRef.set({
             name: name,
             uid: uid
         });
-
-        // const friend = {
-        //     uid,
-        //     name
-        // };
-
-        // @ts-ignore
-        // providers.friend.push(friend);
-
-        return friend;
     }
 };
 
