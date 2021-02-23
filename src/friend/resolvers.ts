@@ -24,14 +24,21 @@ export const Query = {
 };
 
 export const Mutation = {
-    createFriend(_: any, { uid, name }: any) {
-        const friend = {
-            uid,
-            name
-        };
+    async createFriend(_: any, { uid, name }: any) {
+        const docRef = db.collection('usersInfo').doc();
+
+        const friend = await docRef.set({
+            name: name,
+            uid: uid
+        });
+
+        // const friend = {
+        //     uid,
+        //     name
+        // };
 
         // @ts-ignore
-        providers.friend.push(friend);
+        // providers.friend.push(friend);
 
         return friend;
     }
