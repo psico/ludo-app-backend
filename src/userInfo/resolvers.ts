@@ -24,17 +24,13 @@ export const Query = {
 };
 
 export const Mutation = {
-    createUserInfo(_: any, { uid, name, friends }: any) {
-        const userInfo = {
-            uid,
-            name,
-            friends
-        };
+    async createUserInfo(_: any, { uid, name, friends }: any) {
+        const docRef = db.collection('usersInfo').doc();
 
-        // @ts-ignore
-        providers.usersInfo.push(userInfo);
-
-        return userInfo;
+        return docRef.set({
+            name: name,
+            uid: uid
+        });
     }
 };
 
