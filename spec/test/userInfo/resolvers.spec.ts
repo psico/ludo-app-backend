@@ -1,4 +1,4 @@
-const {Query, Mutation} = require("../../../src/userInfo/resolvers");
+const {Query, Mutation, UserInfo} = require("../../../src/userInfo/resolvers");
 
 describe("QUERY UserInfo", () => {
     it("Function usersInfo()", () => {
@@ -16,5 +16,13 @@ describe("MUTATION UserInfo", () => {
         expect(typeof userInfo).toBe("object");
         expect(userInfo.uid).toBe(1);
         expect(userInfo.name).toBe("name");
+    });
+});
+
+describe("MODEL UserInfo", () => {
+    it("Property uid", () => {
+        const uid = UserInfo.uid({uid: "1"});
+        expect(typeof uid).toBe("string");
+        expect(uid).toBe("1");
     });
 });
