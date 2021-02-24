@@ -1,10 +1,19 @@
+import {db} from "../index";
+
 const providers = {
     usersInfo: []
 };
 
 export const Query = {
-    usersInfo: () => {
-        return providers.usersInfo;
+    usersInfo: async () => {
+        let usersInfo: Array<object> = [];
+
+        const snapshot = await db.collection("usersInfo").get();
+        snapshot.forEach((doc: any) => {
+            usersInfo.push(doc.data())
+        });
+
+        return usersInfo;
     },
     userInfo: (_: any, {id}: any) => {
         // @ts-ignore
