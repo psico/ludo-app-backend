@@ -31,4 +31,10 @@ describe("MODEL UserInfo", () => {
         expect(typeof name).toBe("string");
         expect(name).toBe("name");
     });
+
+    // it("Property friends", () => {
+    //     const friends = UserInfo.friends({friends: []});
+    //     expect(typeof friends).toBe("object");
+    //     expect(friends).toBe();
+    // });
 });
