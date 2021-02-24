@@ -15,9 +15,11 @@ export const Query = {
 
         return usersInfo;
     },
-    userInfo: (_: any, {id}: any) => {
-        // @ts-ignore
-        return providers.usersInfo.find(item => item.uid === Number(uid));
+    userInfo: async (_: any, {uid}: any) => {
+        const usersInfoRef = db.collection("usersInfo");
+        const snapshot = await usersInfoRef.where("uid","==", uid).get();
+
+        return snapshot.docs[0].data();
     },
 };
 
