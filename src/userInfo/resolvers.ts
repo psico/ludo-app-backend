@@ -1,9 +1,5 @@
 import {db} from "../index";
 
-const providers = {
-    usersInfo: []
-};
-
 export const Query = {
     usersInfo: async () => {
         let usersInfo: Array<object> = [];
