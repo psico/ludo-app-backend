@@ -24,8 +24,9 @@ export const Mutation = {
         const docRef = db.collection('usersInfo').doc();
 
         return docRef.set({
-            name: name,
-            uid: uid
+            name,
+            uid,
+            friends
         });
     }
 };
