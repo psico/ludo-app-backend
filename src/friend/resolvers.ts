@@ -1,9 +1,5 @@
 import { db } from "../index";
 
-const providers = {
-    friend: []
-};
-
 export const Query = {
     friends: async () => {
         let friends: Array<object> = [];
