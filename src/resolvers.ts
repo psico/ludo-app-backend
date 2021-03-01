@@ -1,9 +1,4 @@
 import {
-    Query as UserQuery,
-    Mutation as UserMutation,
-    User
-} from "./user/resolvers";
-import {
     Query as UserInfoQuery,
     Mutation as UserInfoMutation,
     UserInfo
@@ -16,16 +11,13 @@ import {
 
 export default {
     Query: {
-        ...UserQuery,
         ...UserInfoQuery,
         ...FriendQuery
     },
     Mutation: {
-        ...UserMutation,
         ...UserInfoMutation,
         ...FriendMutation
     },
-    User,
     UserInfo,
     Friend
 }
