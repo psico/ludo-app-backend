@@ -15,7 +15,7 @@ export const Query = {
         // const usersInfoRef = db.collection("usersInfo");
         // const snapshot = await usersInfoRef.where("uid","==", uid).get();
 
-        return snapshot.docs[0].data();
+        // return snapshot.docs[0].data();
     },
 };
 
@@ -23,9 +23,9 @@ export const Mutation = {
     async createComment(_: any, { gameMoment }: any) {
         // const docRef = db.collection('usersInfo').doc();
 
-        return docRef.set({
-            gameMoment: gameMoment
-        });
+        // return docRef.set({
+        //     gameMoment: gameMoment
+        // });
     }
 };
 
