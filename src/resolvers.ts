@@ -8,6 +8,9 @@ import {
     Mutation as FriendMutation,
     Friend
 } from "./friend/resolvers";
+import {
+    Match
+} from "./match/resolvers";
 
 export default {
     Query: {
@@ -19,5 +22,6 @@ export default {
         ...FriendMutation
     },
     UserInfo,
-    Friend
+    Friend,
+    Match
 }
