@@ -1,7 +1,7 @@
 const Friend = `
 extend type Query {
-    friend(uid: ID!): Friend
     friends: [Friend]
+    friend(uid: ID!): Friend    
 }
 extend type Mutation {
     createFriend(uid: ID!, name: String!): Friend

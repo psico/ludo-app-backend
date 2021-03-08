@@ -3,8 +3,8 @@ import Base from '../base';
 
 const UserInfo = `
 extend type Query {
-    userInfo(uid: ID!): UserInfo
     usersInfo: [UserInfo]
+    userInfo(uid: ID!): UserInfo
 }
 extend type Mutation {
     createUserInfo(uid: ID!, name: String!, friends: String): UserInfo
