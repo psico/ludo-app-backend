@@ -1,6 +1,7 @@
 const Match = `
 extend type Query {
-    friend(gameMoment: String!): Match
+    matchs: [Match]
+    match(gameMoment: String!): Match
 }
 extend type Mutation {
     createMatch(gameMoment: String!): Match
