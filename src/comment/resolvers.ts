@@ -4,10 +4,10 @@ export const Query = {
     comments: async () => {
         let comments: Array<object> = [];
 
-        // const snapshot = await db.collection("usersInfo").get();
-        // snapshot.forEach((doc: any) => {
-        //     comments.push(doc.data())
-        // });
+        const snapshot = await db.collection("usersInfo").get();
+        snapshot.forEach((doc: any) => {
+            comments.push(doc.data())
+        });
 
         return comments;
     },
@@ -15,7 +15,7 @@ export const Query = {
         // const usersInfoRef = db.collection("usersInfo");
         // const snapshot = await usersInfoRef.where("uid","==", uid).get();
 
-        return snapshot.docs[0].data();
+        // return snapshot.docs[0].data();
     },
 };
 
@@ -23,11 +23,11 @@ export const Mutation = {
     async createComment(_: any, { uid, name, comment }: any) {
         // const docRef = db.collection('usersInfo').doc();
 
-        return docRef.set({
-            uid: uid,
-            name: name,
-            comment: comment
-        });
+        // return docRef.set({
+        //     uid: uid,
+        //     name: name,
+        //     comment: comment
+        // });
     }
 };
 
