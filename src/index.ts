@@ -28,3 +28,5 @@ app.use(
 );
 
 app.listen(4000);
+
+console.info("LudoApp system is working")
