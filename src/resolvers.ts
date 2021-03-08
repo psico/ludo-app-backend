@@ -9,17 +9,21 @@ import {
     Friend
 } from "./friend/resolvers";
 import {
+    Query as MatchQuery,
+    Mutation as MatchMutation,
     Match
 } from "./match/resolvers";
 
 export default {
     Query: {
         ...UserInfoQuery,
-        ...FriendQuery
+        ...FriendQuery,
+        ...MatchQuery
     },
     Mutation: {
         ...UserInfoMutation,
-        ...FriendMutation
+        ...FriendMutation,
+        ...MatchMutation
     },
     UserInfo,
     Friend,
