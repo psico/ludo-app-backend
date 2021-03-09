@@ -11,11 +11,10 @@ export const Query = {
 
         return matchs;
     },
-    match: async (_: any, {gameMoment}: any) => {
-        // const usersInfoRef = db.collection("usersInfo");
-        // const snapshot = await usersInfoRef.where("uid","==", uid).get();
+    match: async (_: any, { idDoc }: any) => {
+        const snapshot = await db.collection("matches").doc(idDoc).get();
 
-        // return snapshot.docs[0].data();
+        return snapshot.data();
     },
 };
 
