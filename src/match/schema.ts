@@ -7,6 +7,7 @@ extend type Mutation {
     createMatch(gameMoment: String!): Match
 }
 type Match {
+    uid: String
     gameMoment: String
 }
 `;

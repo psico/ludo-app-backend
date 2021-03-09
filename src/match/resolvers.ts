@@ -29,5 +29,6 @@ export const Mutation = {
 };
 
 export const Match = {
+    uid: (match: { uid: string; }) => match.uid,
     gameMoment: (match: { gameMoment: string; }) => match.gameMoment
 };
