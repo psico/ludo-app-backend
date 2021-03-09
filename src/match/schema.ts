@@ -1,7 +1,7 @@
 const Match = `
 extend type Query {
     matchs: [Match]
-    match(gameMoment: String!): Match
+    match(idDoc: String!): Match
 }
 extend type Mutation {
     createMatch(gameMoment: String!): Match
