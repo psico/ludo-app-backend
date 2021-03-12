@@ -1,16 +1,11 @@
-// const Game = `
-// extend type Query {
-//     friend(gameMoment: String!): Game
-// }
-// extend type Mutation {
-//     createGame(gameMoment: String!): Game
-// }
-// type Game {
-//     gameMoment: String
-// }
-// `;
-
 const Game = `
+extend type Query {
+    games: [Game]
+    game(idDoc: String!): Game
+}
+extend type Mutation {
+    createGame(gameMoment: String!): Game
+}
 type Game {
     name: String
     objectId: String
