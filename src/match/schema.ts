@@ -1,3 +1,5 @@
+import Game from '../game/schema';
+
 const Match = `
 extend type Query {
     matchs: [Match]
@@ -9,7 +11,8 @@ extend type Mutation {
 type Match {
     uid: String
     gameMoment: String
+    game: Game
 }
 `;
 
-export default () => [Match];
+export default () => [Match, Game];
