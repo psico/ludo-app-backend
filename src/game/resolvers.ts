@@ -18,5 +18,5 @@ export const Mutation = {
 export const Game = {
     name: (game: { name: string; }) => game.name,
     objectId: (game: { objectId: string; }) => game.objectId,
-    yearPublished: (game: { yearPublished: Number; }) => game.yearPublished
+    yearPublished: (game: { yearPublished: string; }) => game.yearPublished
 };
