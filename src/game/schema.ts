@@ -9,7 +9,7 @@ extend type Mutation {
 type Game {
     name: String
     objectId: String
-    yearPublished: Number
+    yearPublished: String
 }
 `;
 
