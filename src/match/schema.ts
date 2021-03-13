@@ -1,4 +1,5 @@
 import Game from '../game/schema';
+import Comment from '../comment/schema';
 
 const Match = `
 extend type Query {
@@ -12,6 +13,7 @@ type Match {
     uid: String
     gameMoment: String
     game: Game
+    comments: [Comment]
 }
 `;
 
