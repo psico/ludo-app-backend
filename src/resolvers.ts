@@ -14,6 +14,11 @@ import {
     Game
 } from "./game/resolvers";
 import {
+    Query as CommentQuery,
+    Mutation as CommentMutation,
+    Comment
+} from "./comment/resolvers";
+import {
     Query as MatchQuery,
     Mutation as MatchMutation,
     Match
@@ -24,16 +29,19 @@ export default {
         ...UserInfoQuery,
         ...FriendQuery,
         ...GameQuery,
+        ...CommentQuery,
         ...MatchQuery
     },
     Mutation: {
         ...UserInfoMutation,
         ...FriendMutation,
         ...GameMutation,
+        ...CommentMutation,
         ...MatchMutation
     },
     UserInfo,
     Friend,
     Game,
+    Comment,
     Match
 }
