@@ -17,4 +17,4 @@ type Match {
 }
 `;
 
-export default () => [Match, Game];
+export default () => [Match, Game, Comment];
