@@ -7,7 +7,7 @@ extend type Query {
     match(idDoc: String!): Match
 }
 extend type Mutation {
-    createMatch(gameMoment: String!): Match
+    createMatch(uid: String!, gameMoment: String!, game: Game!): Match
 }
 type Match {
     uid: String
