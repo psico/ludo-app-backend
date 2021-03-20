@@ -20,13 +20,12 @@ export const Query = {
 };
 
 export const Mutation = {
-    async createUserInfo(_: any, { uid, name, friends }: any) {
+    async createUserInfo(_: any, { uid, name }: any) {
         const docRef = db.collection('usersInfo').doc();
 
         return docRef.set({
             name,
             uid,
-            friends
         });
     }
 };
