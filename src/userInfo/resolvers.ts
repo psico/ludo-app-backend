@@ -21,12 +21,14 @@ export const Query = {
 
 export const Mutation = {
     async createUserInfo(_: any, { uid, name }: any) {
-        const docRef = db.collection('usersInfo').doc();
+        const docRef = await db.collection('usersInfo').doc();
 
-        return docRef.set({
+        docRef.set({
             name,
             uid,
         });
+
+        return { id: docRef.id, uid, name };
     }
 };
 
