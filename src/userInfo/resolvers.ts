@@ -20,8 +20,8 @@ export const Query = {
 };
 
 export const Mutation = {
-    async createUserInfo(_: any, { uid, name }: any) {
-        const docRef = await db.collection('usersInfo').doc();
+    createUserInfo(_: any, { uid, name }: any) {
+        const docRef = db.collection('usersInfo').doc();
 
         docRef.set({
             name,
