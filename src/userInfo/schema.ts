@@ -10,7 +10,6 @@ extend type Mutation {
     createUserInfo(uid: ID!, name: String!): UserInfo
 }
 type UserInfo {
-    id: ID
     uid: ID
     name: String
     friends: [Friend]

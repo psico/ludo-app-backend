@@ -28,7 +28,7 @@ export const Mutation = {
             uid,
         });
 
-        return { id: docRef.id, uid, name };
+        return { uid, name };
     }
 };
 
