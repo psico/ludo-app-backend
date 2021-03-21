@@ -19,15 +19,17 @@ export const Query = {
 };
 
 export const Mutation = {
-    async createMatch(_: any, { uid, gameMoment, game }: any) {
+    createMatch(_: any, { uid, gameMoment, game }: any) {
         console.log(uid, gameMoment, game);
         const docRef = db.collection('matches').doc();
 
-        return docRef.set({
+        docRef.set({
             uid,
             gameMoment,
             game
         });
+
+        return { uid, gameMoment, game };
     }
 };
 
