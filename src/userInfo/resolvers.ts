@@ -22,7 +22,7 @@ export const Query = {
 export const Mutation = {
     createUserInfo(_: any, { uid, name }: any) {
         const docRef = db.collection('usersInfo').doc();
-
+        //@TODO do a check to validate  that uid exists
         docRef.set({
             name,
             uid,
