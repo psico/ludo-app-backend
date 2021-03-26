@@ -30,6 +30,10 @@ export const Mutation = {
         });
 
         return { uid, gameMoment, game };
+    },
+
+    addComment(_: any, { text }: any ) {
+
     }
 };
 
