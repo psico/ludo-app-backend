@@ -8,6 +8,7 @@ extend type Query {
 }
 extend type Mutation {
     createMatch(uid: String!, gameMoment: String!, game: String!): Match
+    addComment(text: String! ): Match
 }
 type Match {
     uid: String
