@@ -29,4 +29,5 @@ app.use(
 
 app.listen(4000);
 
-console.info("LudoApp system is working")
+console.info("LudoApp system is working");
+console.info("Access the address: http://localhost:4000/graphql");
