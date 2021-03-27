@@ -32,8 +32,24 @@ export const Mutation = {
         return { uid, gameMoment, game };
     },
 
-    addComment(_: any, { text }: any ) {
+    //@TODO validate idDoc and UID
+    async addComment(_: any, { idDoc, text }: any ) {
+        const docRef = db.collection('matches').doc(idDoc);
+        const snapshot = await docRef.get();
 
+        const objMatch = snapshot.data();
+
+        if (objMatch) {
+            objMatch.comments.push({
+                comment: text,
+                name: "Desenvolvedor JG",
+                uid: "0IhNFZFa7QMwBY6yZT8l24L1AX32"
+            });
+
+            await docRef.set(objMatch)
+        }
+
+        return objMatch;
     }
 };
 
