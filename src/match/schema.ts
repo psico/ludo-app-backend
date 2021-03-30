@@ -3,7 +3,7 @@ import Comment from '../comment/schema';
 
 const Match = `
 extend type Query {
-    matchs: [Match]
+    matches: [Match]
     match(idDoc: String!): Match
 }
 extend type Mutation {
