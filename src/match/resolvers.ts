@@ -1,7 +1,7 @@
 import { db } from "../index";
 
 export const Query = {
-    matchs: async () => {
+    matches: async () => {
         let matchs: Array<object> = [];
 
         const snapshot = await db.collection("matches").get();
