@@ -1,5 +1,6 @@
 import Game from '../game/schema';
 import Comment from '../comment/schema';
+import Friend from '../friend/schema';
 
 const Match = `
 extend type Query {
@@ -15,7 +16,8 @@ type Match {
     gameMoment: String
     game: Game
     comments: [Comment]
+    players: [Friend] 
 }
 `;
 
-export default () => [Match, Game, Comment];
+export default () => [Match, Game, Comment, Friend];
