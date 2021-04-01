@@ -2,14 +2,15 @@ import { db } from "../index";
 
 export const Query = {
     matches: async () => {
-        let matchs: Array<object> = [];
+        let matches: Array<object> = [];
 
         const snapshot = await db.collection("matches").get();
+
         snapshot.forEach((doc: any) => {
-            matchs.push(doc.data())
+            matches.push({ docId: doc.id, ...doc.data() });
         });
 
-        return matchs;
+        return matches;
     },
     match: async (_: any, { idDoc }: any) => {
         const snapshot = await db.collection("matches").doc(idDoc).get();
