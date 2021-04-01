@@ -12,6 +12,7 @@ extend type Mutation {
     addComment(idDoc: String!, text: String! ): Match
 }
 type Match {
+    docId: String
     uid: String
     gameMoment: String
     game: Game
