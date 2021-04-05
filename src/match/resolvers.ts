@@ -7,7 +7,26 @@ export const Query = {
         const snapshot = await db.collection("matches").get();
 
         snapshot.forEach((doc: any) => {
-            matches.push({ docId: doc.id, ...doc.data() });
+            console.log("======================");
+            console.log(doc.data());
+            // console.log(typeof (doc.id));
+            // matches.push({
+            //     docId: doc.id,
+            //     ...doc.data("uid"),
+            //     ...doc.data("comments"),
+            //     ...doc.data("game"),
+            //     ...doc.data("players"),
+            // });
+
+            matches.push({
+                docId: doc.id,
+                ...doc.data(),
+            });
+            // matches.push(doc.data());
+
+
+            console.log("***********************");
+            console.log(matches[0])
         });
 
         return matches;
@@ -55,6 +74,7 @@ export const Mutation = {
 };
 
 export const Match = {
+    docId: (match: { docId: string; }) => match.docId,
     uid: (match: { uid: string; }) => match.uid,
     gameMoment: (match: { gameMoment: string; }) => match.gameMoment,
     game: (match: { game: string; }) => match.game,
