@@ -19,6 +19,10 @@ export const db = admin.firestore();
 
 const app = express();
 
+//Using cors protection only in development
+const cors = require('cors');
+app.use(cors());
+
 app.use(
     "/graphql",
     graphqlHTTP({
