@@ -1,4 +1,4 @@
-import { db } from "../index";
+import {auth, db} from "../index";
 
 export const Query = {
     matches: async () => {
@@ -38,17 +38,17 @@ export const Mutation = {
     },
 
     //@TODO validate idDoc and UID
-    async addComment(_: any, { idDoc, text }: any ) {
+    async addComment(_: any, { idDoc, uid, text }: any ) {
+        const userData = await auth.getUser(uid);
         const docRef = db.collection('matches').doc(idDoc);
         const snapshot = await docRef.get();
-
         const objMatch = snapshot.data();
 
         if (objMatch) {
             objMatch.comments.push({
                 comment: text,
-                name: "Desenvolvedor JG",
-                uid: "0IhNFZFa7QMwBY6yZT8l24L1AX32"
+                name: userData.displayName,
+                uid: userData.uid
             });
 
             await docRef.set(objMatch)
