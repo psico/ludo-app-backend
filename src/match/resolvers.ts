@@ -44,7 +44,9 @@ export const Mutation = {
         const snapshot = await docRef.get();
         const objMatch = snapshot.data();
 
-        if (objMatch) {
+        if (objMatch && userData) {
+            console.log("I`m here")
+            console.log(objMatch);
             objMatch.comments.push({
                 comment: text,
                 name: userData.displayName,
