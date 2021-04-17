@@ -42,16 +42,28 @@ export const Mutation = {
         const userData = await auth.getUser(uid);
         const docRef = db.collection('matches').doc(idDoc);
         const snapshot = await docRef.get();
-        const objMatch = snapshot.data();
+        let objMatch = snapshot.data();
 
         if (objMatch && userData) {
             console.log("I`m here")
             console.log(objMatch);
-            objMatch.comments.push({
-                comment: text,
-                name: userData.displayName,
-                uid: userData.uid
-            });
+
+            if (objMatch.comments) {
+                objMatch.comments.push({
+                    comment: text,
+                    name: userData.displayName,
+                    uid: userData.uid
+                });
+            } else {
+                objMatch = {
+                    ...objMatch,
+                    comments: [{
+                        comment: text,
+                        name: userData.displayName,
+                        uid: userData.uid
+                    }]
+                }
+            }
 
             await docRef.set(objMatch)
         }
