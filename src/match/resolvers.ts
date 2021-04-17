@@ -45,8 +45,6 @@ export const Mutation = {
         let objMatch = snapshot.data();
 
         if (objMatch && userData) {
-            console.log("I`m here")
-            console.log(objMatch);
 
             if (objMatch.comments) {
                 objMatch.comments.push({
