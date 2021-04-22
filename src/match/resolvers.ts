@@ -39,29 +39,26 @@ export const Mutation = {
 
     //@TODO validate idDoc and UID
     async addComment(_: any, { idDoc, uid, text }: any ) {
+        console.log("UID: ", uid);
+
         const userData = await auth.getUser(uid);
         const docRef = db.collection('matches').doc(idDoc);
         const snapshot = await docRef.get();
         let objMatch = snapshot.data();
 
-        if (objMatch && userData) {
-
+        if (text && objMatch && userData) {
+            let comments = [];
             if (objMatch.comments) {
-                objMatch.comments.push({
+                comments = objMatch.comments;
+            }
+
+            comments.push({
                     comment: text,
                     name: userData.displayName,
                     uid: userData.uid
-                });
-            } else {
-                objMatch = {
-                    ...objMatch,
-                    comments: [{
-                        comment: text,
-                        name: userData.displayName,
-                        uid: userData.uid
-                    }]
-                }
-            }
+            })
+
+            objMatch.comments = comments;
 
             await docRef.set(objMatch)
         }
