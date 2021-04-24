@@ -37,12 +37,7 @@ export const Mutation = {
         return { uid, gameMoment, game };
     },
 
-    //@TODO validate idDoc and UID
     async addComment(_: any, { CommentInput }: any ) {
-        // console.log("UID: ", uid);
-        // console.log("ID DOC: ", idDoc);
-        console.log("CommentInput: ", CommentInput);
-
         const userData = await auth.getUser(CommentInput.uid);
         const docRef = db.collection('matches').doc(CommentInput.idDoc);
         const snapshot = await docRef.get();
