@@ -39,6 +39,8 @@ export const Mutation = {
 
     async addComment(_: any, { CommentInput }: any ) {
         const userData = await auth.getUser(CommentInput.uid);
+        console.log("========================")
+        console.log(userData);
         const docRef = db.collection('matches').doc(CommentInput.idDoc);
         const snapshot = await docRef.get();
         let objMatch = snapshot.data();
@@ -51,7 +53,7 @@ export const Mutation = {
 
             comments.push({
                     comment: CommentInput.text,
-                    name: userData.displayName,
+                    name: userData.displayName ?? userData.email,
                     uid: userData.uid
             })
 
