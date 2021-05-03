@@ -57,8 +57,8 @@ app.use('/login', (req: any, res: any) => {
     //     token: 'test123'
     // });
 
-    const email = req.body.email;
-    const password = req.body.password;
+    const email = req.body.user.email;
+    const password = req.body.user.password;
 
     firebase
         .auth()
