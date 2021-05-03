@@ -1,3 +1,5 @@
+import firebase from "firebase";
+
 const express = require("express");
 const {graphqlHTTP} = require('express-graphql');
 const passport = require('passport');
@@ -48,12 +50,55 @@ app.use(express.json());
 //     }
 // );
 app.use('/login', (req: any, res: any) => {
-    console.log(req.data);
-    console.log(req.params);
-    console.log(req.body);
-    res.send({
-        token: 'test123'
-    });
+    // console.log(req.data);
+    // console.log(req.params);
+    // console.log(req.body);
+    // res.send({
+    //     token: 'test123'
+    // });
+
+    const email = req.body.email;
+    const password = req.body.password;
+
+    firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+            firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password)
+                .then((result: any) => {
+                    console.log("resultado firebase: ");
+                    console.log(result);
+
+                    if (!result.user.email.isEmpty) {
+                        // Auth.setUserInfo({
+                        //     displayName: result.user.displayName ? result.user.displayName : result.user.email,
+                        //     email: result.user.email,
+                        //     emailVerified: result.user.emailVerified,
+                        //     uid: result.user.uid,
+                        //     photoURL: result.user.photoURL,
+                        //     isLoggedIn: true
+                        // });
+                        // history.push('/community');
+
+                        res.send({
+                            user: {
+                                displayName: result.user.displayName ? result.user.displayName : result.user.email,
+                                email: result.user.email,
+                                emailVerified: result.user.emailVerified,
+                                uid: result.user.uid,
+                                photoURL: result.user.photoURL,
+                                isLoggedIn: true,
+                                token: 'test123'
+                            }
+                        });
+                    }
+                });
+                // .catch((e:Error) => {
+                //     setErrors(e.message);
+                // });
+        });
 });
 
 //Initiating graphQL
