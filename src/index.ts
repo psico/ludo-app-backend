@@ -1,5 +1,6 @@
 const express = require("express");
 const {graphqlHTTP} = require('express-graphql');
+const passport = require('passport');
 
 import admin from "firebase-admin";
 import "firebase/auth";
@@ -24,6 +25,17 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
+//Initiating graphQL
+app.post('/login',
+    passport.authenticate('local'),
+    function (req: any, res: any) {
+        // If this function gets called, authentication was successful.
+        // `req.user` contains the authenticated user.
+        res.redirect('/users/' + req.user.username);
+    }
+);
+
+//Initiating graphQL
 app.use(
     "/graphql",
     graphqlHTTP({
