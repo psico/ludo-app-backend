@@ -1,18 +1,17 @@
-import firebase from "firebase";
-
-const express = require("express");
-const {graphqlHTTP} = require('express-graphql');
-const passport = require('passport');
-
-import admin from "firebase-admin";
 import "firebase/auth";
 import "firebase/firestore";
-
 import schema from './schema';
 
-var serviceAccount = require("../ludoapp-b612-firebase-adminsdk.json");
+// const passport = require('passport');
 
 // Initialize Firebase
+const firebase = require('firebase');
+const firebaseConfig = require("../ludoapp-b612-firebase-config.json");
+firebase.initializeApp(firebaseConfig);
+
+// Initialize Firestore
+const admin = require('firebase-admin');
+const serviceAccount = require("../ludoapp-b612-firebase-adminsdk.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://ludoapp-b612.firebaseio.com"
@@ -20,12 +19,8 @@ admin.initializeApp({
 export const db = admin.firestore();
 export const auth = admin.auth();
 
-var firebaseConfig = {
-
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
+// Initialize Express
+const express = require("express");
 const app = express();
 
 //Using cors protection only in development
@@ -107,6 +102,7 @@ app.use('/login', (req: any, res: any) => {
 });
 
 //Initiating graphQL
+const {graphqlHTTP} = require('express-graphql');
 app.use(
     "/graphql",
     graphqlHTTP({
