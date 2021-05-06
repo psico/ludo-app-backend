@@ -6,12 +6,12 @@ import schema from './schema';
 
 // Initialize Firebase
 const firebase = require('firebase');
-const firebaseConfig = require("../ludoapp-b612-firebase-config.json");
+const firebaseConfig = require("../firebase-config.json");
 firebase.initializeApp(firebaseConfig);
 
 // Initialize Firestore
 const admin = require('firebase-admin');
-const serviceAccount = require("../ludoapp-b612-firebase-adminsdk.json");
+const serviceAccount = require("../serviceAccountKey.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://ludoapp-b612.firebaseio.com"
