@@ -6,7 +6,7 @@ import schema from './schema';
 
 // Initialize Firebase
 const firebase = require('firebase');
-const firebaseConfig = require("../firebase-config.json");
+const firebaseConfig = require("../firebaseConfig.json");
 firebase.initializeApp(firebaseConfig);
 
 // Initialize Firestore

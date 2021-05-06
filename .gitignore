@@ -210,4 +210,4 @@ dist
 # Soource generate by TypeScript
 /dist/
 /serviceAccountKey.json
-/firebase-config.json
+/firebaseConfig.json
