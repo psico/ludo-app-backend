@@ -27,7 +27,7 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
-// Initiating login
+// Login route autentication
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded());
 // Parse JSON bodies (as sent by API clients)
@@ -39,66 +39,37 @@ app.use(express.json());
 //         // If this function gets called, authentication was successful.
 //         // `req.user` contains the authenticated user.
 //         // res.redirect('/users/' + req.user.username);
-//
-//         console.log(req.data);
-//         console.log(req.params);
-//         console.log(req.body);
-//         //JG implements
-//         res.send({
-//             token: 'test12345'
-//         });
 //     }
 // );
 app.use('/login', (req: any, res: any) => {
-    // console.log(req.data);
-    // console.log(req.params);
-    // console.log(req.body);
-    // res.send({
-    //     token: 'test123'
-    // });
 
     const email = req.body.user.email;
     const password = req.body.user.password;
 
-    // firebase
-    //     .auth()
-    //     .setPersistence(firebase.auth.Auth.Persistence.SESSION)
-    //     .then(() => {
-            firebase
-                .auth()
-                .signInWithEmailAndPassword(email, password)
-                .then((result: any) => {
-                    console.log("resultado firebase: ");
-                    console.log(result);
+    firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((result: any) => {
+            console.log("resultado firebase: ");
+            console.log(result);
 
-                    if (!result.user.email.isEmpty) {
-                        // Auth.setUserInfo({
-                        //     displayName: result.user.displayName ? result.user.displayName : result.user.email,
-                        //     email: result.user.email,
-                        //     emailVerified: result.user.emailVerified,
-                        //     uid: result.user.uid,
-                        //     photoURL: result.user.photoURL,
-                        //     isLoggedIn: true
-                        // });
-                        // history.push('/community');
-
-                        res.send({
-                            user: {
-                                displayName: result.user.displayName ? result.user.displayName : result.user.email,
-                                email: result.user.email,
-                                emailVerified: result.user.emailVerified,
-                                uid: result.user.uid,
-                                photoURL: result.user.photoURL,
-                                isLoggedIn: true,
-                                token: 'test123'
-                            }
-                        });
+            if (!result.user.email.isEmpty) {
+                res.send({
+                    user: {
+                        displayName: result.user.displayName ? result.user.displayName : result.user.email,
+                        email: result.user.email,
+                        emailVerified: result.user.emailVerified,
+                        uid: result.user.uid,
+                        photoURL: result.user.photoURL,
+                        isLoggedIn: true,
+                        token: 'test123'
                     }
-                })
-                .catch((e:Error) => {
-                    console.error(e.message);
                 });
-        // });
+            }
+        })
+        .catch((e: Error) => {
+            console.error(e.message);
+        });
 });
 
 //Initiating graphQL
