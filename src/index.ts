@@ -50,10 +50,8 @@ app.use('/login', (req: any, res: any) => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((result: any) => {
-            console.log("resultado firebase: ");
-            console.log(result);
-
             if (!result.user.email.isEmpty) {
+                console.log(`User e-mail ${result.user.email} logged`);
                 res.send({
                     user: {
                         displayName: result.user.displayName ? result.user.displayName : result.user.email,
