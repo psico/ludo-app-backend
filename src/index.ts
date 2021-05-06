@@ -51,7 +51,7 @@ app.use('/login', (req: any, res: any) => {
         .signInWithEmailAndPassword(email, password)
         .then((result: any) => {
             if (!result.user.email.isEmpty) {
-                console.log(`User e-mail ${result.user.email} logged`);
+                console.info(`User e-mail ${result.user.email} logged`);
                 res.send({
                     user: {
                         displayName: result.user.displayName ? result.user.displayName : result.user.email,
