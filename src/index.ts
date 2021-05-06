@@ -17,9 +17,14 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://ludoapp-b612.firebaseio.com"
 });
-
 export const db = admin.firestore();
 export const auth = admin.auth();
+
+var firebaseConfig = {
+
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 const app = express();
 
@@ -60,10 +65,10 @@ app.use('/login', (req: any, res: any) => {
     const email = req.body.user.email;
     const password = req.body.user.password;
 
-    firebase
-        .auth()
-        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        .then(() => {
+    // firebase
+    //     .auth()
+    //     .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    //     .then(() => {
             firebase
                 .auth()
                 .signInWithEmailAndPassword(email, password)
@@ -94,11 +99,11 @@ app.use('/login', (req: any, res: any) => {
                             }
                         });
                     }
+                })
+                .catch((e:Error) => {
+                    console.error(e.message);
                 });
-                // .catch((e:Error) => {
-                //     setErrors(e.message);
-                // });
-        });
+        // });
 });
 
 //Initiating graphQL
