@@ -50,6 +50,7 @@ app.use('/login', (req: any, res: any) => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((result: any) => {
+            console.log(result);
             if (!result.user.email.isEmpty) {
                 console.info(`User e-mail ${result.user.email} logged`);
                 res.send({
@@ -60,7 +61,8 @@ app.use('/login', (req: any, res: any) => {
                         uid: result.user.uid,
                         photoURL: result.user.photoURL,
                         isLoggedIn: true,
-                        token: 'test123'
+                        token: 'test123',
+                        refreshToken: result.user.refreshToken
                     }
                 });
             }
