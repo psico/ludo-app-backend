@@ -49,21 +49,22 @@ app.use('/login', (req: any, res: any) => {
     firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then((result: any) => {
-            console.log(result);
-            if (!result.user.email.isEmpty) {
-                console.info(`User e-mail ${result.user.email} logged`);
-                res.send({
-                    user: {
-                        displayName: result.user.displayName ? result.user.displayName : result.user.email,
-                        email: result.user.email,
-                        emailVerified: result.user.emailVerified,
-                        uid: result.user.uid,
-                        photoURL: result.user.photoURL,
-                        isLoggedIn: true,
-                        token: 'test123',
-                        refreshToken: result.user.refreshToken
-                    }
+        .then((userData: any) => {
+            if (!userData.user.email.isEmpty) {
+                firebase.auth().currentUser.getIdToken().then((token: string) => {
+                    console.info(`User e-mail ${userData.user.email} logged`);
+                    res.send({
+                        user: {
+                            displayName: userData.user.displayName ? userData.user.displayName : userData.user.email,
+                            email: userData.user.email,
+                            emailVerified: userData.user.emailVerified,
+                            uid: userData.user.uid,
+                            photoURL: userData.user.photoURL,
+                            isLoggedIn: true,
+                            token: token,
+                            refreshToken: userData.user.refreshToken
+                        }
+                    });
                 });
             }
         })
