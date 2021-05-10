@@ -3,6 +3,8 @@ import "firebase/firestore";
 import schema from './schema';
 import firebase from "firebase";
 import UserCredential = firebase.auth.UserCredential;
+import {auth} from "firebase-admin/lib/auth";
+import DecodedIdToken = auth.DecodedIdToken;
 
 // const passport = require('passport');
 
@@ -18,7 +20,7 @@ admin.initializeApp({
     databaseURL: "https://ludoapp-b612.firebaseio.com"
 });
 export const db = admin.firestore();
-export const auth = admin.auth();
+export const adminAuth = admin.auth();
 
 // Initialize Express
 const express = require("express");
@@ -69,6 +71,24 @@ app.use('/login', (req: any, res: any) => {
                     });
                 });
             }
+        })
+        .catch((e: Error) => {
+            console.error(e.message);
+        });
+});
+
+//Verify Token
+app.use('/verifyToken', (req: any, res: any) => {
+
+    const idToken = req.body.idToken;
+
+    admin
+        .auth()
+        .verifyIdToken(idToken)
+        .then((decodedToken:DecodedIdToken) => {
+            const uid = decodedToken.uid;
+            console.log("===================")
+            console.log(decodedToken);
         })
         .catch((e: Error) => {
             console.error(e.message);
