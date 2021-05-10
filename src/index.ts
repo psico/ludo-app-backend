@@ -1,11 +1,12 @@
 import "firebase/auth";
 import "firebase/firestore";
 import schema from './schema';
+import firebase from "firebase";
+import UserCredential = firebase.auth.UserCredential;
 
 // const passport = require('passport');
 
 // Initialize Firebase
-const firebase = require('firebase');
 const firebaseConfig = require("../firebaseConfig.json");
 firebase.initializeApp(firebaseConfig);
 
@@ -49,20 +50,21 @@ app.use('/login', (req: any, res: any) => {
     firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then((userData: any) => {
-            if (!userData.user.email.isEmpty) {
-                firebase.auth().currentUser.getIdToken().then((token: string) => {
-                    console.info(`User e-mail ${userData.user.email} logged`);
+        .then((userData: UserCredential) => {
+            if (userData?.user) {
+                firebase.auth().currentUser?.getIdToken().then((token: string) => {
+                    console.info(`User e-mail ${userData.user?.email} logged`);
+
                     res.send({
                         user: {
-                            displayName: userData.user.displayName ? userData.user.displayName : userData.user.email,
-                            email: userData.user.email,
-                            emailVerified: userData.user.emailVerified,
-                            uid: userData.user.uid,
-                            photoURL: userData.user.photoURL,
+                            displayName: userData.user?.displayName ? userData.user.displayName : userData.user?.email,
+                            email: userData.user?.email,
+                            emailVerified: userData.user?.emailVerified,
+                            uid: userData.user?.uid,
+                            photoURL: userData.user?.photoURL,
                             isLoggedIn: true,
                             token: token,
-                            refreshToken: userData.user.refreshToken
+                            refreshToken: userData.user?.refreshToken
                         }
                     });
                 });
