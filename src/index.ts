@@ -87,8 +87,7 @@ app.use('/verifyToken', (req: any, res: any) => {
         .verifyIdToken(idToken)
         .then((decodedToken:DecodedIdToken) => {
             const uid = decodedToken.uid;
-            console.log("===================")
-            console.log(decodedToken);
+            console.log(uid);
         })
         .catch((e: Error) => {
             console.error(e.message);
