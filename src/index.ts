@@ -88,10 +88,33 @@ app.use('/verifyToken', (req: any, res: any) => {
         .then((decodedToken:DecodedIdToken) => {
             const uid = decodedToken.uid;
             console.log(uid);
+            res.send({ uid });
         })
         .catch((e: Error) => {
             console.error(e.message);
         });
+});
+
+//Get current user
+app.use('/currentUser', async (req: any, res: any) => {
+
+    const userData: firebase.User | null = firebase.auth().currentUser;
+
+    if (userData) {
+        console.log("Returning current user...")
+        res.send({
+            user: {
+                displayName: userData.displayName ? userData.displayName : userData.email,
+                email: userData.email,
+                emailVerified: userData.emailVerified,
+                uid: userData.uid,
+                photoURL: userData.photoURL,
+                isLoggedIn: true,
+                token: await userData.getIdToken(),
+                refreshToken: userData.refreshToken
+            }
+        });
+    }
 });
 
 //Initiating graphQL
