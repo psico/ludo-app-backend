@@ -101,7 +101,7 @@ app.use('/currentUser', async (req: any, res: any) => {
     const userData: firebase.User | null = firebase.auth().currentUser;
 
     if (userData) {
-        console.log("Returning current user...")
+        console.log(`Returning current e-mail user ${userData.displayName ? userData.displayName : userData.email}... `)
         res.send({
             user: {
                 displayName: userData.displayName ? userData.displayName : userData.email,
