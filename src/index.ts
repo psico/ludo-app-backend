@@ -77,6 +77,77 @@ app.use('/login', (req: any, res: any) => {
         });
 });
 
+app.use('/loginCredential', (req: any, res: any) => {
+    console.log("testing credential...", req.body);
+    const token = req.body?.credential.credential.token;
+    // console.log("asdfasdfddddddddddddddddddd...", token);
+
+    // if (req.headers.authtoken) {
+    firebase.auth().signInWithCustomToken(token)
+            .then((userData: UserCredential) => {
+                console.log("result -> ", userData);
+                if (userData) {
+                    console.log("currentUser...");
+                    console.log("displayName...", firebase.auth().currentUser);
+                    // firebase.auth().currentUser?.displayName
+                    firebase.auth().currentUser?.getIdToken().then((token: string) => {
+                        console.info(`User e-mail ${userData.user?.email} logged`);
+
+                        res.send({
+                            user: {
+                                displayName: userData.user?.displayName ? userData.user.displayName : userData.user?.email,
+                                email: userData.user?.email,
+                                emailVerified: userData.user?.emailVerified,
+                                uid: userData.user?.uid,
+                                photoURL: userData.user?.photoURL,
+                                isLoggedIn: true,
+                                token: token,
+                                refreshToken: userData.user?.refreshToken
+                            }
+                        });
+                    });
+                }
+            }).catch(() => {
+            res.status(403).send('Unauthorized')
+        });
+    // } else {
+    //     res.status(403).send('Unauthorized 2')
+    // }
+    // console.log("testing credential 12eee...", req.body.credential.oauthAccessToken);
+
+    // const credential = req.body.credential;
+
+    // firebase
+    //     .auth()
+    //     .signInWithCredential(req.body.credential.credential)
+    //     .then((userData: UserCredential) => {
+    //         console.log("result user credential");
+    //         if (userData?.user) {
+    //             firebase.auth().currentUser?.getIdToken().then((token: string) => {
+    //                 console.info(`User e-mail ${userData.user?.email} logged`);
+    //
+    //                 res.send({
+    //                     user: {
+    //                         displayName: userData.user?.displayName ? userData.user.displayName : userData.user?.email,
+    //                         email: userData.user?.email,
+    //                         emailVerified: userData.user?.emailVerified,
+    //                         uid: userData.user?.uid,
+    //                         photoURL: userData.user?.photoURL,
+    //                         isLoggedIn: true,
+    //                         token: token,
+    //                         refreshToken: userData.user?.refreshToken
+    //                     }
+    //                 });
+    //             });
+    //         }
+    //     })
+    //     .catch((e: Error) => {
+    //         console.log("333333333333333333333");
+    //         console.error(e.message);
+    //     });
+
+});
+
 //Verify Token
 app.use('/verifyToken', (req: any, res: any) => {
 
