@@ -79,11 +79,11 @@ app.use('/login', (req: any, res: any) => {
 
 app.use('/loginCredential', (req: any, res: any) => {
     console.log("testing credential...", req.body);
-    const token = req.body?.credential.credential.token;
+    const token = req.body?.credential.credential;
     // console.log("asdfasdfddddddddddddddddddd...", token);
 
     // if (req.headers.authtoken) {
-    firebase.auth().signInWithCustomToken(token)
+    firebase.auth().signInWithCredential(token)
             .then((userData: UserCredential) => {
                 console.log("result -> ", userData);
                 if (userData) {
