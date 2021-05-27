@@ -78,10 +78,10 @@ app.use('/login', (req: any, res: any) => {
 });
 
 app.use('/loginCredential', (req: any, res: any) => {
-    // const credential = req.body?.credential.credential;
-    console.log("========================================================== body...", req.body);
-    const credential = firebase.auth.GoogleAuthProvider.credential(req.body.credential.credential.oauthIdToken,req.body.credential.credential.oauthAccessToken);
-    console.log("========================================================== credential...", req.body.credential.credential.oauthIdToken);
+    const credential = firebase.auth.GoogleAuthProvider.credential(
+        req.body.credential.oauthIdToken,
+        req.body.credential.oauthAccessToken
+    );
 
     // if (req.headers.authtoken) {
     firebase.auth().signInWithCredential(credential)
