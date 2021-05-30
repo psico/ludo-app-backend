@@ -5,8 +5,7 @@ import firebase from "firebase";
 import UserCredential = firebase.auth.UserCredential;
 import {auth} from "firebase-admin/lib/auth";
 import DecodedIdToken = auth.DecodedIdToken;
-
-// const passport = require('passport');
+import {chooseCredential, userDataFormat} from "./util/util";
 
 // Initialize Firebase
 const firebaseConfig = require("../firebaseConfig.json");
@@ -36,137 +35,76 @@ app.use(express.urlencoded());
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-// app.post('/login',
-//     passport.authenticate('local'),
-//     function (req: any, res: any) {
-//         // If this function gets called, authentication was successful.
-//         // `req.user` contains the authenticated user.
-//         // res.redirect('/users/' + req.user.username);
-//     }
-// );
-app.use('/login', (req: any, res: any) => {
+//REQUEST - Login
+app.use('/login', async (req: any, res: any) => {
+    try {
 
-    const email = req.body.user.email;
-    const password = req.body.user.password;
+        const email = req.body.user.email;
+        const password = req.body.user.password;
 
-    firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((userData: UserCredential) => {
-            if (userData?.user) {
-                firebase.auth().currentUser?.getIdToken().then((token: string) => {
+        const userData: UserCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+        const token: string | undefined = await firebase.auth().currentUser?.getIdToken();
+
+        if (userData?.user && token) {
+            console.info(`User e-mail ${userData.user?.email} logged`);
+            return res.send(userDataFormat(userData.user, token));
+
+        }
+    } catch (error) {
+        console.error("Unauthorized");
+        return res.status(403).send('Unauthorized');
+    }
+});
+
+//REQUEST - Login with credential
+app.use('/loginCredential', async (req: Request, res: any) => {
+    try {
+        if (req.body) {
+            let credential = await chooseCredential(req.body);
+
+            if (credential) {
+                const userData: UserCredential | void = await firebase.auth().signInWithCredential(credential);
+                const token: string | undefined = await firebase.auth().currentUser?.getIdToken();
+                if (token && userData.user) {
                     console.info(`User e-mail ${userData.user?.email} logged`);
-
-                    res.send({
-                        user: {
-                            displayName: userData.user?.displayName ? userData.user.displayName : userData.user?.email,
-                            email: userData.user?.email,
-                            emailVerified: userData.user?.emailVerified,
-                            uid: userData.user?.uid,
-                            photoURL: userData.user?.photoURL,
-                            isLoggedIn: true,
-                            token: token,
-                            refreshToken: userData.user?.refreshToken
-                        }
-                    });
-                });
-            }
-        })
-        .catch((e: Error) => {
-            console.error(e.message);
-        });
-});
-
-app.use('/loginCredential', (req: any, res: any) => {
-    let credential = null;
-
-    if (req.body.credential.providerId === "google.com") {
-        credential = firebase.auth.GoogleAuthProvider.credential(
-            req.body.credential.oauthIdToken,
-            req.body.credential.oauthAccessToken
-        );
-    }
-
-    if (req.body.credential.providerId === "facebook.com") {
-        credential = firebase.auth.FacebookAuthProvider.credential(
-            req.body.credential.oauthAccessToken
-        );
-    }
-
-    if (credential) {
-        firebase.auth()
-            .signInWithCredential(credential)
-            .then((userData: UserCredential) => {
-                if (userData) {
-
-                    firebase.auth().currentUser?.getIdToken().then((token: string) => {
-                        console.info(`User e-mail ${userData.user?.email} logged`);
-
-                        res.send({
-                            user: {
-                                displayName: userData.user?.displayName ? userData.user.displayName : userData.user?.email,
-                                email: userData.user?.email,
-                                emailVerified: userData.user?.emailVerified,
-                                uid: userData.user?.uid,
-                                photoURL: userData.user?.photoURL,
-                                isLoggedIn: true,
-                                token: token,
-                                refreshToken: userData.user?.refreshToken
-                            }
-                        });
-                    });
+                    return res.send(userDataFormat(userData.user, token));
                 }
-            }).catch(() => {
-            console.error("Unauthorized")
-            res.status(403).send('Unauthorized')
-        });
-    } else {
-        console.error("There are problens with credential")
-        res.status(403).send('Unauthorized')
+
+            }
+        }
+        console.error("There are problems with credential")
+        return res.status(403).send('Unauthorized')
+    } catch (error) {
+        console.error("Unauthorized")
+        return res.status(403).send('Unauthorized')
     }
-
 });
 
-//Verify Token
-app.use('/verifyToken', (req: any, res: any) => {
+//REQUEST - Verify Token
+app.use('/verifyToken', async (req: any, res: any) => {
+    try {
+        const decodedToken: DecodedIdToken = await admin.auth().verifyIdToken(req.body.idToken);
+        const uid = decodedToken.uid;
 
-    const idToken = req.body.idToken;
-
-    admin
-        .auth()
-        .verifyIdToken(idToken)
-        .then((decodedToken: DecodedIdToken) => {
-            const uid = decodedToken.uid;
-            console.log(uid);
-            res.send({uid});
-        })
-        .catch((e: Error) => {
-            console.error(e.message);
-        });
+        console.info("Token verified");
+        return res.send({uid});
+    }
+    catch (error) {
+        console.error("Error with token");
+        return res.status(403).send('Error with token');
+    }
 });
 
-//Get current user
+//REQUEST - Get current user
 app.use('/currentUser', async (req: any, res: any) => {
-
     const userData: firebase.User | null = firebase.auth().currentUser;
 
     if (userData) {
-        console.log(`Returning current e-mail user ${userData.displayName ? userData.displayName : userData.email}... `)
-        res.send({
-            user: {
-                displayName: userData.displayName ? userData.displayName : userData.email,
-                email: userData.email,
-                emailVerified: userData.emailVerified,
-                uid: userData.uid,
-                photoURL: userData.photoURL,
-                isLoggedIn: true,
-                token: await userData.getIdToken(),
-                refreshToken: userData.refreshToken
-            }
-        });
+        console.info(`Returning current e-mail user ${userData.displayName ? userData.displayName : userData.email}... `);
+        return res.send(userDataFormat(userData, await userData.getIdToken()));
     }
 
-    res.status(204).send();
+    return res.status(204).send();
 });
 
 //Initiating graphQL
