@@ -20,7 +20,6 @@ type Match {
     players: [UserInfo] 
 }
 input CommentInput {
-  uid: String
   idDoc: String
   text: String
 }
