@@ -1,4 +1,5 @@
-import {adminAuth, db} from "../index";
+import {db} from "../index";
+import firebase from "firebase";
 
 export const Query = {
     matches: async () => {
@@ -38,7 +39,7 @@ export const Mutation = {
     },
 
     async addComment(_: any, { CommentInput }: any ) {
-        const userData = await adminAuth.getUser(CommentInput.uid);
+        const userData: any = await firebase.auth().currentUser;
         const docRef = db.collection('matches').doc(CommentInput.idDoc);
         const snapshot = await docRef.get();
         let objMatch = snapshot.data();
