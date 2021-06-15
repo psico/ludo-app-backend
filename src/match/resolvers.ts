@@ -53,6 +53,7 @@ export const Mutation = {
             comments.push({
                     comment: CommentInput.text,
                     name: userData.displayName ?? userData.email,
+                    photoURL: userData.photoURL,
                     uid: userData.uid
             })
 
