@@ -3,6 +3,7 @@ type Comment {
     uid: ID
     name: String
     comment: String
+    photoURL: String
 }
 `;
 
