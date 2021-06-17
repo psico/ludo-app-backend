@@ -1,6 +1,10 @@
+import axios from "axios";
+
 export const Query = {
     games: async () => {
         let games: Array<object> = [];
+
+        games = await axios.get("");
 
         return games;
     },
