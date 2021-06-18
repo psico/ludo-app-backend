@@ -4,7 +4,7 @@ export const Query = {
     games: async () => {
         let games: Array<object> = [];
 
-        games = await axios.get("");
+        games = await axios.get("https://api.boardgameatlas.com/api/search?name=Catan&pretty=true&client_id=fceBG35WbJ");
 
         return games;
     },
