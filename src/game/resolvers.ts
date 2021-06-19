@@ -9,7 +9,7 @@ export const Query = {
 
 
         // @ts-ignore
-        console.log("games => ", games.data.games[0].id);
+        console.log("games => ", games.data.games[0]);
         let game:any;
         for (game of games.data.games) {
             gameList.push({
@@ -19,6 +19,8 @@ export const Query = {
                 objectId: game.id,
                 // @ts-ignore
                 yearPublished: game.year_published,
+                // @ts-ignore
+                description: game.description,
             });
         }
         // @ts-ignore
