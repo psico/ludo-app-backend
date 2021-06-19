@@ -21,6 +21,20 @@ export const Query = {
                 yearPublished: game.year_published,
                 // @ts-ignore
                 description: game.description,
+                // @ts-ignore
+                mechanics: game.mechanics,
+                // @ts-ignore
+                categories: game.categories,
+                // @ts-ignore
+                artists: game.artists,
+                // @ts-ignore
+                designers: game.designers,
+                // @ts-ignore
+                publishers: game.publishers,
+                // @ts-ignore
+                rules_url: game.rules_url,
+                // @ts-ignore
+                rules_url: game.rules_url,
             });
         }
         // @ts-ignore
