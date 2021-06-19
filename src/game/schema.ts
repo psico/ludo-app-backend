@@ -10,6 +10,7 @@ type Game {
     name: String
     objectId: String
     yearPublished: String
+    description: String
 }
 `;
 
