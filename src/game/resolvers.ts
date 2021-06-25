@@ -1,12 +1,10 @@
 import axios from "axios";
 
 export const Query = {
-    games: async () => {
-        // let games: Array<object> = [];
-
+    games: async (_: any, { gameName }: any) => {
+        console.log("gameName ==> ", gameName);
         let games:any = await axios.get("https://api.boardgameatlas.com/api/search?name=Catan&pretty=true&client_id=fceBG35WbJ");
         let gameList: Array<object> = [];
-
 
         // @ts-ignore
         console.log("games => ", games.data.games[0]);
@@ -37,8 +35,6 @@ export const Query = {
                 rules_url: game.rules_url,
             });
         }
-        // @ts-ignore
-        // console.log("gameList => ", gameList);
         return gameList;
     },
     game: async (_: any, {uid}: any) => {
