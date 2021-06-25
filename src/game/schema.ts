@@ -1,6 +1,6 @@
 const Game = `
 extend type Query {
-    games: [Game]
+    games(gameName: String!): [Game]
     game(idDoc: String!): Game
 }
 extend type Mutation {
