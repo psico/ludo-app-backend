@@ -1,6 +1,6 @@
 const Game = `
 extend type Query {
-    games(gameName: String!): [Game]
+    games(GameInput: GameInput): [Game]
     game(idDoc: String!): Game
 }
 extend type Mutation {
@@ -11,6 +11,10 @@ type Game {
     objectId: String
     yearPublished: String
     description: String
+}
+
+input GameInput {
+  name: String
 }
 `;
 
