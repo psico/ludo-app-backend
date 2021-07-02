@@ -2,7 +2,6 @@ import axios from "axios";
 
 export const Query = {
     games: async (_: any, { GameInput }: any) => {
-        console.log("gameName ==> ", GameInput);
         let games:any = await axios.get(`https://api.boardgameatlas.com/api/search?name=${GameInput.name}&pretty=true&client_id=fceBG35WbJ`);
         let gameList: Array<object> = [];
 
