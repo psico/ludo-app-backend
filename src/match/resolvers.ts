@@ -25,17 +25,21 @@ export const Query = {
 };
 
 export const Mutation = {
-    createMatch(_: any, { uid, gameMoment, game }: any) {
-        console.log(uid, gameMoment, game);
+    createMatch(_: any, { MatchInput }: any) {
+        console.log(MatchInput);
         const docRef = db.collection('matches').doc();
 
         docRef.set({
-            uid,
-            gameMoment,
-            game
+            uid: "1",
+            gameMoment: MatchInput.gameMoment,
+            game: MatchInput.game
         });
 
-        return { uid, gameMoment, game };
+        return {
+            uid: "1",
+            gameMoment: MatchInput.gameMoment,
+            game: MatchInput.game
+        };
     },
 
     async addComment(_: any, { CommentInput }: any ) {
