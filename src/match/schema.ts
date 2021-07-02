@@ -8,8 +8,8 @@ extend type Query {
     match(idDoc: String!): Match
 }
 extend type Mutation {
-    createMatch(uid: String!, gameMoment: String!, game: String!): Match
-    addComment(CommentInput:CommentInput): Match
+    createMatch(MatchInput: MatchInput): Match
+    addComment(CommentInput: CommentInput): Match
 }
 type Match {
     idDoc: String
@@ -19,6 +19,11 @@ type Match {
     comments: [Comment]
     players: [UserInfo] 
 }
+input MatchInput {
+    gameMoment: String
+    game: String
+}
+
 input CommentInput {
   idDoc: String
   text: String
