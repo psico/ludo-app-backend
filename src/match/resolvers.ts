@@ -1,5 +1,6 @@
 import {db} from "../index";
 import firebase from "firebase";
+import axios from "axios";
 
 export const Query = {
     matches: async () => {
@@ -25,19 +26,24 @@ export const Query = {
 };
 
 export const Mutation = {
-    createMatch(_: any, { MatchInput }: any) {
-        console.log(MatchInput);
+    async createMatch(_: any, { MatchInput }: any) {
+        console.log(MatchInput.objectId);
+        let gameObject:any = await axios.get(`https://api.boardgameatlas.com/api/search?ids=${MatchInput.objectId}&pretty=true&client_id=fceBG35WbJ`);
         const docRef = db.collection('matches').doc();
 
-        docRef.set({
-            uid: "1",
-            gameMoment: MatchInput.gameMoment,
-            game: {
-                name: MatchInput.game,
-                objectId: MatchInput.game,
-                yearPublished: MatchInput.game,
-            }
-        });
+        if (gameObject[0]) {
+            docRef.set({
+                uid: "1",
+                gameMoment: MatchInput.gameMoment,
+                game: {
+                    name: gameObject[0].name,
+                    objectId: MatchInput.objectId,
+                    yearPublished: gameObject[0].year_published,
+                }
+            });
+        } else {
+            return null;
+        }
 
         return {
             uid: "1",
