@@ -27,18 +27,26 @@ export const Query = {
 
 export const Mutation = {
     async createMatch(_: any, { MatchInput }: any) {
-        console.log(MatchInput.objectId);
-        let gameObject:any = await axios.get(`https://api.boardgameatlas.com/api/search?ids=${MatchInput.objectId}&pretty=true&client_id=fceBG35WbJ`);
+
+        const request:any = await axios.get(`https://api.boardgameatlas.com/api/search?ids=${MatchInput.gameObjectId}&pretty=true&client_id=fceBG35WbJ`);
+        const userData: firebase.User | null = await firebase.auth().currentUser;
         const docRef = db.collection('matches').doc();
 
-        if (gameObject[0]) {
+        let gameObject = null;
+        if (request.data) {
+            gameObject = request.data.games[0]
+        }
+        console.log(gameObject);
+        // @ts-ignore
+        console.log(userData.uid);
+        if (gameObject && userData) {
             docRef.set({
-                uid: "1",
+                uid: userData.uid,
                 gameMoment: MatchInput.gameMoment,
                 game: {
-                    name: gameObject[0].name,
-                    objectId: MatchInput.objectId,
-                    yearPublished: gameObject[0].year_published,
+                    name: gameObject.name,
+                    objectId: MatchInput.gameObjectId,
+                    yearPublished: gameObject.year_published,
                 }
             });
         } else {
