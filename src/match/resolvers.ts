@@ -36,9 +36,7 @@ export const Mutation = {
         if (request.data) {
             gameObject = request.data.games[0]
         }
-        console.log(gameObject);
-        // @ts-ignore
-        console.log(userData.uid);
+
         if (gameObject && userData) {
             docRef.set({
                 uid: userData.uid,
@@ -47,6 +45,7 @@ export const Mutation = {
                     name: gameObject.name,
                     objectId: MatchInput.gameObjectId,
                     yearPublished: gameObject.year_published,
+                    description: gameObject.description
                 }
             });
         } else {
@@ -54,13 +53,17 @@ export const Mutation = {
         }
 
         return {
-            uid: "1",
+            idDoc: docRef.id,
+            uid: userData.uid,
             gameMoment: MatchInput.gameMoment,
             game: {
-                name: MatchInput.game,
-                objectId: MatchInput.game,
-                yearPublished: MatchInput.game,
-            }
+                name: gameObject.name,
+                objectId: MatchInput.gameObjectId,
+                yearPublished: gameObject.year_published,
+                description: gameObject.description,
+            },
+            comments: [],
+            players: [],
         };
     },
 
