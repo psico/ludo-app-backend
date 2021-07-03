@@ -21,7 +21,7 @@ type Match {
 }
 input MatchInput {
     gameMoment: String
-    game: String
+    gameObjectId: String
 }
 
 input CommentInput {
