@@ -32,13 +32,21 @@ export const Mutation = {
         docRef.set({
             uid: "1",
             gameMoment: MatchInput.gameMoment,
-            game: MatchInput.game
+            game: {
+                name: MatchInput.game,
+                objectId: MatchInput.game,
+                yearPublished: MatchInput.game,
+            }
         });
 
         return {
             uid: "1",
             gameMoment: MatchInput.gameMoment,
-            game: MatchInput.game
+            game: {
+                name: MatchInput.game,
+                objectId: MatchInput.game,
+                yearPublished: MatchInput.game,
+            }
         };
     },
 
