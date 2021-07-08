@@ -38,17 +38,17 @@ export const Mutation = {
         }
 
         if (gameObject && userData) {
-            docRef.set({
+            await docRef.set({
                 uid: userData.uid,
                 gameMoment: MatchInput.gameMoment,
                 game: {
                     name: gameObject.name,
-                    objectId: MatchInput.gameObjectId,
-                    yearPublished: gameObject.year_published,
-                    description: gameObject.description
-                }
+                    objectId: MatchInput.gameObjectId
+                },
+                createdAt: new Date()
             });
         } else {
+            console.error("Erro on data or user wasn't logged");
             return null;
         }
 
