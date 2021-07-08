@@ -22,11 +22,17 @@ type Match {
 input MatchInput {
     gameMoment: String
     gameObjectId: String
+    players: [PlayerInput]
 }
 
 input CommentInput {
   idDoc: String
   text: String
+}
+
+input PlayerInput {
+  uid: String
+  name: String
 }
 `;
 

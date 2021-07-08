@@ -46,6 +46,7 @@ export const Mutation = {
                     imageUrl: gameObject.image_url,
                     objectId: MatchInput.gameObjectId
                 },
+                players: MatchInput.players,
                 createdAt: new Date()
             });
         } else {
