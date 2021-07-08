@@ -11,6 +11,7 @@ type Game {
     objectId: String
     yearPublished: String
     description: String
+    imageUrl: String
 }
 
 input GameInput {
