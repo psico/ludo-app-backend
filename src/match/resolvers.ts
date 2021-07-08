@@ -43,6 +43,7 @@ export const Mutation = {
                 gameMoment: MatchInput.gameMoment,
                 game: {
                     name: gameObject.name,
+                    imageUrl: gameObject.image_url,
                     objectId: MatchInput.gameObjectId
                 },
                 createdAt: new Date()
