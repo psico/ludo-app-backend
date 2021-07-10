@@ -6,7 +6,7 @@ export const Query = {
     matches: async () => {
         let matches: Array<object> = [];
 
-        const snapshot = await db.collection("matches").get();
+        const snapshot = await db.collection("matches").orderBy("createdAt", "desc").get();
 
         snapshot.forEach((doc: any) => {
 
