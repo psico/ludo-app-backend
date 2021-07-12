@@ -1,4 +1,4 @@
-const {Query, Mutation, UserInfo} = require("../../../src/userInfo/resolvers");
+const {Query, Mutation, UserInfo} = require("../../src/userInfo/resolvers");
 
 describe("QUERY UserInfo", () => {
     it("Function usersInfo()", () => {

@@ -1,4 +1,4 @@
-const {Query, Mutation, Friend} = require("../../../src/friend/resolvers");
+const {Query, Mutation, Friend} = require("../../src/friend/resolvers");
 
 describe("QUERY Friend", () => {
     it("Function friends()", () => {
