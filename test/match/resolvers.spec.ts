@@ -1,7 +1,9 @@
-// const {Query, Mutation, Friend} = require("../../src/friend/resolvers");
+const {Query, Mutation, Friend} = require("../../src/match/resolvers");
 //
 describe("QUERY Match", () => {
     it("Function matches()", () => {
+        // Query.matches();
+
 //         expect(typeof Query.friends()).toBe("object");
     });
 //
