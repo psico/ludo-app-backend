@@ -3,6 +3,17 @@
   "version": "2.0.0",
   "description": "Backend to use in project LudoApp, project to build social network for boardgames, register matches and challenge yourself in search of achievements",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psico/ludo-app-backend.git"
+  },
+  "scripts": {
+    "start": "tsc && yarn copy-files && node dist/index.js",
+    "copy-files": "copyfiles -u 1 resources/*.* dist/",
+    "dev": "nodemon --config nodemon.json src/index.ts",
+    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
+    "test": "./node_modules/.bin/jest --watch"
+  },
   "jest": {
     "collectCoverage": true,
     "coverageDirectory": "coverage/typescript/",
@@ -46,27 +57,20 @@
   "devDependencies": {
     "@types/express": "^4.17.9",
     "@types/jest": "^26.0.20",
-    "@typescript-eslint/eslint-plugin": "^4.28.2",
-    "@typescript-eslint/parser": "^4.28.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
     "copyfiles": "^2.4.1",
     "eslint": "^7.30.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "rimraf": "^3.0.2",
     "ts-node": "^9.1.1",
     "tslint": "^6.1.3",
     "typescript": "^4.3.5"
-  },
-  "scripts": {
-    "start": "tsc && yarn copy-files && node dist/index.js",
-    "copy-files": "copyfiles -u 1 resources/*.* dist/",
-    "dev": "nodemon --config nodemon.json src/index.ts",
-    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
-    "test": "./node_modules/.bin/jest --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/psico/ludo-app-backend.git"
   },
   "author": "João Gabriel",
   "license": "MIT",
