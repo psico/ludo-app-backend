@@ -1,6 +1,6 @@
-import Game from '../game/schema';
-import Comment from '../comment/schema';
-import UserInfo from '../userInfo/schema';
+import Game from '../game/schema'
+import Comment from '../comment/schema'
+import UserInfo from '../userInfo/schema'
 
 const Match = `
 extend type Query {
@@ -34,6 +34,6 @@ input PlayerInput {
   uid: String
   name: String
 }
-`;
+`
 
-export default () => [Match, Game, Comment, UserInfo];
+export default () => [Match, Game, Comment, UserInfo]
