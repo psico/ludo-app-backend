@@ -1,38 +1,38 @@
-import { db } from '../index'
-import firebase from 'firebase'
-import axios from 'axios'
+import { db } from '../index';
+import firebase from 'firebase';
+import axios from 'axios';
 
 export const Query = {
   matches: async () => {
-    const matches: Array<object> = []
+    const matches: Array<object> = [];
 
-    const snapshot = await db.collection('matches').orderBy('createdAt', 'desc').get()
+    const snapshot = await db.collection('matches').orderBy('createdAt', 'desc').get();
 
     snapshot.forEach((doc: any) => {
       matches.push({
         idDoc: doc.id,
         ...doc.data()
-      })
-    })
+      });
+    });
 
-    return matches
+    return matches;
   },
   match: async (_: any, { idDoc }: any) => {
-    const snapshot = await db.collection('matches').doc(idDoc).get()
+    const snapshot = await db.collection('matches').doc(idDoc).get();
 
-    return snapshot.data()
+    return snapshot.data();
   }
-}
+};
 
 export const Mutation = {
   async createMatch (_: any, { MatchInput }: any) {
-    const request:any = await axios.get(`https://api.boardgameatlas.com/api/search?ids=${MatchInput.gameObjectId}&pretty=true&client_id=fceBG35WbJ`)
-    const userData: firebase.User | null = await firebase.auth().currentUser
-    const docRef = db.collection('matches').doc()
+    const request:any = await axios.get(`https://api.boardgameatlas.com/api/search?ids=${MatchInput.gameObjectId}&pretty=true&client_id=fceBG35WbJ`);
+    const userData: firebase.User | null = await firebase.auth().currentUser;
+    const docRef = db.collection('matches').doc();
 
-    let gameObject = null
+    let gameObject = null;
     if (request.data) {
-      gameObject = request.data.games[0]
+      gameObject = request.data.games[0];
     }
 
     if (gameObject && userData) {
@@ -46,10 +46,10 @@ export const Mutation = {
         },
         players: MatchInput.players,
         createdAt: new Date()
-      })
+      });
     } else {
-      console.error("Erro on data or user wasn't logged")
-      return null
+      console.error("Erro on data or user wasn't logged");
+      return null;
     }
 
     return {
@@ -64,19 +64,19 @@ export const Mutation = {
       },
       comments: [],
       players: []
-    }
+    };
   },
 
   async addComment (_: any, { CommentInput }: any) {
-    const userData: any = await firebase.auth().currentUser
-    const docRef = db.collection('matches').doc(CommentInput.idDoc)
-    const snapshot = await docRef.get()
-    const objMatch = snapshot.data()
+    const userData: any = await firebase.auth().currentUser;
+    const docRef = db.collection('matches').doc(CommentInput.idDoc);
+    const snapshot = await docRef.get();
+    const objMatch = snapshot.data();
 
     if (CommentInput.text && objMatch && userData) {
-      let comments = []
+      let comments = [];
       if (objMatch.comments) {
-        comments = objMatch.comments
+        comments = objMatch.comments;
       }
 
       comments.push({
@@ -84,16 +84,16 @@ export const Mutation = {
         name: userData.displayName ?? userData.email,
         photoURL: userData.photoURL,
         uid: userData.uid
-      })
+      });
 
-      objMatch.comments = comments
+      objMatch.comments = comments;
 
-      await docRef.set(objMatch)
+      await docRef.set(objMatch);
     }
 
-    return objMatch
+    return objMatch;
   }
-}
+};
 
 export const Match = {
   idDoc: (match: { idDoc: string; }) => match.idDoc,
@@ -101,4 +101,4 @@ export const Match = {
   gameMoment: (match: { gameMoment: string; }) => match.gameMoment,
   game: (match: { game: string; }) => match.game,
   comments: (match: { comments: string; }) => match.comments
-}
+};
