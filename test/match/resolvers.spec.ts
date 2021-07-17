@@ -1,10 +1,47 @@
 import { Query } from '../../src/match/resolvers';
 
+// const queryStub = collection => {
+//   if (q == 'SELECT * from tweets') {
+//     return Promise.resolve({
+//       rows: [
+//         { id: 1, body: 'hello' },
+//         { id: 2, body: 'world' }
+//       ]
+//     });
+//   }
+// };
+
 // eslint-disable-next-line no-undef
 describe('QUERY Match', () => {
   // eslint-disable-next-line no-undef
-  it('Function matches()', () => {
-    Query.matches(null, null, null);
+  it('Function matches()', async () => {
+    const context = {
+      collection: {
+        orderBy: {
+          get: {
+            data: {
+              matches: [
+                {
+                  idDoc: 'nUZgGlVIxfGmWRvOqdvA',
+                  game: {
+                    name: 'Zombicide: Black Plague',
+                    imageUrl: 'https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254904698-61gxfLrgk2L.jpg'
+                  },
+                  comments: null,
+                  players: [
+                    {
+                      name: 'João Gabriel'
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    };
+    const data = await Query.matches(null, null, context);
+    console.log('data => ', data);
     //         expect(typeof Query.friends()).toBe("object");
   });
 //
