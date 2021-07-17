@@ -1,9 +1,12 @@
 // const {Query, Mutation, Friend} = require("../../src/friend/resolvers");
 //
-describe("QUERY Friend", () => {
-    it("Function friends()", () => {
-//         expect(typeof Query.friends()).toBe("object");
-    });
+// eslint-disable-next-line no-undef
+describe('QUERY Friend', () => {
+  // eslint-disable-next-line no-undef
+  it('Function friends()', () => {
+
+    //         expect(typeof Query.friends()).toBe("object");
+  });
 //
 //     it("Function friend()", () => {
 //         expect(typeof Query.friend("", {id: 0})).toBe("undefined");
