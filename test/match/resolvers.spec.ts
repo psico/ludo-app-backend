@@ -1,11 +1,12 @@
-const {Query, Mutation, Friend} = require("../../src/match/resolvers");
-//
-describe("QUERY Match", () => {
-    it("Function matches()", () => {
-        // Query.matches();
+import { Query } from '../../src/match/resolvers';
 
-//         expect(typeof Query.friends()).toBe("object");
-    });
+// eslint-disable-next-line no-undef
+describe('QUERY Match', () => {
+  // eslint-disable-next-line no-undef
+  it('Function matches()', () => {
+    Query.matches(null, null, null);
+    //         expect(typeof Query.friends()).toBe("object");
+  });
 //
 //     it("Function friend()", () => {
 //         expect(typeof Query.friend("", {id: 0})).toBe("undefined");
