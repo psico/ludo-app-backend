@@ -15,33 +15,36 @@ import { Query } from '../../src/match/resolvers';
 describe('QUERY Match', () => {
   // eslint-disable-next-line no-undef
   it('Function matches()', async () => {
+    const mockData = {
+      gameMoment: 'play-now',
+      createdAt: new Date().getTime(),
+      game: {
+        name: 'Ab die Post!',
+        description: '',
+        yearPublished: 1996,
+        objectId: 'H3sDuNTtK0'
+      },
+      uid: '0IhNFZFa7QMwBY6yZT8l24L1AX32'
+    };
+
     const context = {
-      collection: {
-        orderBy: {
-          get: {
-            data: {
-              matches: [
-                {
-                  idDoc: 'nUZgGlVIxfGmWRvOqdvA',
-                  game: {
-                    name: 'Zombicide: Black Plague',
-                    imageUrl: 'https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254904698-61gxfLrgk2L.jpg'
-                  },
-                  comments: null,
-                  players: [
-                    {
-                      name: 'João Gabriel'
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        }
-      }
+      // eslint-disable-next-line no-undef
+      collection: jest.fn(x => ({
+        // eslint-disable-next-line no-undef
+        orderBy: jest.fn(x => ({
+          // eslint-disable-next-line no-undef
+          get: jest.fn(x => ({
+            // eslint-disable-next-line no-undef
+            forEach: jest.fn(x => ([{
+              // eslint-disable-next-line no-undef
+              data: jest.fn(x => mockData)
+            }]))
+          }))
+        }))
+      }))
     };
     const data = await Query.matches(null, null, context);
-    console.log('data => ', data);
+    // console.log('data => ', data);
     //         expect(typeof Query.friends()).toBe("object");
   });
 //
