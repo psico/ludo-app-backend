@@ -1,4 +1,6 @@
 import { Query } from '../../src/match/resolvers';
+import firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
 
 // const queryStub = collection => {
 //   if (q == 'SELECT * from tweets') {
@@ -15,17 +17,20 @@ import { Query } from '../../src/match/resolvers';
 describe('QUERY Match', () => {
   // eslint-disable-next-line no-undef
   it('Function matches()', async () => {
-    const mockData = {
-      gameMoment: 'play-now',
-      createdAt: new Date().getTime(),
-      game: {
-        name: 'Ab die Post!',
-        description: '',
-        yearPublished: 1996,
-        objectId: 'H3sDuNTtK0'
-      },
-      uid: '0IhNFZFa7QMwBY6yZT8l24L1AX32'
-    };
+    const mockData = [{
+      // eslint-disable-next-line no-undef
+      data: jest.fn(() => ({
+        createdAt: Timestamp.now(),
+        gameMoment: 'play-now',
+        game: {
+          name: 'Ab die Post!',
+          description: '',
+          yearPublished: 1996,
+          objectId: 'H3sDuNTtK0'
+        },
+        uid: '0IhNFZFa7QMwBY6yZT8l24L1AX32'
+      }))
+    }];
 
     const context = {
       // eslint-disable-next-line no-undef
@@ -33,18 +38,12 @@ describe('QUERY Match', () => {
         // eslint-disable-next-line no-undef
         orderBy: jest.fn(x => ({
           // eslint-disable-next-line no-undef
-          get: jest.fn(x => ({
-            // eslint-disable-next-line no-undef
-            forEach: jest.fn(x => ([{
-              // eslint-disable-next-line no-undef
-              data: jest.fn(x => mockData)
-            }]))
-          }))
+          get: jest.fn(() => mockData)
         }))
       }))
     };
     const data = await Query.matches(null, null, context);
-    // console.log('data => ', data);
+    console.log('data => ', data);
     //         expect(typeof Query.friends()).toBe("object");
   });
 //
