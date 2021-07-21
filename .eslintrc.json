@@ -16,5 +16,16 @@
     ],
     "rules": {
         "semi": [2, "always"]
-    }
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/*.spec.ts",
+                "**/*.spec.tsx"
+            ],
+            "env": {
+                "jest": true
+            }
+        }
+    ]
 }
