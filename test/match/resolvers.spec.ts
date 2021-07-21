@@ -16,15 +16,14 @@ const mockData = [{
 }];
 
 const context = {
-  collection: jest.fn(x => ({
-    orderBy: jest.fn(x => ({
+  collection: jest.fn(() => ({
+    orderBy: jest.fn(() => ({
       get: jest.fn(() => mockData)
     }))
   }))
 };
 
 describe('QUERY Match', () => {
-
   it('Function matches()', async () => {
     const data = await Query.matches(null, null, context);
 
