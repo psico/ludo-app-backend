@@ -33,7 +33,8 @@ describe('QUERY Match', () => {
   it('Function matches()', async () => {
     const data = await Query.matches(null, null, context);
 
-    //         expect(typeof Query.friends()).toBe("object");
+    // eslint-disable-next-line no-undef
+    expect(typeof data).toBe('object');
   });
 //
 //     it("Function friend()", () => {
