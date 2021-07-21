@@ -2,7 +2,6 @@ import { Query } from '../../src/match/resolvers';
 import firebase from 'firebase';
 
 const mockData = [{
-  // eslint-disable-next-line no-undef
   data: jest.fn(() => ({
     createdAt: firebase.firestore.Timestamp.now(),
     gameMoment: 'play-now',
@@ -17,26 +16,21 @@ const mockData = [{
 }];
 
 const context = {
-  // eslint-disable-next-line no-undef
   collection: jest.fn(x => ({
-    // eslint-disable-next-line no-undef
     orderBy: jest.fn(x => ({
-      // eslint-disable-next-line no-undef
       get: jest.fn(() => mockData)
     }))
   }))
 };
 
-// eslint-disable-next-line no-undef
 describe('QUERY Match', () => {
-  // eslint-disable-next-line no-undef
+
   it('Function matches()', async () => {
     const data = await Query.matches(null, null, context);
 
-    // eslint-disable-next-line no-undef
     expect(typeof data).toBe('object');
   });
-//
+
 //     it("Function friend()", () => {
 //         expect(typeof Query.friend("", {id: 0})).toBe("undefined");
 //     });
