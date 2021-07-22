@@ -47,6 +47,20 @@ describe('QUERY Match', () => {
 
   it('Function match()', async () => {
     const data = await Query.match(null, { id: 0 }, context);
+
+    expect(Object.keys(data).length).toEqual(4);
+    expect(data).toHaveProperty('createdAt');
+    expect(data).toHaveProperty('gameMoment');
+    expect(data).toHaveProperty('game');
+    // @ts-ignore
+    expect(data.game).toHaveProperty('name');
+    // @ts-ignore
+    expect(data.game).toHaveProperty('description');
+    // @ts-ignore
+    expect(data.game).toHaveProperty('yearPublished');
+    // @ts-ignore
+    expect(data.game).toHaveProperty('objectId');
+    expect(data).toHaveProperty('uid');
   });
 });
 
