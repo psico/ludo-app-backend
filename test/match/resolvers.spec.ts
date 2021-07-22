@@ -1,7 +1,7 @@
 import { Query } from '../../src/match/resolvers';
 import firebase from 'firebase';
 
-const mockData = [{
+const mockData = {
   data: jest.fn(() => ({
     createdAt: firebase.firestore.Timestamp.now(),
     gameMoment: 'play-now',
@@ -13,11 +13,14 @@ const mockData = [{
     },
     uid: 'testTestTestTestTestTestTest'
   }))
-}];
+};
 
 const context = {
   collection: jest.fn(() => ({
     orderBy: jest.fn(() => ({
+      get: jest.fn(() => ([mockData]))
+    })),
+    doc: jest.fn(() => ({
       get: jest.fn(() => mockData)
     }))
   }))
@@ -30,11 +33,11 @@ describe('QUERY Match', () => {
     expect(typeof data).toBe('object');
   });
 
-//     it("Function friend()", () => {
-//         expect(typeof Query.friend("", {id: 0})).toBe("undefined");
-//     });
+  it('Function match()', async () => {
+    const data = await Query.match(null, { id: 0 }, context);
+  });
 });
-//
+
 // describe("MUTATION Friend", () => {
 //     it("Function createFriend()", () => {
 //         const friend = Mutation.createFriend("", {uid: 1, name: "name"})
