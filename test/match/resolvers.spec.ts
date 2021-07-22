@@ -67,7 +67,9 @@ describe('QUERY MATCH', () => {
 describe('MUTATION MATCH', () => {
   it('Function createMatch()', () => {
     const match = Mutation.createMatch(null, {
-      gameObjectId: 1, players: 'name'
+      MatchInput: {
+        gameObjectId: 1, players: 'name'
+      }
     }, context);
 
     // expect(typeof match).toBe("object");
