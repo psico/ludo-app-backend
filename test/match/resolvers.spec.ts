@@ -1,4 +1,4 @@
-import { Query } from '../../src/match/resolvers';
+import { Mutation, Query } from '../../src/match/resolvers';
 import firebase from 'firebase';
 
 const mockData = {
@@ -26,7 +26,7 @@ const context = {
   }))
 };
 
-describe('QUERY Match', () => {
+describe('QUERY MATCH', () => {
   it('Function matches()', async () => {
     const data = await Query.matches(null, null, context);
 
@@ -64,15 +64,18 @@ describe('QUERY Match', () => {
   });
 });
 
-// describe("MUTATION Friend", () => {
-//     it("Function createFriend()", () => {__proto__ = Object
-//         const friend = Mutation.createFriend("", {uid: 1, name: "name"})
-//         expect(typeof friend).toBe("object");
-//         expect(friend.uid).toBe(1);
-//         expect(friend.name).toBe("name");
-//     });
-// });
-//
+describe('MUTATION MATCH', () => {
+  it('Function createMatch()', () => {
+    const match = Mutation.createMatch(null, {
+      gameObjectId: 1, players: 'name'
+    }, context);
+
+    // expect(typeof match).toBe("object");
+    // expect(match.uid).toBe(1);
+    // expect(match.name).toBe("name");
+  });
+});
+
 // describe("MODEL Friend", () => {
 //     it("Property uid", () => {
 //         const uid = Friend.uid({uid: "1"});
