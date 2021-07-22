@@ -30,7 +30,19 @@ describe('QUERY Match', () => {
   it('Function matches()', async () => {
     const data = await Query.matches(null, null, context);
 
-    expect(typeof data).toBe('object');
+    expect(Object.keys(data[0]).length).toEqual(5);
+    expect(data[0]).toHaveProperty('createdAt');
+    expect(data[0]).toHaveProperty('gameMoment');
+    expect(data[0]).toHaveProperty('game');
+    // @ts-ignore
+    expect(data[0].game).toHaveProperty('name');
+    // @ts-ignore
+    expect(data[0].game).toHaveProperty('description');
+    // @ts-ignore
+    expect(data[0].game).toHaveProperty('yearPublished');
+    // @ts-ignore
+    expect(data[0].game).toHaveProperty('objectId');
+    expect(data[0]).toHaveProperty('uid');
   });
 
   it('Function match()', async () => {
@@ -39,7 +51,7 @@ describe('QUERY Match', () => {
 });
 
 // describe("MUTATION Friend", () => {
-//     it("Function createFriend()", () => {
+//     it("Function createFriend()", () => {__proto__ = Object
 //         const friend = Mutation.createFriend("", {uid: 1, name: "name"})
 //         expect(typeof friend).toBe("object");
 //         expect(friend.uid).toBe(1);
