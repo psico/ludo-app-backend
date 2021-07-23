@@ -1,5 +1,9 @@
-import { Mutation, Query } from '../../src/match/resolvers';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import firebase from 'firebase';
+import { Mutation, Query } from '../../src/match/resolvers';
+
+const mockAxios = new MockAdapter(axios);
 
 const mockData = {
   data: jest.fn(() => ({
@@ -66,6 +70,9 @@ describe('QUERY MATCH', () => {
 
 describe('MUTATION MATCH', () => {
   it('Function createMatch()', () => {
+    mockAxios.onGet('https://api.boardgameatlas.com/api/search?ids=1&pretty=true&client_id=fceBG35WbJ').reply(200, {
+      id: 1, name: 'John Smith'
+    });
     const match = Mutation.createMatch(null, {
       MatchInput: {
         gameObjectId: 1, players: 'name'
