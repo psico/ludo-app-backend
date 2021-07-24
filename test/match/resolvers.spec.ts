@@ -71,7 +71,12 @@ describe('QUERY MATCH', () => {
 describe('MUTATION MATCH', () => {
   it('Function createMatch()', () => {
     mockAxios.onGet('https://api.boardgameatlas.com/api/search?ids=1&pretty=true&client_id=fceBG35WbJ').reply(200, {
-      id: 1, name: 'John Smith'
+      games: [{
+        name: 'Game Test',
+        image_url: 'http://image.png',
+        year_published: 1985,
+        description: 'Game Test description'
+      }]
     });
     const match = Mutation.createMatch(null, {
       MatchInput: {
