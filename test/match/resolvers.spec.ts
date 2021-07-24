@@ -3,6 +3,8 @@ import MockAdapter from 'axios-mock-adapter';
 import firebase from 'firebase';
 import { Mutation, Query } from '../../src/match/resolvers';
 
+const mockAxios = new MockAdapter(axios);
+
 jest.mock('firebase', () => ({
   auth: jest.fn(() => ({
     currentUser: {
@@ -12,10 +14,29 @@ jest.mock('firebase', () => ({
       photoURL: 'http://photo.png'
     }
   })
-  )
+  ),
+  firestore: {
+    Timestamp: {
+      now: jest.fn(() => ({
+        Timestap: { seconds: 1627137682, nanoseconds: 329000000 }
+      }))
+    }
+  }
 }));
 
-const mockAxios = new MockAdapter(axios);
+jest.mock('firebase-admin', () => ({
+  firestore: jest.fn(() => ({
+    collection: jest.fn(() => ({
+      orderBy: jest.fn(() => ({
+        get: jest.fn(() => ([mockData]))
+      })),
+      doc: jest.fn(() => ({
+        get: jest.fn(() => mockData)
+      }))
+    }))
+  })
+  )
+}));
 
 const mockData = {
   data: jest.fn(() => ({
@@ -37,7 +58,8 @@ const context = {
       get: jest.fn(() => ([mockData]))
     })),
     doc: jest.fn(() => ({
-      get: jest.fn(() => mockData)
+      get: jest.fn(() => mockData),
+      set: jest.fn(() => mockData)
     }))
   }))
 };
@@ -81,7 +103,7 @@ describe('QUERY MATCH', () => {
 });
 
 describe('MUTATION MATCH', () => {
-  it('Function createMatch()', () => {
+  it('Function createMatch()', async () => {
     mockAxios.onGet('https://api.boardgameatlas.com/api/search?ids=1&pretty=true&client_id=fceBG35WbJ').reply(200, {
       games: [{
         name: 'Game Test',
@@ -90,11 +112,12 @@ describe('MUTATION MATCH', () => {
         description: 'Game Test description'
       }]
     });
-    const match = Mutation.createMatch(null, {
+    const match = await Mutation.createMatch(null, {
       MatchInput: {
         gameObjectId: 1, players: 'name'
       }
     }, context);
+    console.log('match ==> ', match);
 
     // expect(typeof match).toBe("object");
     // expect(match.uid).toBe(1);
