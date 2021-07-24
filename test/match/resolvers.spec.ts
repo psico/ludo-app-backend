@@ -3,6 +3,18 @@ import MockAdapter from 'axios-mock-adapter';
 import firebase from 'firebase';
 import { Mutation, Query } from '../../src/match/resolvers';
 
+jest.mock('firebase', () => ({
+  auth: jest.fn(() => ({
+    currentUser: {
+      uid: '1',
+      displayName: 'Test Display Name',
+      email: 'test@email.com',
+      photoURL: 'http://photo.png'
+    }
+  })
+  )
+}));
+
 const mockAxios = new MockAdapter(axios);
 
 const mockData = {
