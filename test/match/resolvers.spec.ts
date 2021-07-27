@@ -48,7 +48,8 @@ const mockData = {
       yearPublished: 2021,
       objectId: 'Teste'
     },
-    uid: 'testTestTestTestTestTestTest'
+    uid: 'uid-test-uid-test-uid-test-uid-test',
+    id: 'id-test-id-test-id-test-id-test'
   }))
 };
 
@@ -58,6 +59,7 @@ const context = {
       get: jest.fn(() => ([mockData]))
     })),
     doc: jest.fn(() => ({
+      id: 'id-test-id-test-id-test-id-test',
       get: jest.fn(() => mockData),
       set: jest.fn(() => mockData)
     }))
