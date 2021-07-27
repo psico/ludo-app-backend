@@ -116,7 +116,9 @@ describe('MUTATION MATCH', () => {
     });
     const match = await Mutation.createMatch(null, {
       MatchInput: {
-        gameObjectId: 1, players: 'name'
+        gameObjectId: 1,
+        gameMoment: 'play-now',
+        players: 'name'
       }
     }, context);
     console.log('match ==> ', match);
