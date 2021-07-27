@@ -121,11 +121,15 @@ describe('MUTATION MATCH', () => {
         players: 'name'
       }
     }, context);
-    console.log('match ==> ', match);
 
-    // expect(typeof match).toBe("object");
-    // expect(match.uid).toBe(1);
-    // expect(match.name).toBe("name");
+    expect(typeof match).toBe('object');
+    expect(match?.uid).toBe('1');
+    expect(match?.gameMoment).toBe('play-now');
+    expect(typeof match?.game).toBe('object');
+    expect(match?.game).toHaveProperty('name');
+    expect(match?.game).toHaveProperty('objectId');
+    expect(match?.game).toHaveProperty('yearPublished');
+    expect(match?.game).toHaveProperty('description');
   });
 });
 
