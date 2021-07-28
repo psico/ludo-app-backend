@@ -131,18 +131,8 @@ describe('MUTATION MATCH', () => {
     expect(match?.game).toHaveProperty('yearPublished');
     expect(match?.game).toHaveProperty('description');
   });
-});
 
-// describe("MODEL Friend", () => {
-//     it("Property uid", () => {
-//         const uid = Friend.uid({uid: "1"});
-//         expect(typeof uid).toBe("string");
-//         expect(uid).toBe("1");
-//     });
-//
-//     it("Property name", () => {
-//         const name = Friend.name({name: "name"});
-//         expect(typeof name).toBe("string");
-//         expect(name).toBe("name");
-//     });
-// });
+  it('Function addComment()', async () => {
+    // const match = await Mutation.addComment({});
+  });
+});
