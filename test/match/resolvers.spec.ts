@@ -70,7 +70,6 @@ describe('QUERY MATCH', () => {
   it('Function matches()', async () => {
     const data = await Query.matches(null, null, context);
 
-    expect(Object.keys(data[0]).length).toEqual(5);
     expect(data[0]).toHaveProperty('createdAt');
     expect(data[0]).toHaveProperty('gameMoment');
     expect(data[0]).toHaveProperty('game');
@@ -88,7 +87,6 @@ describe('QUERY MATCH', () => {
   it('Function match()', async () => {
     const data = await Query.match(null, { id: 0 }, context);
 
-    expect(Object.keys(data).length).toEqual(4);
     expect(data).toHaveProperty('createdAt');
     expect(data).toHaveProperty('gameMoment');
     expect(data).toHaveProperty('game');
@@ -133,6 +131,19 @@ describe('MUTATION MATCH', () => {
   });
 
   it('Function addComment()', async () => {
-    const match = await Mutation.addComment(null, { CommentInput: { idDoc: '1', text: 'Test Text' } }, context);
+    const match = await Mutation.addComment(null, {
+      CommentInput: {
+        idDoc: '1',
+        text: 'Test Text'
+      }
+    }, context);
+
+    expect(typeof match).toBe('object');
+    expect(match).toHaveProperty('comments');
+    expect(match.comments).toHaveLength(1);
+    expect(match.comments[0]).toHaveProperty('comment');
+    expect(match.comments[0]).toHaveProperty('name');
+    expect(match.comments[0]).toHaveProperty('photoURL');
+    expect(match.comments[0]).toHaveProperty('uid');
   });
 });
