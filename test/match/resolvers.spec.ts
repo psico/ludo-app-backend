@@ -133,6 +133,6 @@ describe('MUTATION MATCH', () => {
   });
 
   it('Function addComment()', async () => {
-    // const match = await Mutation.addComment({});
+    const match = await Mutation.addComment(null, { CommentInput: { idDoc: '1', text: 'Test Text' } }, context);
   });
 });
