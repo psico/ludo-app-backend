@@ -1,11 +1,10 @@
-import firebase from 'firebase';
 import axios from 'axios';
 
 export const Query = {
-  matches: async (_: any, __: any, context:any) => {
+  matches: async (_: any, __: any, { db }:any) => {
     const matches: Array<object> = [];
 
-    const snapshot = await context.collection('matches').orderBy('createdAt', 'desc').get();
+    const snapshot = await db.collection('matches').orderBy('createdAt', 'desc').get();
 
     snapshot.forEach((doc: any) => {
       matches.push({
@@ -16,18 +15,18 @@ export const Query = {
 
     return matches;
   },
-  match: async (_: any, { idDoc }: any, context:any) => {
-    const snapshot = await context.collection('matches').doc(idDoc).get();
+  match: async (_: any, { idDoc }: any, { db }:any) => {
+    const snapshot = await db.collection('matches').doc(idDoc).get();
 
     return snapshot.data();
   }
 };
 
 export const Mutation = {
-  async createMatch (_: any, { MatchInput }: any, context:any) {
-    const request:any = await axios.get(`https://api.boardgameatlas.com/api/search?ids=${MatchInput.gameObjectId}&pretty=true&client_id=fceBG35WbJ`);
-    const userData: firebase.User | null = await firebase.auth().currentUser;
-    const docRef = context.collection('matches').doc();
+  async createMatch (_: any, { MatchInput }: any, { db, firebase }:any) {
+    const request: any = await axios.get(`https://api.boardgameatlas.com/api/search?ids=${MatchInput.gameObjectId}&pretty=true&client_id=fceBG35WbJ`);
+    const userData: any = await firebase.auth().currentUser;
+    const docRef = db.collection('matches').doc();
 
     let gameObject = null;
     if (request.data) {
@@ -66,9 +65,9 @@ export const Mutation = {
     };
   },
 
-  async addComment (_: any, { CommentInput }: any, context:any) {
+  async addComment (_: any, { CommentInput }: any, { db, firebase }:any) {
     const userData: any = await firebase.auth().currentUser;
-    const docRef = context.collection('matches').doc(CommentInput.idDoc);
+    const docRef = db.collection('matches').doc(CommentInput.idDoc);
     const snapshot = await docRef.get();
     const objMatch = snapshot.data();
 
