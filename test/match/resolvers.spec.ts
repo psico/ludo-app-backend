@@ -53,7 +53,7 @@ const mockData = {
   }))
 };
 
-const context = {
+const db = {
   collection: jest.fn(() => ({
     orderBy: jest.fn(() => ({
       get: jest.fn(() => ([mockData]))
@@ -68,7 +68,7 @@ const context = {
 
 describe('QUERY MATCH', () => {
   it('Function matches()', async () => {
-    const data = await Query.matches(null, null, context);
+    const data = await Query.matches(null, null, { db });
 
     expect(data[0]).toHaveProperty('createdAt');
     expect(data[0]).toHaveProperty('gameMoment');
@@ -85,7 +85,7 @@ describe('QUERY MATCH', () => {
   });
 
   it('Function match()', async () => {
-    const data = await Query.match(null, { id: 0 }, context);
+    const data = await Query.match(null, { id: 0 }, { db });
 
     expect(data).toHaveProperty('createdAt');
     expect(data).toHaveProperty('gameMoment');
@@ -118,7 +118,7 @@ describe('MUTATION MATCH', () => {
         gameMoment: 'play-now',
         players: 'name'
       }
-    }, context);
+    }, { db });
 
     expect(typeof match).toBe('object');
     expect(match?.uid).toBe('1');
@@ -136,7 +136,7 @@ describe('MUTATION MATCH', () => {
         idDoc: '1',
         text: 'Test Text'
       }
-    }, context);
+    }, { db });
 
     expect(typeof match).toBe('object');
     expect(match).toHaveProperty('comments');
