@@ -1,6 +1,5 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import firebase from 'firebase';
 import { Mutation, Query } from '../../src/match/resolvers';
 
 const mockAxios = new MockAdapter(axios);
@@ -40,7 +39,7 @@ jest.mock('firebase-admin', () => ({
 
 const mockData = {
   data: jest.fn(() => ({
-    createdAt: firebase.firestore.Timestamp.now(),
+    createdAt: { Timestamp: { seconds: 1627588601, nanoseconds: 901000000 } },
     gameMoment: 'play-now',
     game: {
       name: 'Test Game',
@@ -63,6 +62,14 @@ const db = {
       get: jest.fn(() => mockData),
       set: jest.fn(() => mockData)
     }))
+  }))
+};
+
+const firebase = {
+  auth: jest.fn(() => ({
+    currentUser: {
+      uid: '1'
+    }
   }))
 };
 
@@ -118,7 +125,7 @@ describe('MUTATION MATCH', () => {
         gameMoment: 'play-now',
         players: 'name'
       }
-    }, { db });
+    }, { db, firebase });
 
     expect(typeof match).toBe('object');
     expect(match?.uid).toBe('1');
@@ -136,7 +143,7 @@ describe('MUTATION MATCH', () => {
         idDoc: '1',
         text: 'Test Text'
       }
-    }, { db });
+    }, { db, firebase });
 
     expect(typeof match).toBe('object');
     expect(match).toHaveProperty('comments');
