@@ -6,6 +6,7 @@ import UserCredential = firebase.auth.UserCredential;
 import { auth } from 'firebase-admin/lib/auth';
 import DecodedIdToken = auth.DecodedIdToken;
 import { chooseCredential, userDataFormat } from './util/util';
+import context from './context';
 
 // Initialize Firebase
 const firebaseConfig = require('../firebaseConfig.json');
@@ -107,11 +108,11 @@ app.use('/currentUser', async (req: any, res: any) => {
 const { graphqlHTTP } = require('express-graphql');
 app.use(
   '/graphql',
-  graphqlHTTP({
+  graphqlHTTP((request: any) => ({
     schema,
-    context: db,
+    context: context(request),
     graphiql: true
-  })
+  }))
 );
 
 app.listen(4000);
