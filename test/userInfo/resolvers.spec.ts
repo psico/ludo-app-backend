@@ -1,9 +1,14 @@
-// const {Query, Mutation, UserInfo} = require("../../src/userInfo/resolvers");
-//
-describe("QUERY UserInfo", () => {
-    it("Function usersInfo()", () => {
-//         expect(typeof Query.usersInfo()).toBe("object");
-    });
+const { Query } = require('../../src/userInfo/resolvers');
+
+const db = {
+
+};
+
+describe('QUERY UserInfo', () => {
+  it('Function usersInfo()', () => {
+    Query.usersInfo(null, null, db);
+    //         expect(typeof Query.usersInfo()).toBe("object");
+  });
 //
 //     it("Function userInfo()", () => {
 //         expect(typeof Query.userInfo("", {id: 0})).toBe("undefined");
