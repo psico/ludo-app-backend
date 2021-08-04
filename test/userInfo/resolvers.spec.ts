@@ -17,7 +17,9 @@ const db = {
   collection: jest.fn(() => ({
     get: jest.fn(() => ([mockData])),
     where: jest.fn(() => ({
-      get: jest.fn(() => ([mockData]))
+      get: jest.fn(() => ({
+        docs: [mockData]
+      }))
     }))
   }))
 };
