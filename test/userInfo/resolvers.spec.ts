@@ -15,7 +15,10 @@ const mockData = {
 
 const db = {
   collection: jest.fn(() => ({
-    get: jest.fn(() => ([mockData]))
+    get: jest.fn(() => ([mockData])),
+    where: jest.fn(() => ({
+      get: jest.fn(() => ([mockData]))
+    }))
   }))
 };
 
@@ -28,5 +31,15 @@ describe('QUERY UserInfo', () => {
     expect(data[0]).toHaveProperty('friends');
     expect(data[0].friends[0]).toHaveProperty('uid');
     expect(data[0].friends[0]).toHaveProperty('name');
+  });
+
+  it('Function userInfo()', async () => {
+    const data = await Query.userInfo(null, { uid: '1111111111111111111111111111' }, { db });
+
+    expect(data).toHaveProperty('uid');
+    expect(data).toHaveProperty('name');
+    expect(data).toHaveProperty('friends');
+    expect(data.friends[0]).toHaveProperty('uid');
+    expect(data.friends[0]).toHaveProperty('name');
   });
 });
