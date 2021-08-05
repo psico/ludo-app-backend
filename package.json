@@ -12,7 +12,8 @@
     "copy-files": "copyfiles -u 1 resources/*.* dist/",
     "dev": "nodemon --config nodemon.json src/index.ts",
     "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
-    "test": "./node_modules/.bin/jest --watch"
+    "test": "./node_modules/.bin/jest",
+    "test:watch": "./node_modules/.bin/jest --watch"
   },
   "jest": {
     "collectCoverage": true,
