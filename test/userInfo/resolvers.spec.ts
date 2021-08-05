@@ -55,8 +55,5 @@ describe('MUTATION UserInfo', () => {
 
     expect(data).toHaveProperty('uid');
     expect(data).toHaveProperty('name');
-    // expect(data).toHaveProperty('friends');
-    // expect(data.friends[0]).toHaveProperty('uid');
-    // expect(data.friends[0]).toHaveProperty('name');
   });
 });
