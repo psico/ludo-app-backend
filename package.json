@@ -18,6 +18,9 @@
   "jest": {
     "collectCoverage": true,
     "coverageDirectory": "coverage/typescript/",
+    "collectCoverageFrom": [
+      "**/*.ts"
+    ],
     "coverageReporters": [
       "json",
       "html",
