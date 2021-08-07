@@ -21,6 +21,10 @@
     "collectCoverageFrom": [
       "**/*.ts"
     ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules",
+      "schema.ts"
+    ],
     "coverageReporters": [
       "json",
       "html",
