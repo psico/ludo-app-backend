@@ -3,9 +3,7 @@ extend type Query {
     games(GameInput: GameInput): [Game]
     game(idDoc: String!): Game
 }
-extend type Mutation {
-    createGame(gameMoment: String!): Game
-}
+
 type Game {
     name: String
     objectId: String
