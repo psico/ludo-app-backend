@@ -1,7 +1,7 @@
 const Game = `
 extend type Query {
     games(GameInput: GameInput): [Game]
-    game(idDoc: String!): Game
+    game(objectId: String!): Game
 }
 
 type Game {
