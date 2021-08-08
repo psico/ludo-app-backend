@@ -22,8 +22,26 @@ export const Query = {
     }
     return gameList;
   },
-  game: async (_: any, { uid }: any) => {
+  game: async (_: any, { objectId }: any) => {
+    const games:any = await axios.get(`https://api.boardgameatlas.com/api/search?ids=${objectId}&pretty=true&client_id=JLBr5npPhV`);
 
+    let game:any = null;
+    if (games.data.games[0]) {
+      game = {
+        name: games.data.games[0].name,
+        objectId: games.data.games[0].id,
+        yearPublished: games.data.games[0].year_published,
+        description: games.data.games[0].description,
+        mechanics: games.data.games[0].mechanics,
+        categories: games.data.games[0].categories,
+        artists: games.data.games[0].artists,
+        designers: games.data.games[0].designers,
+        publishers: games.data.games[0].publishers,
+        rules_url: games.data.games[0].rules_url
+      };
+    }
+
+    return game;
   }
 };
 
