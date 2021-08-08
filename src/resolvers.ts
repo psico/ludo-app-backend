@@ -10,7 +10,6 @@ import {
 } from './friend/resolvers';
 import {
   Query as GameQuery,
-  Mutation as GameMutation,
   Game
 } from './game/resolvers';
 import {
@@ -32,7 +31,6 @@ export default {
   Mutation: {
     ...UserInfoMutation,
     ...FriendMutation,
-    ...GameMutation,
     ...MatchMutation
   },
   UserInfo,
