@@ -13,6 +13,7 @@ type UserInfo {
     uid: ID
     name: String
     friends: [Friend]
+    numberOfMatches: Int
 }
 `;
 
