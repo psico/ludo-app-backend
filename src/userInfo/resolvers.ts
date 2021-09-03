@@ -13,6 +13,11 @@ export const Query = {
     const usersInfoRef = db.collection('usersInfo');
     const snapshot = await usersInfoRef.where('uid', '==', uid).get();
 
+    // .where('uid', 'array-contains-any', ['0IhNFZFa7QMwBY6yZT8l24L1AX32'])
+    const snapshot2 = await db.collection('matches').doc().get();
+
+    console.log('snapshot2 => ', snapshot2.data());
+
     return snapshot.docs[0].data();
   }
 };
