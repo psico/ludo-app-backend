@@ -11,7 +11,7 @@ export const Query = {
   },
   userInfo: async (_: any, { uid }: any, { db }:any) => {
     const usersInfoRef = db.collection('usersInfo');
-    const snapshot = await usersInfoRef.where('uid', '==', uid).get();
+    const snapshotUsersInfo = await usersInfoRef.where('uid', '==', uid).get();
 
     const snapshotMatches = await db.collection('matches').get();
 
@@ -24,7 +24,7 @@ export const Query = {
 
     console.log('snapshotMatches => ', matches.length);
 
-    return snapshot.docs[0].data();
+    return snapshotUsersInfo.docs[0].data();
   }
 };
 
