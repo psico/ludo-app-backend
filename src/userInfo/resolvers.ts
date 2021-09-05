@@ -14,9 +14,9 @@ export const Query = {
     const snapshot = await usersInfoRef.where('uid', '==', uid).get();
 
     // .where('uid', 'array-contains-any', ['0IhNFZFa7QMwBY6yZT8l24L1AX32'])
-    const snapshot2 = await db.collection('matches').doc().get();
+    const snapshot2 = await db.collection('matches').get();
 
-    console.log('snapshot2 => ', snapshot2.data());
+    console.log('snapshot2 => ', snapshot2.docs.map((doc:any) => doc.data()));
 
     return snapshot.docs[0].data();
   }
