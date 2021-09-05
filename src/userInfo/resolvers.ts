@@ -13,16 +13,16 @@ export const Query = {
     const usersInfoRef = db.collection('usersInfo');
     const snapshot = await usersInfoRef.where('uid', '==', uid).get();
 
-    const snapshot2 = await db.collection('matches').get();
+    const snapshotMatches = await db.collection('matches').get();
 
     const matches:any = [];
-    snapshot2.docs.forEach((doc:any) => {
+    snapshotMatches.docs.forEach((doc:any) => {
       if (doc.data().uid === uid || doc.data().players.find((player:any) => player.uid === uid)) {
         matches.push(doc.data());
       }
     });
 
-    console.log('snapshot2 => ', matches.length);
+    console.log('snapshotMatches => ', matches.length);
 
     return snapshot.docs[0].data();
   }
