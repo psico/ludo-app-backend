@@ -10,12 +10,24 @@ export const Query = {
     return usersInfo;
   },
   userInfo: async (_: any, { uid }: any, { db }:any) => {
-    const usersInfoRef = db.collection('usersInfo');
-    const snapshotUsersInfo = await usersInfoRef.where('uid', '==', uid).get();
+    // const usersInfoRef = db.collection('usersInfo');
+    // const snapshotUsersInfo = await usersInfoRef.where('uid', '==', uid).get();
+    let userInfo: any = {};
+    let followers: number = 0;
 
-    const snapshotMatches = await db.collection('matches').get();
+    const snapshotUsersInfo = await db.collection('usersInfo').get();
+    snapshotUsersInfo.docs.forEach((doc:any) => {
+      if (doc.data().uid === uid) {
+        userInfo = doc.data();
+      } else {
+        if (doc.data().friends.find((friendData:any) => friendData.uid === uid)) {
+          followers += 1;
+        }
+      }
+    });
 
     const matches:any = [];
+    const snapshotMatches = await db.collection('matches').get();
     snapshotMatches.docs.forEach((doc:any) => {
       if (doc.data().uid === uid || doc.data().players.find((player:any) => player.uid === uid)) {
         matches.push(doc.data());
@@ -23,9 +35,10 @@ export const Query = {
     });
 
     return {
-      ...snapshotUsersInfo.docs[0].data(),
+      ...userInfo,
       numberOfMatches: matches.length,
-      numberOfFriends: snapshotUsersInfo.docs[0].data().friends.length
+      following: snapshotUsersInfo.docs[0].data().friends.length,
+      followers: followers
     };
   }
 };
