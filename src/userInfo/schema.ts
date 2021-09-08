@@ -14,7 +14,8 @@ type UserInfo {
     name: String
     friends: [Friend]
     numberOfMatches: Int
-    numberOfFriends: Int
+    following: Int
+    followers: Int
 }
 `;
 
