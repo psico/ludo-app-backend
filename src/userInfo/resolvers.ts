@@ -24,7 +24,8 @@ export const Query = {
 
     return {
       ...snapshotUsersInfo.docs[0].data(),
-      numberOfMatches: matches.length
+      numberOfMatches: matches.length,
+      numberOfFriends: snapshotUsersInfo.docs[0].data().friends.length
     };
   }
 };
