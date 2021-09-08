@@ -13,7 +13,7 @@ export const Query = {
     // const usersInfoRef = db.collection('usersInfo');
     // const snapshotUsersInfo = await usersInfoRef.where('uid', '==', uid).get();
     let userInfo: any = {};
-    let followers: number = 0;
+    const followers: any = [];
 
     const snapshotUsersInfo = await db.collection('usersInfo').get();
     snapshotUsersInfo.docs.forEach((doc:any) => {
@@ -21,7 +21,7 @@ export const Query = {
         userInfo = doc.data();
       } else {
         if (doc.data().friends.find((friendData:any) => friendData.uid === uid)) {
-          followers += 1;
+          followers.push(doc.data());
         }
       }
     });
@@ -37,7 +37,7 @@ export const Query = {
     return {
       ...userInfo,
       numberOfMatches: matches.length,
-      following: snapshotUsersInfo.docs[0].data().friends.length,
+      following: snapshotUsersInfo.docs[0].data().friends,
       followers: followers
     };
   }
