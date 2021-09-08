@@ -10,8 +10,7 @@ export const Query = {
     return usersInfo;
   },
   userInfo: async (_: any, { uid }: any, { db }:any) => {
-    // const usersInfoRef = db.collection('usersInfo');
-    // const snapshotUsersInfo = await usersInfoRef.where('uid', '==', uid).get();
+    // @TODO this code should be optimized
     let userInfo: any = {};
     const followers: any = [];
 
