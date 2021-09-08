@@ -24,7 +24,10 @@ export const Query = {
 
     console.log('snapshotMatches => ', matches.length);
 
-    return snapshotUsersInfo.docs[0].data();
+    return {
+      ...snapshotUsersInfo.docs[0].data(),
+      numberOfMatches: matches.length
+    };
   }
 };
 
