@@ -1,10 +1,14 @@
 import axios from 'axios';
 
 export const Query = {
-  matches: async (_: any, __: any, { db }:any) => {
+  matches: async (_: any, { uid }: any, { db }:any) => {
     const matches: Array<object> = [];
 
-    const snapshot = await db.collection('matches').orderBy('createdAt', 'desc').get();
+    const snapshot = await db.collection('matches')
+      .where('uid', '==', uid)
+      .or()
+      .where('players.uid', 'array-contains', uid)
+      .orderBy('createdAt', 'desc').get();
 
     snapshot.forEach((doc: any) => {
       matches.push({
