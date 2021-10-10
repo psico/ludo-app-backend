@@ -9,7 +9,7 @@ export const Query = {
     //   .orderBy('createdAt', 'desc').get();
 
     const snapshot = await db.collection('matches')
-      .where('players.uid', 'array-contains', uid)
+      .where('players.uid', '==', uid)
       .orderBy('createdAt', 'desc').get();
 
     snapshot.forEach((doc: any) => {
