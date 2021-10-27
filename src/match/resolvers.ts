@@ -4,19 +4,26 @@ export const Query = {
   matches: async (_: any, { uid }: any, { db }:any) => {
     const matches: Array<object> = [];
     console.log('uid => ', uid);
+    const snapshot = await db.collection('matches')
+      .orderBy('createdAt', 'desc').get();
+
     // const snapshot = await db.collection('matches')
     //   .where('uid', '==', uid)
     //   .orderBy('createdAt', 'desc').get();
 
-    const snapshot = await db.collection('matches')
-      .where('players.uid', '==', uid)
-      .orderBy('createdAt', 'desc').get();
+    // const snapshot = await db.collection('matches')
+    //   .where('players.uid', '==', uid)
+    //   .orderBy('createdAt', 'desc').get();
 
     snapshot.forEach((doc: any) => {
-      matches.push({
-        idDoc: doc.id,
-        ...doc.data()
-      });
+      // console.log('aki ', doc.data().uid);
+      // console.log('aki ', doc.data().players.find((player:any) => player.uid === uid));
+      if (doc.data().uid === uid || doc.data().players.find((player:any) => player.uid === uid)) {
+        matches.push({
+          idDoc: doc.id,
+          ...doc.data()
+        });
+      }
     });
 
     return matches;
