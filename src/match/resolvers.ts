@@ -8,7 +8,15 @@ export const Query = {
       .orderBy('createdAt', 'desc').get();
 
     snapshot.forEach((doc: any) => {
-      if (doc.data().uid === uid || doc.data().players.find((player:any) => player.uid === uid)) {
+      let addDoc: boolean = true;
+      if (uid) {
+        addDoc = false;
+        if (doc.data().uid === uid || doc.data().players.find((player:any) => player.uid === uid)) {
+          addDoc = true;
+        }
+      }
+
+      if (addDoc) {
         matches.push({
           idDoc: doc.id,
           ...doc.data()
