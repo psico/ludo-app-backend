@@ -4,7 +4,7 @@ import UserInfo from '../userInfo/schema';
 
 const Match = `
 extend type Query {
-    matches(uid: String): [Match]
+    matches(uid: ID): [Match]
     match(idDoc: String!): Match
 }
 extend type Mutation {
