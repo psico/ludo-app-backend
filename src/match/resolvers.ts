@@ -9,17 +9,13 @@ export const Query = {
 
     snapshot.forEach((doc: any) => {
       if (uid) {
-        console.log('doc.data().uid', doc.data().uid, uid, doc.data().uid === uid);
-
         if (doc.data().uid === uid || doc.data().players?.find((player:any) => player.uid === uid)) {
-          console.log('passou 1');
           matches.push({
             idDoc: doc.id,
             ...doc.data()
           });
         }
       } else {
-        console.log('passou 2');
         matches.push({
           idDoc: doc.id,
           ...doc.data()
