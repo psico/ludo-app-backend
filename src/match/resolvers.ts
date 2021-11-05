@@ -8,15 +8,18 @@ export const Query = {
       .orderBy('createdAt', 'desc').get();
 
     snapshot.forEach((doc: any) => {
-      let addDoc: boolean = true;
       if (uid) {
-        addDoc = false;
-        if (doc.data().uid === uid || doc.data().players.find((player:any) => player.uid === uid)) {
-          addDoc = true;
-        }
-      }
+        console.log('doc.data().uid', doc.data().uid, uid, doc.data().uid === uid);
 
-      if (addDoc) {
+        if (doc.data().uid === uid || doc.data().players?.find((player:any) => player.uid === uid)) {
+          console.log('passou 1');
+          matches.push({
+            idDoc: doc.id,
+            ...doc.data()
+          });
+        }
+      } else {
+        console.log('passou 2');
         matches.push({
           idDoc: doc.id,
           ...doc.data()
