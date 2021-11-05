@@ -28,7 +28,7 @@ export const Query = {
     const matches:any = [];
     const snapshotMatches = await db.collection('matches').get();
     snapshotMatches.docs.forEach((doc:any) => {
-      if (doc.data().uid === uid || doc.data().players.find((player:any) => player.uid === uid)) {
+      if (doc.data().uid === uid || doc.data().players?.find((player:any) => player.uid === uid)) {
         matches.push(doc.data());
       }
     });
