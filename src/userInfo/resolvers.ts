@@ -19,7 +19,7 @@ export const Query = {
       if (doc.data().uid === uid) {
         userInfo = doc.data();
       } else {
-        if (doc.data().friends.find((friendData:any) => friendData.uid === uid)) {
+        if (doc.data().friends?.find((friendData:any) => friendData.uid === uid)) {
           followers.push(doc.data());
         }
       }
