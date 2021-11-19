@@ -32,7 +32,10 @@ export const Mutation = {
     return { uid, name };
   },
 
-  follow (_: any, { uid }: any) {
+  async follow(_: any, { uid }: any) {
+    const usersInfoRef = db.collection('usersInfo');
+    const snapshot = await usersInfoRef.where('uid', '==', uid).get();
+    console.log('folloing called', snapshot.docs[0].data());
     return {};
   }
 };
