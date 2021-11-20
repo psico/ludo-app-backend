@@ -32,9 +32,10 @@ export const Mutation = {
     return { uid, name };
   },
 
-  async follow(_: any, { uid, followUid }: any) {
+  async follow (_: any, { followUid }: any, { db, firebase }:any) {
+    const userData: any = await firebase.auth().currentUser;
     const usersInfoRef = db.collection('usersInfo');
-    const snapshot = await usersInfoRef.where('uid', '==', uid).get();
+    const snapshot = await usersInfoRef.where('uid', '==', userData.uid).get();
     console.log('folloing called', snapshot.docs[0].data());
     return {};
   }
