@@ -5,7 +5,7 @@ extend type Query {
 }
 extend type Mutation {
     createFriend(uid: ID!, name: String!): Friend
-    follow(uid: ID!, followUid: ID!): Friend
+    follow(followUid: ID!): Friend
 }
 type Friend {
     uid: ID
