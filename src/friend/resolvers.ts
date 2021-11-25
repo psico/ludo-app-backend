@@ -34,6 +34,7 @@ export const Mutation = {
 
   async follow (_: any, { followUid }: any, { db, firebase }:any) {
     const userData: any = await firebase.auth().currentUser;
+    console.log('userData => ', userData);
     const usersInfoRef = db.collection('usersInfo');
     const snapshot = await usersInfoRef.where('uid', '==', userData.uid).get();
 
