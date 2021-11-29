@@ -34,13 +34,13 @@ export const Mutation = {
 
   async follow (_: any, { followUid }: any, { db, firebase }:any) {
     const userData: any = await firebase.auth().currentUser;
-    console.log('userData => ', userData);
     const usersInfoRef = db.collection('usersInfo');
-    const snapshot = await usersInfoRef.where('uid', '==', userData.uid).get();
+    const snapshotUser = await usersInfoRef.where('uid', '==', userData.uid).get();
+    const snapshotFollow = await usersInfoRef.where('uid', '==', followUid).get();
 
-    snapshot.docs[0].data().friends.push({ uid: followUid, name: 'ok' });
-    console.log('ops => ', snapshot.docs[0].data());
-    await usersInfoRef.doc().set(snapshot.docs[0].data());
+    snapshotUser.docs[0].data().friends.push({ uid: followUid, name: 'ok' });
+    console.log('ops => ', snapshotUser.docs[0].data());
+    await usersInfoRef.doc().set(snapshotUser.docs[0].data());
     console.log('folloing called');
     return {
       uid: 1,
