@@ -39,12 +39,15 @@ export const Mutation = {
     const snapshotFollow = await usersInfoRef.where('uid', '==', followUid).get();
     const dataUser = snapshotUser.docs[0].data();
 
-    dataUser.friends.push({
-      uid: snapshotFollow.docs[0].data().uid,
-      name: snapshotFollow.docs[0].data().name || 'Name undefined'
-    });
-    console.log('ops => ', dataUser);
-    await usersInfoRef.doc().set(dataUser);
+    dataUser.friends = [
+      ...dataUser.friends,
+      {
+        uid: snapshotFollow.docs[0].data().uid,
+        name: snapshotFollow.docs[0].data().name || 'Name undefined'
+      }
+    ];
+    console.log('ops => ', snapshotUser.docs[0].id, snapshotFollow.docs[0].data().uid);
+    await usersInfoRef.doc(snapshotUser.docs[0].id).set(dataUser);
     console.log('folloing called');
     return {
       uid: 1,
