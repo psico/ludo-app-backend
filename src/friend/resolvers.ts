@@ -47,7 +47,13 @@ export const Mutation = {
       }
     ];
     console.log('ops => ', snapshotUser.docs[0].id, snapshotFollow.docs[0].data().uid);
-    await usersInfoRef.doc(snapshotUser.docs[0].id).set(dataUser);
+    await usersInfoRef.doc(snapshotUser.docs[0].id).set(dataUser)
+      .then((data:any) => {
+        console.log('data ==> ', data);
+      })
+      .catch((erro:any) => {
+        console.log('erro ==> ', erro);
+      });
     console.log('folloing called');
     return {
       uid: 1,
