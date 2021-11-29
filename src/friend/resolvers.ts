@@ -46,9 +46,8 @@ export const Mutation = {
         name: snapshotFollow.docs[0].data().name || 'Name undefined'
       }
     ];
-    console.log('ops => ', snapshotUser.docs[0].id, snapshotFollow.docs[0].data().uid);
     await usersInfoRef.doc(snapshotUser.docs[0].id).set(dataUser);
-    console.log('folloing called');
+
     return {
       uid: 1,
       name: 'test'
