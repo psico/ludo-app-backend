@@ -38,7 +38,7 @@ export const Mutation = {
     const snapshotUser = await usersInfoRef.where('uid', '==', userData.uid).get();
     const snapshotFollow = await usersInfoRef.where('uid', '==', followUid).get();
 
-    snapshotUser.docs[0].data().friends.push({ uid: followUid, name: 'ok' });
+    snapshotUser.docs[0].data().friends.push({ uid: snapshotUser.docs[0].data().uid, name: snapshotUser.docs[0].data().name || 'Name undefined' });
     console.log('ops => ', snapshotUser.docs[0].data());
     await usersInfoRef.doc().set(snapshotUser.docs[0].data());
     console.log('folloing called');
