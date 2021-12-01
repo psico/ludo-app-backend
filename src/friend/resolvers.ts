@@ -49,8 +49,8 @@ export const Mutation = {
     await usersInfoRef.doc(snapshotUser.docs[0].id).set(dataUser);
 
     return {
-      uid: 1,
-      name: 'test'
+      uid: snapshotFollow.docs[0].data().uid,
+      name: snapshotFollow.docs[0].data().name || 'Name undefined'
     };
   }
 };
