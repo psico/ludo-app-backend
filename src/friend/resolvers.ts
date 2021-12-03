@@ -33,32 +33,40 @@ export const Mutation = {
   },
 
   async follow (_: any, { followUid }: any, { db, firebase }:any) {
-    const userData: any = await firebase.auth().currentUser;
-    const usersInfoRef = db.collection('usersInfo');
-    const snapshotUser = await usersInfoRef.where('uid', '==', userData?.uid).get();
-    const snapshotFollow = await usersInfoRef.where('uid', '==', followUid).get();
-    const dataUser = snapshotUser.docs[0].data();
+    try {
+      const userData: any = await firebase.auth().currentUser;
+      if (userData) {
+        const usersInfoRef = db.collection('usersInfo');
+        const snapshotUser = await usersInfoRef.where('uid', '==', userData?.uid).get();
+        const snapshotFollow = await usersInfoRef.where('uid', '==', followUid).get();
+        const dataUser = snapshotUser.docs[0].data();
 
-    const friendExist = dataUser.friends.find((friend: any) => {
-      console.log('friend => ', friend);
-      return friend.uid === snapshotFollow.docs[0].data().uid;
-    });
+        const friendExist = dataUser.friends.find((friend: any) => {
+          console.log('friend => ', friend);
+          return friend.uid === snapshotFollow.docs[0].data().uid;
+        });
 
-    if (!friendExist) {
-      dataUser.friends = [
-        ...dataUser.friends,
-        {
+        if (!friendExist) {
+          dataUser.friends = [
+            ...dataUser.friends,
+            {
+              uid: snapshotFollow.docs[0].data().uid,
+              name: snapshotFollow.docs[0].data().name || 'Name undefined'
+            }
+          ];
+          await usersInfoRef.doc(snapshotUser.docs[0].id).set(dataUser);
+        }
+
+        return {
           uid: snapshotFollow.docs[0].data().uid,
           name: snapshotFollow.docs[0].data().name || 'Name undefined'
-        }
-      ];
-      await usersInfoRef.doc(snapshotUser.docs[0].id).set(dataUser);
+        };
+      }
+      return null;
+    } catch (e) {
+      console.error('ERROR on follow a friend');
+      return null;
     }
-
-    return {
-      uid: snapshotFollow.docs[0].data().uid,
-      name: snapshotFollow.docs[0].data().name || 'Name undefined'
-    };
   }
 };
 
