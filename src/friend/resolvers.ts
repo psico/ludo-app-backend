@@ -35,11 +35,14 @@ export const Mutation = {
   async follow (_: any, { followUid }: any, { db, firebase }:any) {
     const userData: any = await firebase.auth().currentUser;
     const usersInfoRef = db.collection('usersInfo');
-    const snapshotUser = await usersInfoRef.where('uid', '==', userData.uid).get();
+    const snapshotUser = await usersInfoRef.where('uid', '==', userData?.uid).get();
     const snapshotFollow = await usersInfoRef.where('uid', '==', followUid).get();
     const dataUser = snapshotUser.docs[0].data();
 
-    const friendExist = dataUser.friends.find((friend: any) => friend.uid === snapshotFollow.docs[0].data().uid);
+    const friendExist = dataUser.friends.find((friend: any) => {
+      console.log('friend => ', friend);
+      return friend.uid === snapshotFollow.docs[0].data().uid;
+    });
 
     if (!friendExist) {
       dataUser.friends = [
