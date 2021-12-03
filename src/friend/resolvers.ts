@@ -42,7 +42,6 @@ export const Mutation = {
         const dataUser = snapshotUser.docs[0].data();
 
         const friendExist = dataUser.friends.find((friend: any) => {
-          console.log('friend => ', friend);
           return friend.uid === snapshotFollow.docs[0].data().uid;
         });
 
