@@ -41,16 +41,20 @@ export const Mutation = {
         const snapshotFollow = await usersInfoRef.where('uid', '==', followUid).get();
         const dataUser = snapshotUser.docs[0].data();
 
-        const friendExist = dataUser.friends.find((friend: any) => friend.uid === snapshotFollow.docs[0].data().uid);
+        let friendExist = null;
+        if (dataUser.friends) {
+          friendExist = dataUser.friends.find((friend: any) => friend.uid === snapshotFollow.docs[0].data().uid);
+        }
 
         if (!friendExist) {
           dataUser.friends = [
-            ...dataUser.friends,
+            ...dataUser?.friends || [],
             {
               uid: snapshotFollow.docs[0].data().uid,
               name: snapshotFollow.docs[0].data().name || 'Name undefined'
             }
           ];
+
           await usersInfoRef.doc(snapshotUser.docs[0].id).set(dataUser);
         }
 
