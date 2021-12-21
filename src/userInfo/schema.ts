@@ -12,6 +12,7 @@ extend type Mutation {
 type UserInfo {
     uid: ID
     name: String
+    photoURL: String
     friends: [Friend]
     numberOfMatches: Int
     following: [Friend]
