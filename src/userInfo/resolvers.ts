@@ -43,12 +43,13 @@ export const Query = {
 };
 
 export const Mutation = {
-  createUserInfo: (_: any, { uid, name }: any, { db }:any) => {
+  createUserInfo: (_: any, { uid, name, photoURL }: any, { db }:any) => {
     const docRef = db.collection('usersInfo').doc();
     // @TODO to do a check to validate  that uid exists
     docRef.set({
+      uid,
       name,
-      uid
+      photoURL
     });
 
     return { uid, name };
