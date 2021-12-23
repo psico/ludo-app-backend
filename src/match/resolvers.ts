@@ -81,7 +81,11 @@ export const Mutation = {
 
     return {
       idDoc: docRef.id,
-      uid: userData.uid,
+      matchOwner: {
+        uid: userData.uid,
+        name: userData.displayName,
+        photoURL: userData.photoURL
+      },
       gameMoment: MatchInput.gameMoment,
       game: {
         name: gameObject.name,
