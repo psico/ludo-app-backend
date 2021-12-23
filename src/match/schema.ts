@@ -11,15 +11,23 @@ extend type Mutation {
     createMatch(MatchInput: MatchInput): Match
     addComment(CommentInput: CommentInput): Match
 }
+
 type Match {
     idDoc: String
-    uid: String
+    matchOwner: UserSummary
     gameMoment: String
     createdAt: Date
     game: Game
     comments: [Comment]
     players: [UserInfo] 
 }
+
+type UserSummary {
+    uid: ID
+    name: String
+    photoURL: String
+}
+
 input MatchInput {
     gameMoment: String
     gameObjectId: String
@@ -34,6 +42,7 @@ input CommentInput {
 input PlayerInput {
   uid: String
   name: String
+  photoURL: String
 }
 `;
 

@@ -60,7 +60,11 @@ export const Mutation = {
 
     if (gameObject && userData) {
       await docRef.set({
-        uid: userData.uid,
+        matchOwner: {
+          uid: userData.uid,
+          name: userData.displayName,
+          photoURL: userData.photoURL
+        },
         gameMoment: MatchInput.gameMoment,
         game: {
           name: gameObject.name,
@@ -120,7 +124,7 @@ export const Mutation = {
 
 export const Match = {
   idDoc: (match: { idDoc: string; }) => match.idDoc,
-  uid: (match: { uid: string; }) => match.uid,
+  matchOwner: (match: { matchOwner: string; }) => match.matchOwner,
   gameMoment: (match: { gameMoment: string; }) => match.gameMoment,
   game: (match: { game: string; }) => match.game,
   comments: (match: { comments: string; }) => match.comments

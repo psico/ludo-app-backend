@@ -6,9 +6,11 @@ extend type Query {
     usersInfo: [UserInfo]
     userInfo(uid: ID!): UserInfo
 }
+
 extend type Mutation {
     createUserInfo(uid: ID!, name: String!): UserInfo
 }
+
 type UserInfo {
     uid: ID
     name: String
