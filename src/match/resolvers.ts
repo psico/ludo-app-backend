@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const Query = {
-  matches: async (_: any, { uid }: any, { db }:any) => {
+  matches: async (_: any, { uid, textSearch }: any, { db }:any) => {
     const matches: Array<object> = [];
 
     const snapshot = await db.collection('matches')
