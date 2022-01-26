@@ -7,9 +7,13 @@ export const Query = {
     const matches: Array<object> = [];
 
     const snapshot = await db.collection('matches')
-      .orderBy('createdAt', 'desc').get();
+      .startAt('teste')
+      .orderBy('createdAt', 'desc');
 
-    snapshot.forEach((doc: any) => {
+    console.log('snapshot => ', snapshot.get());
+
+    snapshot.get().forEach((doc: any) => {
+      console.log('doc => ', doc);
       if (uid) {
         if (doc.data().uid === uid || doc.data().players?.find((player:any) => player.uid === uid)) {
           matches.push({
