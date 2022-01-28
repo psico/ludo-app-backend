@@ -6,14 +6,13 @@ export const Query = {
     console.log('textSearch => ', textSearch);
     const matches: Array<object> = [];
 
-    const snapshot = await db.collection('matches')
-      .startAt('teste')
-      .orderBy('createdAt', 'desc');
+    // const snapshot = await db.collection('matches')
+    //
+    //   .orderBy('createdAt', 'desc').startAt('teste').get();
 
-    console.log('snapshot => ', snapshot.get());
+    const snapshot = await db.collection('matches').orderBy('createdAt', 'desc').get();
 
-    snapshot.get().forEach((doc: any) => {
-      console.log('doc => ', doc);
+    snapshot.forEach((doc: any) => {
       if (uid) {
         if (doc.data().uid === uid || doc.data().players?.find((player:any) => player.uid === uid)) {
           matches.push({
@@ -44,7 +43,10 @@ export const Query = {
     //   });
     // });
 
-    return matches;
+    return matches.filter((match: any) => {
+      console.log('match => ', match);
+      return true;
+    });
   },
   match: async (_: any, { idDoc }: any, { db }:any) => {
     const snapshot = await db.collection('matches').doc(idDoc).get();
