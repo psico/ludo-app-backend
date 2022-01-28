@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { once } from 'cluster';
 
 export const Query = {
   matches: async (_: any, { uid, textSearch }: any, { db }:any) => {
