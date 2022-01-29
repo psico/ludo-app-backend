@@ -48,12 +48,19 @@ export const Query = {
       //   match.game?.name?.toUpperCase().search(textSearch)
       // );
 
+      let searchResult = false;
+      if (match.game?.name && match.game?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
+        searchResult = true;
+      }
+      if (match.matchOwner?.name && match.matchOwner?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
+        searchResult = true;
+      }
+
       console.log('match => ',
-        match.game?.name?.toUpperCase(),
-        match.game?.name?.toUpperCase().search(textSearch.toUpperCase())
+        match
       );
 
-      return true;
+      return searchResult;
     });
   },
   match: async (_: any, { idDoc }: any, { db }:any) => {
