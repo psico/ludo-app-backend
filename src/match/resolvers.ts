@@ -43,7 +43,7 @@ export const Query = {
     // });
 
     return matches.filter((match: any) => {
-      console.log('match => ', match);
+      console.log('match => ', match.game.description.toUpperCase().search(textSearch), match.game.name.toUpperCase().search(textSearch));
       return true;
     });
   },
