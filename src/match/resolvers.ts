@@ -27,27 +27,7 @@ export const Query = {
       }
     });
 
-    // const snapshot = await db.collection('matches')
-    //   .where('uid', '==', uid)
-    //   .orderBy('createdAt', 'desc').get();
-
-    // const snapshot = await db.collection('matches')
-    //   .where('players.uid', '==', uid)
-    //   .orderBy('createdAt', 'desc').get();
-
-    // snapshot.forEach((doc: any) => {
-    //   matches.push({
-    //     idDoc: doc.id,
-    //     ...doc.data()
-    //   });
-    // });
-
     return matches.filter((match: any) => {
-      // console.log('match => ',
-      //   match.game?.description?.toUpperCase().search(textSearch),
-      //   match.game?.name?.toUpperCase().search(textSearch)
-      // );
-
       let searchResult = false;
       if (match.game?.name && match.game?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
         searchResult = true;
