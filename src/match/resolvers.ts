@@ -43,7 +43,16 @@ export const Query = {
     // });
 
     return matches.filter((match: any) => {
-      console.log('match => ', match.game?.description?.toUpperCase().search(textSearch), match.game?.name?.toUpperCase().search(textSearch));
+      // console.log('match => ',
+      //   match.game?.description?.toUpperCase().search(textSearch),
+      //   match.game?.name?.toUpperCase().search(textSearch)
+      // );
+
+      console.log('match => ',
+        match.game?.name?.toUpperCase(),
+        match.game?.name?.toUpperCase().search(textSearch.toUpperCase())
+      );
+
       return true;
     });
   },
