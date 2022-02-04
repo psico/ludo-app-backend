@@ -29,10 +29,16 @@ export const Query = {
 
     return matches.filter((match: any) => {
       let searchResult = false;
+
+      if (match.matchOwner?.name && match.matchOwner?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
+        searchResult = true;
+      }
+
       if (match.game?.name && match.game?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
         searchResult = true;
       }
-      if (match.matchOwner?.name && match.matchOwner?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
+
+      if (match.game?.description && match.game?.description?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
         searchResult = true;
       }
 
