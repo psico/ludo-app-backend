@@ -3,7 +3,7 @@ import axios from 'axios';
 export const Query = {
   matches: async (_: any, { uid, textSearch }: any, { db }:any) => {
     console.log('textSearch => ', textSearch);
-    const matches: Array<object> = [];
+    let matches: Array<object> = [];
 
     // const snapshot = await db.collection('matches')
     //
@@ -27,27 +27,31 @@ export const Query = {
       }
     });
 
-    return matches.filter((match: any) => {
-      let searchResult = false;
+    if (textSearch) {
+      matches = matches.filter((match: any) => {
+        let searchResult = false;
 
-      if (match.matchOwner?.name && match.matchOwner?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
-        searchResult = true;
-      }
+        if (match.matchOwner?.name && match.matchOwner?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
+          searchResult = true;
+        }
 
-      if (match.game?.name && match.game?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
-        searchResult = true;
-      }
+        if (match.game?.name && match.game?.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
+          searchResult = true;
+        }
 
-      if (match.game?.description && match.game?.description?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
-        searchResult = true;
-      }
+        if (match.game?.description && match.game?.description?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
+          searchResult = true;
+        }
 
-      console.log('match => ',
-        match
-      );
+        console.log('match => ',
+          match
+        );
 
-      return searchResult;
-    });
+        return searchResult;
+      });
+    }
+
+    return matches;
   },
   match: async (_: any, { idDoc }: any, { db }:any) => {
     const snapshot = await db.collection('matches').doc(idDoc).get();
