@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const Query = {
+  // @TODO it`s necessary to improve code to use query to search filter
   matches: async (_: any, { uid, textSearch }: any, { db }:any) => {
     let matches: Array<object> = [];
 
