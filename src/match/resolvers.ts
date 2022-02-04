@@ -2,12 +2,7 @@ import axios from 'axios';
 
 export const Query = {
   matches: async (_: any, { uid, textSearch }: any, { db }:any) => {
-    console.log('textSearch => ', textSearch);
     let matches: Array<object> = [];
-
-    // const snapshot = await db.collection('matches')
-    //
-    //   .orderBy('createdAt', 'desc').startAt('teste').get();
 
     const snapshot = await db.collection('matches').orderBy('createdAt', 'desc').get();
 
