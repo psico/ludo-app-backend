@@ -39,10 +39,6 @@ export const Query = {
           searchResult = true;
         }
 
-        console.log('match => ',
-          match
-        );
-
         return searchResult;
       });
     }
