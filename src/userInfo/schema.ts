@@ -3,7 +3,7 @@ import Base from '../base';
 
 const UserInfo = `
 extend type Query {
-    usersInfo: [UserInfo]
+    usersInfo(textSearch: String): [UserInfo]
     userInfo(uid: ID!): UserInfo
 }
 
