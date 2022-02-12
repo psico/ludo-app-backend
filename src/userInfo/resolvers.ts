@@ -1,5 +1,5 @@
 export const Query = {
-  usersInfo: async (_: any, __: any, { db }:any) => {
+  usersInfo: async (_: any, { textSearch }: any, { db }:any) => {
     const usersInfo: Array<object> = [];
 
     const snapshot = await db.collection('usersInfo').get();
