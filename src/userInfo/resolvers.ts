@@ -1,11 +1,23 @@
 export const Query = {
   usersInfo: async (_: any, { textSearch }: any, { db }:any) => {
-    const usersInfo: Array<object> = [];
+    let usersInfo: Array<object> = [];
 
     const snapshot = await db.collection('usersInfo').get();
     snapshot.forEach((doc: any) => {
       usersInfo.push(doc.data());
     });
+
+    if (textSearch) {
+      usersInfo = usersInfo.filter((user: any) => {
+        let searchResult = false;
+
+        if (user.name && user.name?.toUpperCase().search(textSearch.toUpperCase()) !== -1) {
+          searchResult = true;
+        }
+
+        return searchResult;
+      });
+    }
 
     return usersInfo;
   },
