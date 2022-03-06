@@ -19,6 +19,13 @@ type UserInfo {
     numberOfMatches: Int
     following: [Friend]
     followers: [Friend]
+    logExperience: [LogExperience]
+}
+
+type LogExperience {
+  gained: number
+  gameName: String
+  type: String
 }
 `;
 
