@@ -23,9 +23,10 @@ type UserInfo {
 }
 
 type LogExperience {
-  gained: number
+  gained: Int
   gameName: String
   type: String
+  date: Date
 }
 `;
 
