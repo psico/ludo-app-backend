@@ -26,8 +26,9 @@ type LogExperience {
   gained: Int
   gameName: String
   type: String
-  logDate: Date
+  createdAt : String
 }
+
 `;
 
 export default () => [UserInfo, Friend, Base];
