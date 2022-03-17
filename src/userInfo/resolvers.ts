@@ -45,6 +45,13 @@ export const Query = {
       }
     });
 
+    // const logExperience: any = userInfo.logExperience((logExperience: any) => {
+    //   return {
+    //     ...logExperience,
+    //     createdAt: (new Date(logExperience.createdAt))
+    //   };
+    // });
+
     return {
       ...userInfo,
       numberOfMatches: matches.length,
@@ -72,5 +79,6 @@ export const UserInfo = {
   uid: (userInfo: { uid: any; }) => userInfo.uid,
   name: (userInfo: { name: string; }) => userInfo.name,
   photoURL: (userInfo: { photoURL: string; }) => userInfo.photoURL,
-  friends: (userInfo: { friends: Array<any>; }) => userInfo.friends
+  friends: (userInfo: { friends: Array<any>; }) => userInfo.friends,
+  logExperience: (userInfo: { logExperience: Array<any>; }) => userInfo.logExperience
 };
