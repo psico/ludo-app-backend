@@ -40,4 +40,8 @@ export const chooseCredential = async (body: ReadableStream): Promise<firebase.a
   return null;
 };
 
-export const addExperience = () => ({});
+export const addExperience = async ({ db }:any) => {
+  const snapshot = await db.collection('usersInfo').get();
+
+  return true;
+};
