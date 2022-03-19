@@ -26,7 +26,7 @@ type LogExperience {
   gained: Int
   gameName: String
   type: String
-  createdAt : String
+  createdAt: String
 }
 
 `;
