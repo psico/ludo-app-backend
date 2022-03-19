@@ -41,6 +41,7 @@ export const chooseCredential = async (body: ReadableStream): Promise<firebase.a
 };
 
 export const addExperience = async ({ db }:any) => {
+  const userData: any = await firebase.auth().currentUser;
   const snapshot = await db.collection('usersInfo').get();
 
   return true;
