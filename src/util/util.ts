@@ -42,7 +42,10 @@ export const chooseCredential = async (body: ReadableStream): Promise<firebase.a
 
 export const addExperience = async ({ db }:any) => {
   const userData: any = await firebase.auth().currentUser;
-  const snapshot = await db.collection('usersInfo').get();
+  const snapshot = await db.collection('usersInfo').where('uid', '==', 'Pr5X0qk6DeYut8paQ8hQ5s7kb8F3').get();
+
+  // .collection("usersInfo")
+  //     .where("uid", "==", "Pr5X0qk6DeYut8paQ8hQ5s7kb8F3")
 
   return true;
 };
