@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { addExperience } from '../util/util';
 
 export const Query = {
   // @TODO it`s necessary to improve code to use query to search filter
@@ -83,6 +84,8 @@ export const Mutation = {
       console.error("Erro on data or user wasn't logged");
       return null;
     }
+
+    await addExperience(db);
 
     return {
       idDoc: docRef.id,
