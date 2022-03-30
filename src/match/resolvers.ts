@@ -85,7 +85,7 @@ export const Mutation = {
       return null;
     }
 
-    await addExperience(db);
+    await addExperience({ db });
 
     return {
       idDoc: docRef.id,
