@@ -41,11 +41,13 @@ export const chooseCredential = async (body: ReadableStream): Promise<firebase.a
 };
 
 export const addExperience = async ({ db }:any) => {
+  console.log('Testing 1');
   const userData: any = await firebase.auth().currentUser;
+  console.log('Testing 2');
   const docRef = await db.collection('usersInfo').where('uid', '==', userData.getIdToken()).doc();
-
+  console.log('Testing 3');
   console.log('addExperience => ', docRef.data());
-
+  console.log('Testing 4');
   const dataObj = docRef.data();
 
   let arrLogExperience = [];
