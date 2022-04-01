@@ -44,9 +44,9 @@ export const addExperience = async ({ db }:any) => {
   console.log('Testing 1');
   const userData: any = await firebase.auth().currentUser;
   console.log('Testing 2 => ', await userData.uid);
-  const docRef = await db.collection('usersInfo').where('uid', '==', await userData.uid).doc();
+  const docRef = await db.collection('usersInfo').where('uid', '==', await userData.uid).get();
   console.log('Testing 3');
-  console.log('addExperience => ', docRef.data());
+  console.log('addExperience => ', docRef);
   console.log('Testing 4');
   const dataObj = docRef.data();
 
