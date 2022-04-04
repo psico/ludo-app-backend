@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import User = firebase.User;
 import { firestore } from 'firebase-admin';
 import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
+import QuerySnapshot = firestore.QuerySnapshot;
 
 export const userDataFormat = (userData: User, token: string): object => {
   return {
@@ -47,17 +48,18 @@ export const addExperience = async ({ db }:any) => {
   const userData: any = await firebase.auth().currentUser;
   console.log('Testing 2 => ', await userData.uid);
   const uid = await userData.uid;
-  const docRef = db.collection('usersInfo').where('uid', '==', uid);
+  const docRef: QuerySnapshot = db.collection('usersInfo').where('uid', '==', uid);
+  // @ts-ignore
   const snapshot = await docRef.get();
 
-  console.log('Testing 3 => ', docRef);
+  console.log('Testing 3 => ', snapshot.data());
 
   snapshot.forEach((doc:QueryDocumentSnapshot) => {
     const data = doc.data();
     console.log('doc => ', data.name);
     console.log('doc => ', data.friends);
   });
-  console.log('Testing 4 => ', snapshot.data());
+  console.log('Testing 4 => ', snapshot[0].data());
   const dataObj = snapshot;
 
   let arrLogExperience = [];
