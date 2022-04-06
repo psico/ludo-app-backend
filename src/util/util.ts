@@ -52,7 +52,7 @@ export const addExperience = async ({ db }:any) => {
   // @ts-ignore
   const snapshot = await docRef.get();
 
-  console.log('Testing 3 => ', snapshot.data());
+  console.log('Testing 3 => ');
 
   snapshot.forEach((doc:QueryDocumentSnapshot) => {
     const data = doc.data();
