@@ -52,18 +52,17 @@ export const addExperience = async ({ db }:any) => {
   // @ts-ignore
   const snapshot = await docRef.get();
 
-  console.log('Testing 3 => ');
+  let dataObj = null;
+  // eslint-disable-next-line no-return-assign
+  snapshot.forEach((doc:QueryDocumentSnapshot) => dataObj = doc.data());
 
-  snapshot.forEach((doc:QueryDocumentSnapshot) => {
-    const data = doc.data();
-    console.log('doc => ', data.name);
-    console.log('doc => ', data.friends);
-  });
-  console.log('Testing 4 => ', snapshot[0].data());
-  const dataObj = snapshot;
+  // console.log('Testing 4 => ', snapshot[0].data());
+  // const dataObj = snapshot;
 
   let arrLogExperience = [];
+  // @ts-ignore
   if (dataObj?.logExperience) {
+    // @ts-ignore
     arrLogExperience = dataObj?.logExperience;
   }
 
