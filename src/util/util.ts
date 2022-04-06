@@ -71,7 +71,7 @@ export const addExperience = async ({ db }:any) => {
 
     doc.ref.set({
       ...doc.data(),
-      arrLogExperience
+      logExperience: arrLogExperience
     });
   });
 
