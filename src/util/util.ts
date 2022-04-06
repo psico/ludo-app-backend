@@ -52,25 +52,44 @@ export const addExperience = async ({ db }:any) => {
   // @ts-ignore
   const snapshot = await docRef.get();
 
-  let dataObj = null;
-  // eslint-disable-next-line no-return-assign
-  snapshot.forEach((doc:QueryDocumentSnapshot) => dataObj = doc.data());
+  let arrLogExperience: { gained: number; gameName: string; type: string; }[] = [];
+
+  snapshot.forEach((doc:QueryDocumentSnapshot) => {
+    console.log('dataObj => ');
+    // dataObj = doc.data();
+
+    if (doc.data()?.logExperience) {
+      // @ts-ignore
+      arrLogExperience = doc.data()?.logExperience;
+    }
+
+    arrLogExperience.push({
+      gained: 5,
+      gameName: 'Lhama Dice',
+      type: 'trying new game'
+    });
+
+    doc.ref.set({
+      ...doc.data(),
+      arrLogExperience
+    });
+  });
 
   // console.log('Testing 4 => ', snapshot[0].data());
   // const dataObj = snapshot;
 
-  let arrLogExperience = [];
-  // @ts-ignore
-  if (dataObj?.logExperience) {
-    // @ts-ignore
-    arrLogExperience = dataObj?.logExperience;
-  }
+  // let arrLogExperience = [];
+  // // @ts-ignore
+  // if (dataObj?.logExperience) {
+  //   // @ts-ignore
+  //   arrLogExperience = dataObj?.logExperience;
+  // }
 
-  arrLogExperience.push({
-    gained: 5,
-    gameName: 'Lhama Dice',
-    type: 'trying new game'
-  });
+  // arrLogExperience.push({
+  //   gained: 5,
+  //   gameName: 'Lhama Dice',
+  //   type: 'trying new game'
+  // });
 
   // docRef.set({
   //   ...dataObj,
