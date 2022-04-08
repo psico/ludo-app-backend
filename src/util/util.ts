@@ -43,14 +43,14 @@ export const chooseCredential = async (body: ReadableStream): Promise<firebase.a
   return null;
 };
 
-export const addExperience = async ({ db }:any) => {
+export const addExperience = async ({ db, experienceType, game }:any) => {
   const userData: any = await firebase.auth().currentUser;
   const uid = await userData.uid;
   const docRef: QuerySnapshot = db.collection('usersInfo').where('uid', '==', uid);
   // @ts-ignore
   const snapshot = await docRef.get();
 
-  let arrLogExperience: { gained: number; gameName: string; type: string; }[] = [];
+  let arrLogExperience: { gained: number; game: string; experienceType: string; }[] = [];
 
   snapshot.forEach((doc:QueryDocumentSnapshot) => {
     if (doc.data()?.logExperience) {
@@ -59,8 +59,8 @@ export const addExperience = async ({ db }:any) => {
 
     arrLogExperience.push({
       gained: 5,
-      gameName: 'Lhama Dice',
-      type: 'trying new game'
+      game,
+      experienceType
     });
 
     doc.ref.set({
