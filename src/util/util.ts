@@ -44,9 +44,7 @@ export const chooseCredential = async (body: ReadableStream): Promise<firebase.a
 };
 
 export const addExperience = async ({ db }:any) => {
-  console.log('Testing 1');
   const userData: any = await firebase.auth().currentUser;
-  console.log('Testing 2 => ', await userData.uid);
   const uid = await userData.uid;
   const docRef: QuerySnapshot = db.collection('usersInfo').where('uid', '==', uid);
   // @ts-ignore
@@ -55,11 +53,7 @@ export const addExperience = async ({ db }:any) => {
   let arrLogExperience: { gained: number; gameName: string; type: string; }[] = [];
 
   snapshot.forEach((doc:QueryDocumentSnapshot) => {
-    console.log('dataObj => ');
-    // dataObj = doc.data();
-
     if (doc.data()?.logExperience) {
-      // @ts-ignore
       arrLogExperience = doc.data()?.logExperience;
     }
 
