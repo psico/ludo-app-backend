@@ -85,7 +85,7 @@ export const Mutation = {
       return null;
     }
 
-    await addExperience({ db });
+    await addExperience({ db, experienceType: 'Single Match', game: { name: gameObject.name, objectId: MatchInput.gameObjectId } });
 
     return {
       idDoc: docRef.id,
