@@ -57,8 +57,10 @@ export const addExperience = async ({ db, experienceType, game }:any) => {
       arrLogExperience = doc.data()?.logExperience;
     }
 
+    let gained = 1;
+
     arrLogExperience.push({
-      gained: 5,
+      gained,
       game,
       experienceType
     });
