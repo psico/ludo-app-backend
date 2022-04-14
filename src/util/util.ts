@@ -61,6 +61,9 @@ export const addExperience = async ({ db, experienceType, game }:any) => {
     if (experienceType === 'Single Match') {
       gained = 5;
     }
+    if (experienceType === 'First Match Game') {
+      gained = 15;
+    }
 
     arrLogExperience.push({
       gained,
