@@ -58,7 +58,7 @@
     "firebase": "^8.2.7",
     "firebase-admin": "^9.5.0",
     "graphql": "^15.4.0",
-    "graphql-tools": "^7.0.2",
+    "graphql-tools": "^8.2.7",
     "jest-junit": "^12.0.0",
     "passport": "^0.4.1",
     "ts-jest": "^26.5.0"
