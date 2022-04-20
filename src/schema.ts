@@ -7,13 +7,10 @@ import Comment from './comment/schema';
 import Match from './match/schema';
 import resolvers from './resolvers';
 
-// export default makeExecutableSchema({
-//   typeDefs: [Base, UserInfo, Friend, Game, Comment, Match],
-//   resolvers,
-//   logger: { log: e => console.log(e) }
-// });
-
 export default makeExecutableSchema({
   typeDefs: [Base, UserInfo, Friend, Game, Comment, Match],
-  resolvers
+  resolvers,
+  // @ts-ignore
+  // eslint-disable-next-line no-undef
+  logger: { log: e => console.log(e) }
 });
