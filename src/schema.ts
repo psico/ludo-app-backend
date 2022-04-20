@@ -7,8 +7,13 @@ import Comment from './comment/schema';
 import Match from './match/schema';
 import resolvers from './resolvers';
 
+// export default makeExecutableSchema({
+//   typeDefs: [Base, UserInfo, Friend, Game, Comment, Match],
+//   resolvers,
+//   logger: { log: e => console.log(e) }
+// });
+
 export default makeExecutableSchema({
   typeDefs: [Base, UserInfo, Friend, Game, Comment, Match],
-  resolvers,
-  logger: { log: e => console.log(e) }
+  resolvers
 });
