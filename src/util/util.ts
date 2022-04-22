@@ -104,6 +104,6 @@ export const addExperience = async ({ db, experienceType, game }:any) => {
   return true;
 };
 
-export const verifyPassiveExperience = () => {
+export const verifyPassiveExperience = ({ db, user }:any) => {
 
 };
