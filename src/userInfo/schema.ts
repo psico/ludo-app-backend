@@ -5,7 +5,7 @@ const UserInfo = `
 extend type Query {
     usersInfo(textSearch: String): [UserInfo]
     userInfo(uid: ID!): UserInfo
-    userExperienceInfo(): ExperienceInfo 
+    userExperienceInfo(uid: ID!): ExperienceInfo 
 }
 
 extend type Mutation {
