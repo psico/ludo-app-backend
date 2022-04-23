@@ -5,6 +5,7 @@ const UserInfo = `
 extend type Query {
     usersInfo(textSearch: String): [UserInfo]
     userInfo(uid: ID!): UserInfo
+    userExperienceInfo(): ExperienceInfo 
 }
 
 extend type Mutation {
@@ -27,6 +28,11 @@ type LogExperience {
   gameName: String
   type: String
   createdAt: String
+}
+
+type ExperienceInfo {
+  totalExperience: Int
+  level: Int
 }
 
 `;
