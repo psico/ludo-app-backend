@@ -58,6 +58,9 @@ export const Query = {
       following: snapshotUsersInfo.docs[0].data().friends,
       followers: followers
     };
+  },
+  userExperienceInfo: async (_: any, { uid }: any, { db }:any) => {
+
   }
 };
 
