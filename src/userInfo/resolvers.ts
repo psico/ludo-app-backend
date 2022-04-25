@@ -1,3 +1,6 @@
+import firebase from 'firebase';
+import QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
+
 export const Query = {
   usersInfo: async (_: any, { textSearch }: any, { db }:any) => {
     let usersInfo: Array<object> = [];
@@ -60,6 +63,8 @@ export const Query = {
     };
   },
   userExperienceInfo: async (_: any, { uid }: any, { db }:any) => {
+    const snapshotUsersInfo = await db.collection('usersInfo').where('uid', '==', '0IhNFZFa7QMwBY6yZT8l24L1AX32').get();
+
     return {
       totalExperience: 100,
       level: 1
