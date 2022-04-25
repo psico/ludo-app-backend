@@ -60,7 +60,10 @@ export const Query = {
     };
   },
   userExperienceInfo: async (_: any, { uid }: any, { db }:any) => {
-
+    return {
+      totalExperience: 100,
+      level: 1
+    };
   }
 };
 
