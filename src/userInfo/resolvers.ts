@@ -65,6 +65,10 @@ export const Query = {
   userExperienceInfo: async (_: any, { uid }: any, { db }:any) => {
     const snapshotUsersInfo = await db.collection('usersInfo').where('uid', '==', '0IhNFZFa7QMwBY6yZT8l24L1AX32').get();
 
+    snapshotUsersInfo.forEach((doc:QueryDocumentSnapshot) => {
+      console.log('debug => ', doc.data());
+    });
+
     return {
       totalExperience: 100,
       level: 1
