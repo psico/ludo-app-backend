@@ -1,5 +1,5 @@
-import firebase from 'firebase';
-import QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
+import { firestore } from 'firebase-admin';
+import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
 
 export const Query = {
   usersInfo: async (_: any, { textSearch }: any, { db }:any) => {
