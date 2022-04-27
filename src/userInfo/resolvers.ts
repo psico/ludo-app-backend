@@ -1,6 +1,3 @@
-import { firestore } from 'firebase-admin';
-import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
-
 export const Query = {
   usersInfo: async (_: any, { textSearch }: any, { db }:any) => {
     let usersInfo: Array<object> = [];
@@ -65,10 +62,14 @@ export const Query = {
   userExperienceInfo: async (_: any, { uid }: any, { db }:any) => {
     const snapshotUsersInfo = await db.collection('usersInfo').where('uid', '==', '0IhNFZFa7QMwBY6yZT8l24L1AX32').get();
 
-    console.log('debug 1 => ', snapshotUsersInfo.docs[0].data());
+    const totalExperience = snapshotUsersInfo.docs[0].data().logExperience.reduce(
+      (previousValue: any, currentValue: any) => previousValue.gained + currentValue.gained
+    );
+
+    console.log('totalExperience => ', totalExperience);
 
     return {
-      totalExperience: 100,
+      totalExperience: totalExperience,
       level: 1
     };
   }
