@@ -60,7 +60,7 @@ export const Query = {
     };
   },
   userExperienceInfo: async (_: any, { uid }: any, { db }:any) => {
-    const snapshotUsersInfo = await db.collection('usersInfo').where('uid', '==', '0IhNFZFa7QMwBY6yZT8l24L1AX32').get();
+    const snapshotUsersInfo = await db.collection('usersInfo').where('uid', '==', uid).get();
 
     const totalExperience = snapshotUsersInfo.docs[0].data().logExperience.reduce(
       (previousValue: any, currentValue: any) => previousValue.gained + currentValue.gained
