@@ -1,3 +1,5 @@
+import { calculateExperienceLevel } from '../util/util';
+
 export const Query = {
   usersInfo: async (_: any, { textSearch }: any, { db }:any) => {
     let usersInfo: Array<object> = [];
@@ -66,7 +68,7 @@ export const Query = {
       (previousValue: any, currentValue: any) => previousValue.gained + currentValue.gained
     );
 
-    console.log('totalExperience => ', totalExperience);
+    console.log('lvlExperience => ', totalExperience, calculateExperienceLevel({ experience: totalExperience }));
 
     return {
       totalExperience: totalExperience,
