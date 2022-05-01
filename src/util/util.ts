@@ -107,3 +107,22 @@ export const addExperience = async ({ db, experienceType, game }:any) => {
 export const verifyPassiveExperience = ({ db, user }:any) => {
 
 };
+
+export const calculateExperienceLevel = ({ experience, amountDivision }: any): any => {
+  experience = experience || 0;
+  amountDivision = amountDivision || 0;
+
+  if (experience >= 5) {
+    experience = experience / 2;
+    amountDivision = amountDivision + 1;
+    return calculateExperienceLevel({
+      experience,
+      amountDivision
+    });
+  }
+
+  return {
+    experience,
+    amountDivision
+  };
+};
