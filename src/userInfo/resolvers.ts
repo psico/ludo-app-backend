@@ -69,10 +69,11 @@ export const Query = {
     );
 
     const level = calculateExperienceLevel({ experience: totalExperience });
+    console.log('testing => ', totalExperience, level);
 
     return {
       totalExperience,
-      level
+      level: level.amountDivision
     };
   }
 };
