@@ -33,6 +33,7 @@ type LogExperience {
 type ExperienceInfo {
   totalExperience: Int
   level: Int
+  nextLevelExperience: Int
 }
 
 `;

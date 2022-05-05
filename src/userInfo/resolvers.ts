@@ -72,7 +72,7 @@ export const Query = {
 
     return {
       totalExperience,
-      level: level.amountDivision
+      ...level
     };
   }
 };

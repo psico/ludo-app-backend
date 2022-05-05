@@ -108,21 +108,24 @@ export const verifyPassiveExperience = ({ db, user }:any) => {
 
 };
 
-export const calculateExperienceLevel = ({ experience, amountDivision }: any): any => {
+export const calculateExperienceLevel = ({ experience, amountDivision, nextLevelExperience }: any): any => {
   experience = experience || 0;
   amountDivision = amountDivision || 0;
+  nextLevelExperience = nextLevelExperience || 5;
 
   if (experience >= 5) {
     experience = experience / 2;
     amountDivision = amountDivision + 1;
+    nextLevelExperience = nextLevelExperience * 2;
     return calculateExperienceLevel({
       experience,
-      amountDivision
+      amountDivision,
+      nextLevelExperience
     });
   }
 
   return {
-    experience,
-    amountDivision
+    level: amountDivision - 1,
+    nextLevelExperience
   };
 };
