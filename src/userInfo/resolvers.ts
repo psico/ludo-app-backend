@@ -65,8 +65,13 @@ export const Query = {
     const snapshotUsersInfo = await db.collection('usersInfo').where('uid', '==', uid).get();
 
     const totalExperience = snapshotUsersInfo.docs[0].data().logExperience.reduce(
-      (previousValue: any, currentValue: any) => previousValue.gained + currentValue.gained
+      (previousValue: any, currentValue: any) => {
+        console.log('== ', previousValue.gained || 0, currentValue.gained || 0);
+        return previousValue.gained || 0 + currentValue.gained || 0;
+      }
     );
+
+    console.log('ll ', totalExperience);
 
     const level = calculateExperienceLevel({ experience: totalExperience });
 
