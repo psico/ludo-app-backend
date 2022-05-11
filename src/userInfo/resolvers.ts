@@ -68,8 +68,6 @@ export const Query = {
       (previousValue: any, currentValue: any) => previousValue.gained || 0 + currentValue.gained || 0
     );
 
-    console.log('ll ', totalExperience);
-
     const level = calculateExperienceLevel({ experience: totalExperience });
 
     return {
