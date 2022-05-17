@@ -66,9 +66,7 @@ export const Query = {
 
     const totalExperience = snapshotUsersInfo.docs[0].data().logExperience.reduce(
       (previousValue: any, currentValue: any) => {
-        const value = previousValue + currentValue.gained || 0;
-        console.log('aki ==> ', previousValue, currentValue, value);
-        return value;
+        return previousValue + currentValue.gained || 0;
       }, 0
     );
     console.log('totalExperience ==> ', totalExperience);
