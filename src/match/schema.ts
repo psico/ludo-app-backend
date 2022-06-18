@@ -20,6 +20,7 @@ type Match {
     game: Game
     comments: [Comment]
     players: [UserInfo] 
+    likes: [UserInfo]
 }
 
 type UserSummary {
