@@ -131,6 +131,10 @@ export const Mutation = {
     }
 
     return objMatch;
+  },
+
+  async likeIt (_: any, { PlayerInput }: any, { db, firebase }: any) {
+
   }
 };
 
