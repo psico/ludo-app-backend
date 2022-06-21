@@ -134,7 +134,30 @@ export const Mutation = {
   },
 
   async likeIt (_: any, { PlayerInput }: any, { db, firebase }: any) {
+    const userData: any = await firebase.auth().currentUser;
+    const docRef = db.collection('matches').doc(CommentInput.idDoc);
+    const snapshot = await docRef.get();
+    const objMatch = snapshot.data();
 
+    // if (CommentInput.text && objMatch && userData) {
+    //   let comments = [];
+    //   if (objMatch.comments) {
+    //     comments = objMatch.comments;
+    //   }
+    //
+    //   comments.push({
+    //     comment: CommentInput.text,
+    //     name: userData.displayName ?? userData.email,
+    //     photoURL: userData.photoURL,
+    //     uid: userData.uid
+    //   });
+    //
+    //   objMatch.comments = comments;
+    //
+    //   await docRef.set(objMatch);
+    // }
+
+    return objMatch
   }
 };
 
