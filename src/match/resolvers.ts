@@ -133,9 +133,9 @@ export const Mutation = {
     return objMatch;
   },
 
-  async likeIt (_: any, { LikeInput }: any, { db, firebase }: any) {
+  async likeIt (_: any, { PlayerInput }: any, { db, firebase }: any) {
     const userData: any = await firebase.auth().currentUser;
-    const docRef = db.collection('matches').doc(LikeInput.idDoc);
+    const docRef = db.collection('matches').doc(PlayerInput.idDoc);
     const snapshot = await docRef.get();
     const objMatch = snapshot.data();
 
