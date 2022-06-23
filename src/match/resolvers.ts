@@ -139,23 +139,22 @@ export const Mutation = {
     const snapshot = await docRef.get();
     const objMatch = snapshot.data();
 
-    // if (CommentInput.text && objMatch && userData) {
-    //   let comments = [];
-    //   if (objMatch.comments) {
-    //     comments = objMatch.comments;
-    //   }
-    //
-    //   comments.push({
-    //     comment: CommentInput.text,
-    //     name: userData.displayName ?? userData.email,
-    //     photoURL: userData.photoURL,
-    //     uid: userData.uid
-    //   });
-    //
-    //   objMatch.comments = comments;
-    //
-    //   await docRef.set(objMatch);
-    // }
+    if (PlayerInput && objMatch && userData) {
+      let likes = [];
+      if (objMatch.likes) {
+        likes = objMatch.likes;
+      }
+
+      likes.push({
+        name: userData.displayName ?? userData.email,
+        photoURL: userData.photoURL,
+        uid: userData.uid
+      });
+
+      objMatch.likes = likes;
+
+      await docRef.set(objMatch);
+    }
 
     return objMatch;
   }
