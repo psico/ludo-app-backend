@@ -10,7 +10,7 @@ extend type Query {
 extend type Mutation {
     createMatch(MatchInput: MatchInput): Match
     addComment(CommentInput: CommentInput): Match
-    likeIt(PlayerInput: PlayerInput): Match
+    likeIt(idDoc: String): Match
 }
 
 type Match {
