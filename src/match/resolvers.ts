@@ -156,7 +156,7 @@ export const Mutation = {
 
       await docRef.set(objMatch);
     } else {
-      console.warn('Verify params idDoc and if user is logging');
+      console.warn('Check if the idDoc parameters and if the user is logged in');
     }
 
     return objMatch;
