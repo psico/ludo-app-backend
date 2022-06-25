@@ -134,15 +134,13 @@ export const Mutation = {
   },
 
   async likeIt (_: any, { idDoc }: any, { db, firebase }: any) {
-    console.log('test');
     const userData: any = await firebase.auth().currentUser;
     const docRef = db.collection('matches').doc(idDoc);
 
     const snapshot = await docRef.get();
     const objMatch = snapshot.data();
-    console.log('test 2 ==> ', idDoc, objMatch, userData);
+
     if (idDoc && objMatch && userData) {
-      console.log('test 3');
       let likes = [];
       if (objMatch.likes) {
         likes = objMatch.likes;
@@ -157,6 +155,8 @@ export const Mutation = {
       objMatch.likes = likes;
 
       await docRef.set(objMatch);
+    } else {
+      console.warn('Verify params idDoc and if user is logging');
     }
 
     return objMatch;
