@@ -140,9 +140,9 @@ export const Mutation = {
 
     const snapshot = await docRef.get();
     const objMatch = snapshot.data();
-
+    console.log('test 2 ==> ', idDoc, objMatch, userData);
     if (idDoc && objMatch && userData) {
-      console.log('test 2');
+      console.log('test 3');
       let likes = [];
       if (objMatch.likes) {
         likes = objMatch.likes;
