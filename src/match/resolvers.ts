@@ -146,13 +146,17 @@ export const Mutation = {
         likes = objMatch.likes;
       }
 
-      likes.find((like: any) => like.uid === userData.uid);
+      const resultFindLike = likes.find((like: any) => like.uid === userData.uid);
 
-      likes.push({
-        name: userData.displayName ?? userData.email,
-        photoURL: userData.photoURL,
-        uid: userData.uid
-      });
+      if (resultFindLike === -1) {
+        likes.push({
+          name: userData.displayName ?? userData.email,
+          photoURL: userData.photoURL,
+          uid: userData.uid
+        });
+      } else {
+
+      }
 
       objMatch.likes = likes;
 
