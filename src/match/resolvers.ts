@@ -145,7 +145,9 @@ export const Mutation = {
       if (objMatch.likes) {
         likes = objMatch.likes;
       }
-      console.log('likes ==> ', likes);
+
+      likes.find((like: any) => like.uid === userData.uid);
+
       likes.push({
         name: userData.displayName ?? userData.email,
         photoURL: userData.photoURL,
