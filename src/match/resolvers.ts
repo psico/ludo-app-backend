@@ -155,7 +155,7 @@ export const Mutation = {
           uid: userData.uid
         });
       } else {
-
+        likes = likes.splice(resultFindLike, 1);
       }
 
       objMatch.likes = likes;
