@@ -134,9 +134,10 @@ export const Mutation = {
   },
 
   async likeIt (_: any, { idDoc }: any, { db, firebase }: any) {
+    console.log('1111111111111111111');
     const userData: any = await firebase.auth().currentUser;
     const docRef = db.collection('matches').doc(idDoc);
-
+    console.log('222222');
     const snapshot = await docRef.get();
     const objMatch = snapshot.data();
 
