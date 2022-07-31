@@ -134,22 +134,19 @@ export const Mutation = {
   },
 
   async likeIt (_: any, { idDoc }: any, { db, firebase }: any) {
-    console.log('likeIt');
     const userData: any = await firebase.auth().currentUser;
     const docRef = db.collection('matches').doc(idDoc);
-    console.log('idDoc ', idDoc);
     const snapshot = await docRef.get();
     const objMatch = snapshot.data();
 
     if (idDoc && objMatch && userData) {
-      console.log('objMatch.likes ==> ', objMatch.likes);
       let likes = [];
       if (objMatch.likes) {
         likes = objMatch.likes;
       }
 
       const resultFindLike = likes.find((like: any) => like.uid === userData.uid);
-      console.log('resultFindLike ==> ', resultFindLike);
+
       if (!resultFindLike) {
         likes.push({
           name: userData.displayName ?? userData.email,
@@ -159,7 +156,6 @@ export const Mutation = {
       } else {
         likes = likes.splice(resultFindLike, 1);
       }
-      console.log('likes ==> ', likes);
       objMatch.likes = likes;
 
       await docRef.set(objMatch);
