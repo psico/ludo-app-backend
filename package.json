@@ -60,7 +60,7 @@
     "graphql": "^15.4.0",
     "graphql-tools": "^8.2.7",
     "jest-junit": "^14.0.0",
-    "passport": "^0.4.1",
+    "passport": "^0.6.0",
     "ts-jest": "^26.5.0"
   },
   "devDependencies": {
