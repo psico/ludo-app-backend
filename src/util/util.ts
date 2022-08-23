@@ -1,10 +1,9 @@
-import firebase from 'firebase';
-import User = firebase.User;
 import { firestore } from 'firebase-admin';
 import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
 import QuerySnapshot = firestore.QuerySnapshot;
+const firebase = require('firebase/compat/app');
 
-export const userDataFormat = (userData: User, token: string): object => {
+export const userDataFormat = (userData: any, token: string): object => {
   return {
     user: {
       displayName: userData.displayName ? userData.displayName : userData.email,
@@ -19,7 +18,7 @@ export const userDataFormat = (userData: User, token: string): object => {
   };
 };
 
-export const chooseCredential = async (body: ReadableStream): Promise<firebase.auth.OAuthCredential | null> => {
+export const chooseCredential = async (body: ReadableStream): Promise<any | null> => {
   // Login with Google
   // @ts-ignore
   if (body.credential.providerId === 'google.com') {
