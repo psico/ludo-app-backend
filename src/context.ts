@@ -1,5 +1,5 @@
 import { db } from './index';
-import firebase from 'firebase';
+const firebase = require('firebase/compat/app');
 
 export default (request:any) => ({
   db: db,
