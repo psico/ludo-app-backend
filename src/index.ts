@@ -1,12 +1,10 @@
-import 'firebase/auth';
-import 'firebase/firestore';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
 import schema from './schema';
-import firebase from 'firebase';
-import UserCredential = firebase.auth.UserCredential;
-import { auth } from 'firebase-admin/lib/auth';
-import DecodedIdToken = auth.DecodedIdToken;
 import { chooseCredential, userDataFormat } from './util/util';
 import context from './context';
+const firebase = require('firebase/compat/app');
 
 // Initialize Firebase
 const firebaseConfig = require('../firebaseConfig.json');
@@ -21,6 +19,14 @@ admin.initializeApp({
 });
 export const db = admin.firestore();
 export const adminAuth = admin.auth();
+
+// // Initialize Firebase
+// const firebaseConfig = require('../firebaseConfig.json');
+// const fireBaseApp = initializeApp(firebaseConfig);
+//
+// // Initialize Firestore
+// export const db = firebase.firestore();
+// export const adminAuth = getAuth();
 
 // Initialize Express
 const express = require('express');
@@ -42,7 +48,7 @@ app.use('/login', async (req: any, res: any) => {
     const email = req.body.user.email;
     const password = req.body.user.password;
 
-    const userData: UserCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+    const userData: any = await firebase.auth().signInWithEmailAndPassword(email, password);
     const token: string | undefined = await firebase.auth().currentUser?.getIdToken();
 
     if (userData?.user && token) {
@@ -62,7 +68,7 @@ app.use('/loginCredential', async (req: Request, res: any) => {
       const credential = await chooseCredential(req.body);
 
       if (credential) {
-        const userData: UserCredential | void = await firebase.auth().signInWithCredential(credential);
+        const userData: any | void = await firebase.auth().signInWithCredential(credential);
         const token: string | undefined = await firebase.auth().currentUser?.getIdToken();
         if (token && userData.user) {
           console.info(`User e-mail ${userData.user?.email} logged`);
@@ -81,7 +87,7 @@ app.use('/loginCredential', async (req: Request, res: any) => {
 // REQUEST - Verify Token
 app.use('/verifyToken', async (req: any, res: any) => {
   try {
-    const decodedToken: DecodedIdToken = await admin.auth().verifyIdToken(req.body.idToken);
+    const decodedToken: any = await admin.auth().verifyIdToken(req.body.idToken);
     const uid = decodedToken.uid;
 
     console.info('Token verified');
@@ -94,7 +100,7 @@ app.use('/verifyToken', async (req: any, res: any) => {
 
 // REQUEST - Get current user
 app.use('/currentUser', async (req: any, res: any) => {
-  const userData: firebase.User | null = firebase.auth().currentUser;
+  const userData: any | null = firebase.auth().currentUser;
 
   if (userData) {
     console.info(`Returning current e-mail user ${userData.displayName ? userData.displayName : userData.email}... `);
