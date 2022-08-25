@@ -19,14 +19,22 @@ export const userDataFormat = (userData: any, token: string): object => {
 };
 
 export const chooseCredential = async (body: ReadableStream): Promise<any | null> => {
+  // @ts-ignore
+  console.log('ops 1 ', body.credential);
   // Login with Google
   // @ts-ignore
   if (body.credential.providerId === 'google.com') {
+    // console.log('ops 2 ', firebase.auth.GoogleAuthProvider.credential(
+    //   // @ts-ignore
+    //   body.credential.idToken,
+    //   // @ts-ignore
+    //   body.credential.accessToken
+    // ));
     return firebase.auth.GoogleAuthProvider.credential(
       // @ts-ignore
-      body.credential.oauthIdToken,
+      body.credential.idToken,
       // @ts-ignore
-      body.credential.oauthAccessToken
+      body.credential.accessToken
     );
   }
 
