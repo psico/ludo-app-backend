@@ -20,14 +20,6 @@ admin.initializeApp({
 export const db = admin.firestore();
 export const adminAuth = admin.auth();
 
-// // Initialize Firebase
-// const firebaseConfig = require('../firebaseConfig.json');
-// const fireBaseApp = initializeApp(firebaseConfig);
-//
-// // Initialize Firestore
-// export const db = firebase.firestore();
-// export const adminAuth = getAuth();
-
 // Initialize Express
 const express = require('express');
 const app = express();
