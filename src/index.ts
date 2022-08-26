@@ -18,7 +18,7 @@ admin.initializeApp({
   databaseURL: 'https://ludoapp-b612.firebaseio.com'
 });
 export const db = admin.firestore();
-export const adminAuth = admin.auth();
+admin.auth();
 
 // Initialize Express
 const express = require('express');
