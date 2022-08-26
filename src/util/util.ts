@@ -35,7 +35,7 @@ export const chooseCredential = async (body: ReadableStream): Promise<any | null
   if (body?.credential.providerId === 'facebook.com') {
     return firebase.auth.FacebookAuthProvider.credential(
       // @ts-ignore
-      body.credential.oauthAccessToken
+      body.credential.accessToken
     );
   }
 
