@@ -49,7 +49,10 @@ export const Query = {
   match: async (_: any, { idDoc }: any, { db }:any) => {
     const snapshot = await db.collection('matches').doc(idDoc).get();
 
-    return snapshot.data();
+    return {
+      idDoc,
+      ...snapshot.data()
+    };
   }
 };
 
