@@ -6,7 +6,7 @@ export const Query = {
   matches: async (_: any, { uid, textSearch }: any, { db }:any) => {
     let matches: Array<object> = [];
 
-    const snapshot = await db.collection('matches').orderBy('createdAt', 'desc').get();
+    const snapshot = await db.collection('matches').orderBy('createdAt', 'desc').limit(2).get();
 
     snapshot.forEach((doc: any) => {
       if (uid) {
