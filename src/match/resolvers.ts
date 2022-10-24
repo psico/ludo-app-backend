@@ -11,19 +11,16 @@ export const Query = {
     snapshot.forEach((doc: any) => {
       if (uid) {
         if (doc.data().uid === uid || doc.data().players?.find((player:any) => player.uid === uid)) {
-          console.log('aaaa', doc.data().createdAt._seconds);
           matches.push({
             ...doc.data(),
-            idDoc: doc.id,
-            createAt: doc.data().createdAt._seconds
+            idDoc: doc.id
           });
         }
       } else {
-        console.log('bbbb', doc.data().createdAt._seconds);
+        // console.log('bbbb', doc.data().createdAt._seconds);
         matches.push({
           ...doc.data(),
-          idDoc: doc.id,
-          createAt: doc.data().createdAt._seconds
+          idDoc: doc.id
         });
       }
     });
