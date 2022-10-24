@@ -17,7 +17,6 @@ export const Query = {
           });
         }
       } else {
-        // console.log('bbbb', doc.data().createdAt._seconds);
         matches.push({
           ...doc.data(),
           idDoc: doc.id
