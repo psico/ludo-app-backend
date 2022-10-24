@@ -11,15 +11,18 @@ export const Query = {
     snapshot.forEach((doc: any) => {
       if (uid) {
         if (doc.data().uid === uid || doc.data().players?.find((player:any) => player.uid === uid)) {
+          console.log('bbbb ', doc.data());
           matches.push({
+            ...doc.data(),
             idDoc: doc.id,
-            ...doc.data()
+            createAt: doc.data().createdAt._seconds
           });
         }
       } else {
         matches.push({
+          ...doc.data(),
           idDoc: doc.id,
-          ...doc.data()
+          createAt: doc.data().createdAt._seconds
         });
       }
     });
