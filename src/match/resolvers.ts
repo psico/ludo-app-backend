@@ -11,7 +11,7 @@ export const Query = {
     snapshot.forEach((doc: any) => {
       if (uid) {
         if (doc.data().uid === uid || doc.data().players?.find((player:any) => player.uid === uid)) {
-          console.log('bbbb ', doc.data());
+          console.log('aaaa', doc.data().createdAt._seconds);
           matches.push({
             ...doc.data(),
             idDoc: doc.id,
@@ -19,6 +19,7 @@ export const Query = {
           });
         }
       } else {
+        console.log('bbbb', doc.data().createdAt._seconds);
         matches.push({
           ...doc.data(),
           idDoc: doc.id,
