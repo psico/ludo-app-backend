@@ -17,7 +17,7 @@ type Match {
     idDoc: String
     matchOwner: UserSummary
     gameMoment: String
-    createdAt: String
+    createdAt: Date
     game: Game
     comments: [Comment]
     players: [UserInfo] 
