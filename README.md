@@ -19,6 +19,8 @@
 
 Developed by João Gabriel - Github [psico](https://github.com/psico)
 
+![Image](ludo512.png)
+
 # ludo-app-backend
 New version of backend to use in project LudoApp
 
